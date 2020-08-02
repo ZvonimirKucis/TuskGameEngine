@@ -1,10 +1,9 @@
-#include <iostream>
-#include <GLFW/glfw3.h>
-#include <vulkan/vulkan.h>
-
-#include "Utils/Logger.h"
+#include "Engine.h"
 
 int main() {
-	Tusk::Logger::Log("Opa");
+	Tusk::Engine* engine = new Tusk::Engine("Demo");
+	engine->Run();
+
+	delete engine;
 	return 0;
 }

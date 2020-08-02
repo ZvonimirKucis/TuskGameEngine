@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <string>
 
-//#include "defines.h"
-#include "logger.h"
+#include "Defines.h"
+#include "Logger.h"
 
 namespace Tusk {
     static void writeLog(const char* prepend, const char* message, va_list args) {
@@ -44,6 +44,6 @@ namespace Tusk {
         writeLog("[FATAL]: ", message, args);
         va_end(args);
 
-        //ASSERT(false);
+        ASSERT(false);
     }
 }
