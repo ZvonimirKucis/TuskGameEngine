@@ -95,11 +95,17 @@
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Platform\Platform.cpp" />
+    <ClCompile Include="Renderer\VulkanDevice.cpp" />
+    <ClCompile Include="Renderer\VulkanRenderer.cpp" />
+    <ClCompile Include="Renderer\VulkanUtils.cpp" />
     <ClCompile Include="Utils\Logger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Platform\Platform.h" />
+    <ClInclude Include="Renderer\VulkanDevice.h" />
+    <ClInclude Include="Renderer\VulkanRenderer.h" />
+    <ClInclude Include="Renderer\VulkanUtils.h" />
     <ClInclude Include="Utils\Defines.h" />
     <ClInclude Include="Utils\Logger.h" />
     <ClInclude Include="Utils\Types.h" />

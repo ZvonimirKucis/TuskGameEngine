@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vulkan/vulkan.h>
 #include "../Utils/Types.h"
 
 struct GLFWwindow;
@@ -13,11 +14,14 @@ namespace Tusk {
         Platform(Engine* engine, const char* applicationName);
         ~Platform();
 
-        GLFWwindow* GetWindow() { return _window; }
+        GLFWwindow* getWindow() { return _window; }
 
-        void GetRequiredExtensions(U32* extensionCount, const char*** extensionNames);
+        void getRequiredExtensions(U32* extensionCount, const char*** extensionNames);
 
-        const bool StartGameLoop();
+        void createSurface(VkInstance instance, VkSurfaceKHR* surface);
+
+        const bool startGameLoop();
+
     private:
         GLFWwindow* _window;
         Engine* _engine;

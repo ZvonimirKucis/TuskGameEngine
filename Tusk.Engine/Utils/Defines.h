@@ -8,6 +8,8 @@
 #define U64_MAX 0xffffffffffffffffui64
 #endif
 
+#define FORCEINLINE __forceinline
+
 // Assertions
 #define ASSERTIONS_ENABLED
 #ifdef ASSERTIONS_ENABLED
@@ -30,7 +32,19 @@
     } \
 }
 
-void reportAssertionFailure(const char* expression, const char* message, const char* file, int line) {
+#ifdef _DEBUG
+#define ASSERT_DEBUG(expr) { \
+    if( expr ) { \
+    } else { \
+        reportAssertionFailure(#expr, "", __FILE__, __LINE__); \
+        debugBreak(); \
+    } \
+}
+#else
+#define ASSERT_DEBUG(expr) // Does nothing at all
+#endif
+
+FORCEINLINE void reportAssertionFailure(const char* expression, const char* message, const char* file, int line) {
     std::cerr << "Assertion failure: " << expression << ", message: '" << message << "', in file: " << file << ", line: " << line << "\n";
 }
 

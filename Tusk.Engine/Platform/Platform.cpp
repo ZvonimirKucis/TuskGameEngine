@@ -1,8 +1,10 @@
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
+#include <vulkan/vulkan.h>
 
 #include "../Utils/Logger.h"
 #include "../Engine.h"
+#include "../Renderer/VulkanUtils.h"
 #include "Platform.h"
 
 namespace Tusk {
@@ -26,11 +28,15 @@ namespace Tusk {
         glfwTerminate();
     }
 
-    void Platform::GetRequiredExtensions(U32* extensionCount, const char*** extensionNames) {
+    void Platform::getRequiredExtensions(U32* extensionCount, const char*** extensionNames) {
         *extensionNames = glfwGetRequiredInstanceExtensions(extensionCount);
     }
 
-    const bool Platform::StartGameLoop() {
+    void Platform::createSurface(VkInstance instance, VkSurfaceKHR* surface) {
+        VK_CHECK(glfwCreateWindowSurface(instance, _window, nullptr, surface));
+    }
+
+    const bool Platform::startGameLoop() {
         while (!glfwWindowShouldClose(_window)) {
             glfwPollEvents();
 

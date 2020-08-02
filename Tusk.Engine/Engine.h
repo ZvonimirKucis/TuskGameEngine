@@ -5,7 +5,7 @@
 namespace Tusk {
 
     class Platform;
-    //class VulkanRenderer;
+    class VulkanRenderer;
 
     class Engine {
     public:
@@ -17,6 +17,6 @@ namespace Tusk {
         void OnLoop(const F32 deltaTime);
     private:
         Platform* _platform;
-        //VulkanRenderer* _renderer;
+        VulkanRenderer* _renderer;
     };
 }
