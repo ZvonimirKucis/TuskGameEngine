@@ -97,7 +97,6 @@
     <ClCompile Include="Platform\Platform.cpp" />
     <ClCompile Include="Renderer\VulkanDevice.cpp" />
     <ClCompile Include="Renderer\VulkanRenderer.cpp" />
-    <ClCompile Include="Renderer\VulkanUtils.cpp" />
     <ClCompile Include="Utils\Logger.cpp" />
   </ItemGroup>
   <ItemGroup>
