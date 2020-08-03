@@ -15,11 +15,11 @@ namespace Tusk {
         delete _platform;
     }
 
-    void Engine::Run() {
+    void Engine::run() {
         _platform->startGameLoop();
     }
 
-    void Engine::OnLoop(const F32 deltaTime) {
+    void Engine::onLoop(const F32 deltaTime) {
 
     }
 }

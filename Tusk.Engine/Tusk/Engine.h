@@ -12,9 +12,9 @@ namespace Tusk {
         Engine(const char* applicationName);
         ~Engine();
 
-        void Run();
+        void run();
 
-        void OnLoop(const F32 deltaTime);
+        void onLoop(const F32 deltaTime);
     private:
         Platform* _platform;
         VulkanRenderer* _renderer;

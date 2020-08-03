@@ -40,7 +40,7 @@ namespace Tusk {
         while (!glfwWindowShouldClose(_window)) {
             glfwPollEvents();
 
-            _engine->OnLoop(0);
+            _engine->onLoop(0);
         }
 
         return true;

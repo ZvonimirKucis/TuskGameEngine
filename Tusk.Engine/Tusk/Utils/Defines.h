@@ -8,6 +8,14 @@
 #define U64_MAX 0xffffffffffffffffui64
 #endif
 
+#if _WIN32 || _WIN64
+    #ifdef TUSK_BUILD_LIB
+        #define TUSK_API __declspec(dllexport)
+    #else
+        #define TUSK_API __declspec(dllimport)
+       #endif
+#endif
+
 #define FORCEINLINE __forceinline
 
 // Assertions
