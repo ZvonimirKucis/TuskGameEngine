@@ -1,8 +1,10 @@
+#include "tuskpch.h"
+
 #include "Application.h"
 
 namespace Tusk {
 	Application::Application() {
-
+		_window = std::unique_ptr<Window>(Window::create());
 	}
 
 	Application::~Application() {
@@ -10,6 +12,8 @@ namespace Tusk {
 	}
 
 	void Application::run() {
-		while (true);
+		while (_running) {
+			_window->onUpdate();
+		}
 	}
 }

@@ -1,6 +1,4 @@
-#include <stdarg.h>
-#include <stdio.h>
-#include <string>
+#include "tuskpch.h"
 
 #include "Defines.h"
 #include "Logger.h"

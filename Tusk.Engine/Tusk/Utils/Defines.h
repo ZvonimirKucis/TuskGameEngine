@@ -1,5 +1,7 @@
 #pragma once
 
+#define BIT(x) (1 << x)
+
 #ifndef U32_MAX
 #define U32_MAX 0xffffffffui32
 #endif

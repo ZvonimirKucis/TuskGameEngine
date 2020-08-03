@@ -49,7 +49,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(ProjectName)\</IntDir>
-    <IncludePath>$(SolutionDir)\External\Include;$(IncludePath);C:\VulkanSDK\1.2.141.2\Include</IncludePath>
+    <IncludePath>$(SolutionDir)\Tusk.Engine;$(SolutionDir)\External\Include;$(IncludePath);C:\VulkanSDK\1.2.141.2\Include</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <TargetExt>.dll</TargetExt>
   </PropertyGroup>
@@ -57,7 +57,7 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(ProjectName)\</IntDir>
-    <IncludePath>$(SolutionDir)\External\Include;$(IncludePath);C:\VulkanSDK\1.2.141.2\Include</IncludePath>
+    <IncludePath>$(SolutionDir)\Tusk.Engine;$(SolutionDir)\External\Include;$(IncludePath);C:\VulkanSDK\1.2.141.2\Include</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <TargetExt>.dll</TargetExt>
   </PropertyGroup>
@@ -70,6 +70,8 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>
       </AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>tuskpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -87,6 +89,8 @@
       <PreprocessorDefinitions>TUSK_BUILD_LIB;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>tuskpch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -101,8 +105,13 @@
     <ClCompile Include="Tusk\Application.cpp" />
     <ClCompile Include="Tusk\Engine.cpp" />
     <ClCompile Include="Tusk\Platform\Platform.cpp" />
+    <ClCompile Include="Tusk\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="Tusk\Renderer\VulkanDevice.cpp" />
     <ClCompile Include="Tusk\Renderer\VulkanRenderer.cpp" />
+    <ClCompile Include="tuskpch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Tusk\Utils\Logger.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -115,9 +124,12 @@
     <ClInclude Include="Tusk\Events\KeyEvent.h" />
     <ClInclude Include="Tusk\Events\MouseEvent.h" />
     <ClInclude Include="Tusk\Platform\Platform.h" />
+    <ClInclude Include="Tusk\Platform\Window.h" />
+    <ClInclude Include="Tusk\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="Tusk\Renderer\VulkanDevice.h" />
     <ClInclude Include="Tusk\Renderer\VulkanRenderer.h" />
     <ClInclude Include="Tusk\Renderer\VulkanUtils.h" />
+    <ClInclude Include="tuskpch.h" />
     <ClInclude Include="Tusk\Utils\Defines.h" />
     <ClInclude Include="Tusk\Utils\Logger.h" />
     <ClInclude Include="Tusk\Utils\Types.h" />
