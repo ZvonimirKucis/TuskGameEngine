@@ -110,6 +110,10 @@
     <ClInclude Include="Tusk\Application.h" />
     <ClInclude Include="Tusk\Engine.h" />
     <ClInclude Include="Tusk\EntryPoint.h" />
+    <ClInclude Include="Tusk\Events\ApplicationEvent.h" />
+    <ClInclude Include="Tusk\Events\Event.h" />
+    <ClInclude Include="Tusk\Events\KeyEvent.h" />
+    <ClInclude Include="Tusk\Events\MouseEvent.h" />
     <ClInclude Include="Tusk\Platform\Platform.h" />
     <ClInclude Include="Tusk\Renderer\VulkanDevice.h" />
     <ClInclude Include="Tusk\Renderer\VulkanRenderer.h" />
