@@ -5,15 +5,15 @@
 #include <vulkan/vulkan.h>
 
 #include "../Utils/Logger.h"
-#include "../Engine.h"
+//#include "../Engine.h"
 #include "../Renderer/VulkanUtils.h"
 #include "Platform.h"
 
 namespace Tusk {
 
-    Platform::Platform(Engine* engine, const char* applicationName) {
+    Platform::Platform(const char* applicationName) {
         Logger::Trace("Initializing platform layer...");
-        _engine = engine;
+       // _engine = engine;
 
         glfwInit();
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
@@ -42,7 +42,7 @@ namespace Tusk {
         while (!glfwWindowShouldClose(_window)) {
             glfwPollEvents();
 
-            _engine->onLoop(0);
+            //_engine->onLoop(0);
         }
 
         return true;

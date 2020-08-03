@@ -103,7 +103,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Tusk\Application.cpp" />
-    <ClCompile Include="Tusk\Engine.cpp" />
+    <ClCompile Include="Tusk\Layers\Layer.cpp" />
+    <ClCompile Include="Tusk\Layers\LayerStack.cpp" />
     <ClCompile Include="Tusk\Platform\Platform.cpp" />
     <ClCompile Include="Tusk\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="Tusk\Renderer\VulkanDevice.cpp" />
@@ -117,12 +118,13 @@
   <ItemGroup>
     <ClInclude Include="Tusk.h" />
     <ClInclude Include="Tusk\Application.h" />
-    <ClInclude Include="Tusk\Engine.h" />
     <ClInclude Include="Tusk\EntryPoint.h" />
     <ClInclude Include="Tusk\Events\ApplicationEvent.h" />
     <ClInclude Include="Tusk\Events\Event.h" />
     <ClInclude Include="Tusk\Events\KeyEvent.h" />
     <ClInclude Include="Tusk\Events\MouseEvent.h" />
+    <ClInclude Include="Tusk\Layers\Layer.h" />
+    <ClInclude Include="Tusk\Layers\LayerStack.h" />
     <ClInclude Include="Tusk\Platform\Platform.h" />
     <ClInclude Include="Tusk\Platform\Window.h" />
     <ClInclude Include="Tusk\Platform\Windows\WindowsWindow.h" />

@@ -2,7 +2,7 @@
 
 namespace Tusk {
 
-    class Logger {
+    class TUSK_API Logger {
     public:
         static void Trace(const char* message, ...);
         static void Log(const char* message, ...);

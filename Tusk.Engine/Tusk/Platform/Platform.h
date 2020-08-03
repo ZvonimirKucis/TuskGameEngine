@@ -7,11 +7,11 @@ struct GLFWwindow;
 
 namespace Tusk {
 
-    class Engine;
+    //class Engine;
 
     class Platform {
     public:
-        Platform(Engine* engine, const char* applicationName);
+        Platform(const char* applicationName);
         ~Platform();
 
         GLFWwindow* getWindow() { return _window; }
@@ -24,6 +24,6 @@ namespace Tusk {
 
     private:
         GLFWwindow* _window;
-        Engine* _engine;
+        //Engine* _engine;
     };
 }
