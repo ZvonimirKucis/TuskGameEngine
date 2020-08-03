@@ -55,7 +55,7 @@ namespace Tusk {
 
 		// F will be deduced by the compiler
 		template<typename T, typename F>
-		bool Dispatch(const F& func)
+		bool dispatch(const F& func)
 		{
 			if (m_Event.GetEventType() == T::GetStaticType())
 			{
