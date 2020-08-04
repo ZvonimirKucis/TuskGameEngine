@@ -29,7 +29,7 @@ namespace Tusk {
 
         bool checkDeviceExtensionSupport(VkPhysicalDevice device);
         SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
-        void detectQueueFamilyIndices(VkPhysicalDevice physicalDevice, I32* graphicsQueueIndex, I32* presentationQueueIndex);
+        void detectQueueFamilyIndices(VkPhysicalDevice physicalDevice, uint32_t* graphicsQueueIndex, uint32_t* presentationQueueIndex);
 
     private:
         VkInstance _instance;
@@ -38,8 +38,8 @@ namespace Tusk {
         VkPhysicalDevice _physicalDevice = VK_NULL_HANDLE;
         VkDevice _device;
 
-        I32 _graphicsFamilyQueueIndex;
-        I32 _presentationFamilyQueueIndex;
+        uint32_t _graphicsFamilyQueueIndex;
+        uint32_t _presentationFamilyQueueIndex;
         VkQueue _graphicsQueue;
         VkQueue _presentationQueue;
     };

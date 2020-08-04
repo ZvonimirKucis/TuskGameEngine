@@ -1,19 +1,17 @@
 #pragma once
 
-#include "tuskpch.h"
-
 #include "../Events/Event.h"
 
 namespace Tusk {
 	struct WindowCreateInfo
 	{
 		std::string title;
-		I32 width;
-		I32 height;
+		uint32_t width;
+		uint32_t height;
 
 		WindowCreateInfo(const std::string title = "Tusk Engine",
-			I32 width = 1280,
-			I32 height = 720)
+			uint32_t width = 1280,
+			uint32_t height = 720)
 			: title(title), width(width), height(height)
 		{
 

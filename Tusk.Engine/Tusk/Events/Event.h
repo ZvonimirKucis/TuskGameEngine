@@ -1,5 +1,6 @@
 #pragma once
 #include "tuskpch.h"
+#include "../Utils/Defines.h"
 
 namespace Tusk {
 	enum class EventType

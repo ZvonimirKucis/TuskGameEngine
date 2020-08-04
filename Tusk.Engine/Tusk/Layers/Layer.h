@@ -1,4 +1,5 @@
 #pragma once
+#include "../Utils/Defines.h"
 #include "../Events/Event.h"
 
 namespace Tusk {

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Defines.h"
+
 namespace Tusk {
 
     class TUSK_API Logger {

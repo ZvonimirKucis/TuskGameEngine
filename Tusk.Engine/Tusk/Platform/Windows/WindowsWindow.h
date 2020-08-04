@@ -28,7 +28,7 @@ namespace Tusk {
 		struct WindowData
 		{
 			std::string title;
-			I32 width, height;
+			uint32_t width, height;
 
 			EventCallbackFn EventCallback;
 		};

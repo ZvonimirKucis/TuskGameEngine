@@ -1,6 +1,7 @@
 #include "tuskpch.h"
 
 //#include "../Platform/Platform.h"
+#include "../Utils/Logger.h"
 #include "VulkanUtils.h"
 #include "VulkanDevice.h"
 #include "VulkanRenderer.h"
@@ -55,12 +56,12 @@ namespace Tusk {
         createInfo.pApplicationInfo = &appInfo;
 
         std::vector<const char*> extensions = getRequiredExtensions();
-        createInfo.enabledExtensionCount = static_cast<U32>(extensions.size());
+        createInfo.enabledExtensionCount = static_cast<uint32_t>(extensions.size());
         createInfo.ppEnabledExtensionNames = extensions.data();
 
         if (ENABLE_VALIDATION_LAYERS) {
             checkValidationLayerSupport();
-            createInfo.enabledLayerCount = static_cast<U32>(requiredValidationLayers.size());
+            createInfo.enabledLayerCount = static_cast<uint32_t>(requiredValidationLayers.size());
             createInfo.ppEnabledLayerNames = requiredValidationLayers.data();
         }
         else {
@@ -95,7 +96,7 @@ namespace Tusk {
     }
 
     std::vector<const char*> VulkanRenderer::getRequiredExtensions() {
-        U32 glfwExtensionCount = 0;
+        unsigned int glfwExtensionCount = 0;
         const char** glfwExtensions;
         //_platform->getRequiredExtensions(&glfwExtensionCount, &glfwExtensions);
 
@@ -111,7 +112,7 @@ namespace Tusk {
     }
 
     void VulkanRenderer::checkValidationLayerSupport() {
-        U32 layerCount;
+        unsigned int layerCount;
         VK_CHECK(vkEnumerateInstanceLayerProperties(&layerCount, nullptr));
         std::vector<VkLayerProperties> availableLayers(layerCount);
         VK_CHECK(vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data()));

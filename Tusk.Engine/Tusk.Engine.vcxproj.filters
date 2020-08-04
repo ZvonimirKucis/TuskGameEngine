@@ -62,9 +62,6 @@
     <ClInclude Include="Tusk\Utils\Logger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tusk\Utils\Types.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Tusk\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>

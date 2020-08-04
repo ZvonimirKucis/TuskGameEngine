@@ -2,6 +2,7 @@
 
 #include "Application.h"
 
+#include "Utils/Logger.h"
 #include "Platform/Input.h"
 
 namespace Tusk {

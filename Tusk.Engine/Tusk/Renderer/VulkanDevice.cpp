@@ -1,5 +1,6 @@
 #include "tuskpch.h"
 
+#include "../Utils/Logger.h"
 #include "VulkanUtils.h"
 #include "VulkanDevice.h"
 
@@ -16,7 +17,7 @@ namespace Tusk {
     }
 
     void VulkanDevice::pickPhysicalDevice() {
-        U32 deviceCount = 0;
+        uint32_t deviceCount = 0;
         vkEnumeratePhysicalDevices(_instance, &deviceCount, nullptr);
 
         if (deviceCount == 0) {
@@ -42,26 +43,26 @@ namespace Tusk {
     }
 
     void VulkanDevice::createLogicalDevice() {
-        I32 graphicsQueueIndex = -1;
-        I32 presentationQueueIndex = -1;
+        uint32_t graphicsQueueIndex = -1;
+        uint32_t presentationQueueIndex = -1;
         detectQueueFamilyIndices(_physicalDevice, &graphicsQueueIndex, &presentationQueueIndex);
 
         bool presentationSharesGraphicsQueue = graphicsQueueIndex == presentationQueueIndex;
 
-        std::vector<U32> indices;
+        std::vector<uint32_t> indices;
         indices.push_back(graphicsQueueIndex);
         if (!presentationSharesGraphicsQueue) {
             indices.push_back(presentationQueueIndex);
         }
 
         std::vector<VkDeviceQueueCreateInfo> queueCreateInfos(indices.size());
-        for (U32 i = 0; i < (U32)indices.size(); ++i) {
+        for (uint32_t i = 0; i < (uint32_t)indices.size(); ++i) {
             queueCreateInfos[i].sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
             queueCreateInfos[i].queueFamilyIndex = indices[i];
             queueCreateInfos[i].queueCount = 1;
             queueCreateInfos[i].flags = 0;
             queueCreateInfos[i].pNext = nullptr;
-            F32 queuePriority = 1.0f;
+            float queuePriority = 1.0f;
             queueCreateInfos[i].pQueuePriorities = &queuePriority;
         }
 
@@ -70,9 +71,9 @@ namespace Tusk {
 
         VkDeviceCreateInfo createInfo = { VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO };
         createInfo.pQueueCreateInfos = queueCreateInfos.data();
-        createInfo.queueCreateInfoCount = (U32)indices.size();
+        createInfo.queueCreateInfoCount = (uint32_t)indices.size();
         createInfo.pEnabledFeatures = &deviceFeatures;
-        createInfo.enabledExtensionCount = (U32)requiredExtensions.size();
+        createInfo.enabledExtensionCount = (uint32_t)requiredExtensions.size();
         createInfo.pNext = nullptr;
         createInfo.ppEnabledExtensionNames = requiredExtensions.data();
 
@@ -94,8 +95,8 @@ namespace Tusk {
     }
 
     int VulkanDevice::rateDeviceSuitability(VkPhysicalDevice device) {
-        I32 graphicsQueueIndex = -1;
-        I32 presentationQueueIndex = -1;
+        uint32_t graphicsQueueIndex = -1;
+        uint32_t presentationQueueIndex = -1;
         detectQueueFamilyIndices(device, &graphicsQueueIndex, &presentationQueueIndex);
         bool supportsRequiredQueueFamilies = (graphicsQueueIndex != -1) && (presentationQueueIndex != -1);
 
@@ -163,13 +164,13 @@ namespace Tusk {
         return details;
     }
 
-    void VulkanDevice::detectQueueFamilyIndices(VkPhysicalDevice physicalDevice, I32* graphicsQueueIndex, I32* presentationQueueIndex) {
-        U32 queueFamilyCount = 0;
+    void VulkanDevice::detectQueueFamilyIndices(VkPhysicalDevice physicalDevice, uint32_t* graphicsQueueIndex, uint32_t* presentationQueueIndex) {
+        uint32_t queueFamilyCount = 0;
         vkGetPhysicalDeviceQueueFamilyProperties(physicalDevice, &queueFamilyCount, nullptr);
         std::vector<VkQueueFamilyProperties> familyProperties(queueFamilyCount);
         vkGetPhysicalDeviceQueueFamilyProperties(physicalDevice, &queueFamilyCount, familyProperties.data());
 
-        for (U32 i = 0; i < queueFamilyCount; ++i) {
+        for (uint32_t i = 0; i < queueFamilyCount; ++i) {
 
             if (familyProperties[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) {
                 *graphicsQueueIndex = i;
