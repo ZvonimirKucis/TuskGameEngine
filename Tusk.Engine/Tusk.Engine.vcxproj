@@ -114,6 +114,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanContext.cpp" />
     <ClCompile Include="Tusk\Utils\Logger.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -133,10 +134,12 @@
     <ClInclude Include="Tusk\Platform\Window.h" />
     <ClInclude Include="Tusk\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="Tusk\Platform\Windows\WindowsWindow.h" />
+    <ClInclude Include="Tusk\Renderer\GraphicsContext.h" />
     <ClInclude Include="Tusk\Renderer\VulkanDevice.h" />
     <ClInclude Include="Tusk\Renderer\VulkanRenderer.h" />
     <ClInclude Include="Tusk\Renderer\VulkanUtils.h" />
     <ClInclude Include="tuskpch.h" />
+    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanContext.h" />
     <ClInclude Include="Tusk\Utils\Defines.h" />
     <ClInclude Include="Tusk\Utils\Logger.h" />
   </ItemGroup>

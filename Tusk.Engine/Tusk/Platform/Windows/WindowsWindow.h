@@ -2,7 +2,9 @@
 
 #include "../Window.h"
 
-#include <GLFW/glfw3.h>
+#include "../../Renderer/GraphicsContext.h"
+
+struct GLFWwindow;
 
 namespace Tusk {
 
@@ -24,6 +26,7 @@ namespace Tusk {
 
 	private:
 		GLFWwindow* _window;
+		GraphicsContext* _context;
 
 		struct WindowData
 		{

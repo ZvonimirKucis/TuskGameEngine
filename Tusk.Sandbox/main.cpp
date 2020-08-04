@@ -25,7 +25,10 @@ public:
 class Sandbox : public Tusk::Application {
 public:
 	Sandbox() {
-		pushLayer(new ExampleLayer());
+		Tusk::Layer* layer = new ExampleLayer();
+		Tusk::Logger::Log("Layer created: %s", layer->getName().c_str());
+		
+		pushLayer(layer);		
 	}
 
 	~Sandbox() {

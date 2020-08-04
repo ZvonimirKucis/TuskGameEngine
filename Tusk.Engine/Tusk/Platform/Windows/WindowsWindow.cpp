@@ -1,11 +1,15 @@
-#define GLFW_INCLUDE_VULKAN
-
 #include "tuskpch.h"
+
+#define GLFW_INCLUDE_VULKAN
+#include <GLFW/glfw3.h>
+
 #include "WindowsWindow.h"
 
 #include "../../Events/ApplicationEvent.h"
 #include "../../Events/KeyEvent.h"
 #include "../../Events/MouseEvent.h"
+
+#include "../../Renderer/Vulkan/VulkanContext.h"
 
 namespace Tusk {
 	
@@ -20,13 +24,16 @@ namespace Tusk {
 	void WindowsWindow::init(const WindowCreateInfo& props) {
 		_data.title = props.title;
 		_data.width = props.width;
-		_data.height = props.height;
+		_data.height = props.height;		
 
 		glfwInit();
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
 		_window = glfwCreateWindow(props.width, props.height, props.title.c_str(), nullptr, nullptr);
 		glfwSetWindowUserPointer(_window, &_data);
+
+		_context = new VulkanContext(_window);
+		_context->init();
 
 		glfwSetWindowSizeCallback(_window, [](GLFWwindow* window, int width, int height){
 			WindowData& data = *(WindowData*) glfwGetWindowUserPointer(window);
@@ -107,6 +114,7 @@ namespace Tusk {
 
 	void WindowsWindow::onUpdate() {
 		glfwPollEvents();
+		_context->swapBuffers();
 	}
 
 	WindowsWindow::~WindowsWindow() {
