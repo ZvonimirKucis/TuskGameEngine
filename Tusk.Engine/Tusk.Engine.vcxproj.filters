@@ -107,5 +107,11 @@
     <ClInclude Include="Tusk\Platform\Windows\WindowsInput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Tusk\Platform\KeyCodes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Platform\MouseButtonCodes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

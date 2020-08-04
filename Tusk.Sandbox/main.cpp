@@ -5,11 +5,20 @@ public:
 	ExampleLayer() : Layer("example") {}
 
 	void onUpdate() override {
-		//Tusk::Logger::Log("Update");
+		if (Tusk::Input::isKeyPressed(TUSK_KEY_TAB)) {
+			Tusk::Logger::Log("Tab key is pressed (poll)!");
+		}
 	}
 
 	void onEvent(Tusk::Event& event) override {
-		Tusk::Logger::Log("layer, event: %s", event.ToString().c_str());
+		Tusk::Logger::Log("Example layer, event: %s", event.toString().c_str());
+
+		if (event.getEventType() == Tusk::EventType::KeyPressed)
+		{
+			Tusk::KeyPressedEvent& e = (Tusk::KeyPressedEvent&)event;
+			if (e.getKeyCode() == TUSK_KEY_TAB)
+				Tusk::Logger::Log("Tab key is pressed (event)!");
+		}
 	}
 };
 

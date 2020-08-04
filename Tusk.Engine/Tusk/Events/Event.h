@@ -22,11 +22,11 @@ namespace Tusk {
 		EventCategoryMouseButton = BIT(4)
 	};
 
-#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; }\
-								virtual EventType GetEventType() const override { return GetStaticType(); }\
-								virtual const char* GetName() const override { return #type; }
+#define EVENT_CLASS_TYPE(type) static EventType getStaticType() { return EventType::type; }\
+								virtual EventType getEventType() const override { return getStaticType(); }\
+								virtual const char* getName() const override { return #type; }
 
-#define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
+#define EVENT_CLASS_CATEGORY(category) virtual int getCategoryFlags() const override { return category; }
 
 	class Event
 	{
@@ -35,14 +35,14 @@ namespace Tusk {
 
 		bool Handled = false;
 
-		virtual EventType GetEventType() const = 0;
-		virtual const char* GetName() const = 0;
-		virtual int GetCategoryFlags() const = 0;
-		virtual std::string ToString() const { return GetName(); }
+		virtual EventType getEventType() const = 0;
+		virtual const char* getName() const = 0;
+		virtual int getCategoryFlags() const = 0;
+		virtual std::string toString() const { return getName(); }
 
-		bool IsInCategory(EventCategory category)
+		bool isInCategory(EventCategory category)
 		{
-			return GetCategoryFlags() & category;
+			return getCategoryFlags() & category;
 		}
 	};
 
@@ -58,7 +58,7 @@ namespace Tusk {
 		template<typename T, typename F>
 		bool dispatch(const F& func)
 		{
-			if (_event.GetEventType() == T::GetStaticType())
+			if (_event.getEventType() == T::getStaticType())
 			{
 				_event.Handled = func(static_cast<T&>(_event));
 				return true;

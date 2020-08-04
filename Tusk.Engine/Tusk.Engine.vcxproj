@@ -128,6 +128,8 @@
     <ClInclude Include="Tusk\Layers\Layer.h" />
     <ClInclude Include="Tusk\Layers\LayerStack.h" />
     <ClInclude Include="Tusk\Platform\Input.h" />
+    <ClInclude Include="Tusk\Platform\KeyCodes.h" />
+    <ClInclude Include="Tusk\Platform\MouseButtonCodes.h" />
     <ClInclude Include="Tusk\Platform\Window.h" />
     <ClInclude Include="Tusk\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="Tusk\Platform\Windows\WindowsWindow.h" />

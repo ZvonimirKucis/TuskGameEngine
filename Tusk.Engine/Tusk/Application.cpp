@@ -41,11 +41,6 @@ namespace Tusk {
 			for (Layer* layer : _layerStack) {
 				layer->onUpdate();
 			}
-
-			float x = Input::getMouseX();
-			float y = Input::getMouseY();
-			Logger::Trace("Mouse position: %f, %f", x, y);
-
 			_window->onUpdate();
 		}
 	}

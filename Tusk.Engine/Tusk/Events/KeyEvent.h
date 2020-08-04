@@ -4,31 +4,31 @@
 
 namespace Tusk {
 
-	/*class KeyEvent : public Event
+	class KeyEvent : public Event
 	{
 	public:
-		KeyCode GetKeyCode() const { return m_KeyCode; }
+		inline int getKeyCode() const { return _keyCode; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 	protected:
-		KeyEvent(KeyCode keycode)
-			: m_KeyCode(keycode) {}
+		KeyEvent(int keycode)
+			: _keyCode(keycode) {}
 
-		KeyCode m_KeyCode;
+		int _keyCode;
 	};
 
 	class KeyPressedEvent : public KeyEvent
 	{
 	public:
-		KeyPressedEvent(KeyCode keycode, int repeatCount)
+		KeyPressedEvent(int keycode, int repeatCount)
 			: KeyEvent(keycode), m_RepeatCount(repeatCount) {}
 
-		int GetRepeatCount() const { return m_RepeatCount; }
+		int getRepeatCount() const { return m_RepeatCount; }
 
-		std::string ToString() const override
+		std::string toString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyPressedEvent: " << m_KeyCode << " (" << m_RepeatCount << " repeats)";
+			ss << "KeyPressedEvent: " << _keyCode << " (" << m_RepeatCount << " repeats)";
 			return ss.str();
 		}
 
@@ -40,13 +40,13 @@ namespace Tusk {
 	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
-		KeyReleasedEvent(KeyCode keycode)
+		KeyReleasedEvent(int keycode)
 			: KeyEvent(keycode) {}
 
-		std::string ToString() const override
+		std::string toString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyReleasedEvent: " << m_KeyCode;
+			ss << "KeyReleasedEvent: " << _keyCode;
 			return ss.str();
 		}
 
@@ -56,16 +56,16 @@ namespace Tusk {
 	class KeyTypedEvent : public KeyEvent
 	{
 	public:
-		KeyTypedEvent(KeyCode keycode)
+		KeyTypedEvent(int keycode)
 			: KeyEvent(keycode) {}
 
-		std::string ToString() const override
+		std::string toString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyTypedEvent: " << m_KeyCode;
+			ss << "KeyTypedEvent: " << _keyCode;
 			return ss.str();
 		}
 
 		EVENT_CLASS_TYPE(KeyTyped)
-	};*/
+	};
 }
