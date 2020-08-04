@@ -5,12 +5,11 @@
 
 namespace Tusk {
 	
-	class Platform;
 	class VulkanDevice;
 
 	class VulkanRenderer {
 	public:
-		VulkanRenderer(Platform* platform);
+		VulkanRenderer();
 		~VulkanRenderer();
 	
 	private:
@@ -24,7 +23,6 @@ namespace Tusk {
 		void checkValidationLayerSupport();
 
 	private:
-		Platform* _platform;
 
 		VkInstance _instance;
 		VkDebugUtilsMessengerEXT _debugMessenger;

@@ -2,8 +2,14 @@
 
 #include "Application.h"
 
+#include "Platform/Input.h"
+
 namespace Tusk {
+	Application* Application::_instance = nullptr;
+
 	Application::Application() {
+		_instance = this;
+
 		_window = std::unique_ptr<Window>(Window::create());
 		_window->setEventCallback(std::bind(&Application::onEvent, this, std::placeholders::_1));
 	}
@@ -34,6 +40,11 @@ namespace Tusk {
 			for (Layer* layer : _layerStack) {
 				layer->onUpdate();
 			}
+
+			float x = Input::getMouseX();
+			float y = Input::getMouseY();
+			Logger::Trace("Mouse position: %f, %f", x, y);
+
 			_window->onUpdate();
 		}
 	}

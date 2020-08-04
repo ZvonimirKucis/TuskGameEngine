@@ -103,9 +103,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Tusk\Application.cpp" />
+    <ClCompile Include="Tusk\GUI\ImGuiLayer.cpp" />
     <ClCompile Include="Tusk\Layers\Layer.cpp" />
     <ClCompile Include="Tusk\Layers\LayerStack.cpp" />
-    <ClCompile Include="Tusk\Platform\Platform.cpp" />
+    <ClCompile Include="Tusk\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="Tusk\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="Tusk\Renderer\VulkanDevice.cpp" />
     <ClCompile Include="Tusk\Renderer\VulkanRenderer.cpp" />
@@ -123,10 +124,12 @@
     <ClInclude Include="Tusk\Events\Event.h" />
     <ClInclude Include="Tusk\Events\KeyEvent.h" />
     <ClInclude Include="Tusk\Events\MouseEvent.h" />
+    <ClInclude Include="Tusk\GUI\ImGuiLayer.h" />
     <ClInclude Include="Tusk\Layers\Layer.h" />
     <ClInclude Include="Tusk\Layers\LayerStack.h" />
-    <ClInclude Include="Tusk\Platform\Platform.h" />
+    <ClInclude Include="Tusk\Platform\Input.h" />
     <ClInclude Include="Tusk\Platform\Window.h" />
+    <ClInclude Include="Tusk\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="Tusk\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="Tusk\Renderer\VulkanDevice.h" />
     <ClInclude Include="Tusk\Renderer\VulkanRenderer.h" />

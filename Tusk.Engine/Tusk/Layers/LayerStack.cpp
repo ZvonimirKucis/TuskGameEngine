@@ -15,11 +15,13 @@ namespace Tusk{
 	{
 		_layers.emplace(_layers.begin() + _layerInsertIndex, layer);
 		_layerInsertIndex++;
+		layer->onAttach();
 	}
 
 	void LayerStack::pushOverlay(Layer* overlay)
 	{
 		_layers.emplace_back(overlay);
+		overlay->onAttach();
 	}
 
 	void LayerStack::popLayer(Layer* layer)

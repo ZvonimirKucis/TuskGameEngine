@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Tusk\Platform\Platform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Tusk\Renderer\VulkanDevice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -42,11 +39,14 @@
     <ClCompile Include="Tusk\Layers\LayerStack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Tusk\GUI\ImGuiLayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Platform\Windows\WindowsInput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Tusk\Platform\Platform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Tusk\Renderer\VulkanDevice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -99,6 +99,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Layers\LayerStack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\GUI\ImGuiLayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Platform\Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Platform\Windows\WindowsInput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

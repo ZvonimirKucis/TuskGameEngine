@@ -49,7 +49,7 @@ namespace Tusk {
 	{
 	public:
 		EventDispatcher(Event& event)
-			: m_Event(event)
+			: _event(event)
 		{
 		}
 
@@ -57,14 +57,14 @@ namespace Tusk {
 		template<typename T, typename F>
 		bool dispatch(const F& func)
 		{
-			if (m_Event.GetEventType() == T::GetStaticType())
+			if (_event.GetEventType() == T::GetStaticType())
 			{
-				m_Event.Handled = func(static_cast<T&>(m_Event));
+				_event.Handled = func(static_cast<T&>(_event));
 				return true;
 			}
 			return false;
 		}
 	private:
-		Event& m_Event;
+		Event& _event;
 	};
 }

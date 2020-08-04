@@ -5,7 +5,7 @@ public:
 	ExampleLayer() : Layer("example") {}
 
 	void onUpdate() override {
-		Tusk::Logger::Log("Update");
+		//Tusk::Logger::Log("Update");
 	}
 
 	void onEvent(Tusk::Event& event) override {

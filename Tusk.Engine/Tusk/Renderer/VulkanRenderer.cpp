@@ -1,6 +1,6 @@
 #include "tuskpch.h"
 
-#include "../Platform/Platform.h"
+//#include "../Platform/Platform.h"
 #include "VulkanUtils.h"
 #include "VulkanDevice.h"
 #include "VulkanRenderer.h"
@@ -31,9 +31,7 @@ namespace Tusk {
         return VK_FALSE;
     }
 
-    VulkanRenderer::VulkanRenderer(Platform* platform) {
-        _platform = platform;
-
+    VulkanRenderer::VulkanRenderer() {
         Logger::Trace("Initializing Vulkan renderer...");
         initVulkan();
     }
@@ -89,7 +87,7 @@ namespace Tusk {
     }
 
     void VulkanRenderer::createSurface() {
-        _platform->createSurface(_instance, &_surface);
+       // _platform->createSurface(_instance, &_surface);
     }
 
     void VulkanRenderer::createDevice() {
@@ -99,9 +97,11 @@ namespace Tusk {
     std::vector<const char*> VulkanRenderer::getRequiredExtensions() {
         U32 glfwExtensionCount = 0;
         const char** glfwExtensions;
-        _platform->getRequiredExtensions(&glfwExtensionCount, &glfwExtensions);
+        //_platform->getRequiredExtensions(&glfwExtensionCount, &glfwExtensions);
 
-        std::vector<const char*> extensions(glfwExtensions, glfwExtensions + glfwExtensionCount);
+        //std::vector<const char*> extensions(glfwExtensions, glfwExtensions + glfwExtensionCount);
+
+        std::vector<const char*> extensions;
 
         if (ENABLE_VALIDATION_LAYERS) {
             extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);

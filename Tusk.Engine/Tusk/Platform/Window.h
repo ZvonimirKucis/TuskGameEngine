@@ -33,6 +33,8 @@ namespace Tusk {
 
 		virtual void setEventCallback(const EventCallbackFn & callback) = 0;
 
+		virtual void* getNativeWindow() const = 0;
+
 		static Window* create(const WindowCreateInfo& props = WindowCreateInfo());
 	};
 }

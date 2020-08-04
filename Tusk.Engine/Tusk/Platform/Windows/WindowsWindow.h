@@ -18,6 +18,7 @@ namespace Tusk {
 
 		void setEventCallback(const EventCallbackFn& callback) override { _data.EventCallback = callback; }
 
+		inline virtual void* getNativeWindow() const { return _window;  }
 	private:
 		virtual void init(const WindowCreateInfo& props);
 

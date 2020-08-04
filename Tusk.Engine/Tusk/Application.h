@@ -18,8 +18,15 @@ namespace Tusk {
 
 		void pushLayer(Layer* layer);
 		void pushOverlay(Layer* layer);
+
+		Window& getWindow() { return *_window; }
+
+		static Application& get() { return *_instance; }
 	private:
 		bool onWindowClose(WindowCloseEvent& e);
+
+	private:
+		static Application* _instance;
 
 		std::unique_ptr<Window> _window;
 		bool _running = true;
