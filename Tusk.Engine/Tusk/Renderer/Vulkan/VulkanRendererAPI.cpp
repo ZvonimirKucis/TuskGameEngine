@@ -4,7 +4,10 @@
 
 namespace Tusk {
 
-	void VulkanRendererAPI::init() {
+	void VulkanRendererAPI::init(const Ref<Window> window) {
+		_instance = CreateScope<VulkanInstance>(window);
+	}
 
+	VulkanRendererAPI::~VulkanRendererAPI() {
 	}
 }

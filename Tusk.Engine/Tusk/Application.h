@@ -7,7 +7,7 @@
 #include "Layers/LayerStack.h"
 
 namespace Tusk {
-	class TUSK_API Application {
+	class Application {
 	public:
 		Application();
 		virtual ~Application();
@@ -28,7 +28,7 @@ namespace Tusk {
 	private:
 		static Application* _instance;
 
-		Scope<Window> _window;
+		Ref<Window> _window;
 		bool _running = true;
 		LayerStack _layerStack;
 	};

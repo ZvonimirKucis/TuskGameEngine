@@ -1,17 +1,15 @@
 #pragma once
 
 #include "../Window.h"
-
 #include "../../Renderer/GraphicsContext.h"
 
-struct GLFWwindow;
+#include <GLFW/glfw3.h>
 
 namespace Tusk {
-
 	class WindowsWindow : public Window {
 	public:
 		WindowsWindow(const WindowCreateInfo& props);
-		virtual ~WindowsWindow();
+		virtual ~WindowsWindow() override;
 
 		void onUpdate() override;
 
@@ -20,7 +18,7 @@ namespace Tusk {
 
 		void setEventCallback(const EventCallbackFn& callback) override { _data.EventCallback = callback; }
 
-		inline virtual void* getNativeWindow() const { return _window;  }
+		inline virtual void* getNativeWindow() const override { return _window; };
 	private:
 		virtual void init(const WindowCreateInfo& props);
 
@@ -31,7 +29,7 @@ namespace Tusk {
 		struct WindowData
 		{
 			std::string title;
-			uint32_t width, height;
+			uint32_t width = 0, height = 0;
 
 			EventCallbackFn EventCallback;
 		};

@@ -10,8 +10,10 @@ namespace Tusk {
 	Application::Application() {
 		_instance = this;
 
-		_window = std::unique_ptr<Window>(Window::create());
+		_window = Window::create();
 		_window->setEventCallback(std::bind(&Application::onEvent, this, std::placeholders::_1));
+
+		Renderer::init(_window);
 	}
 
 	void Application::pushLayer(Layer* layer) {

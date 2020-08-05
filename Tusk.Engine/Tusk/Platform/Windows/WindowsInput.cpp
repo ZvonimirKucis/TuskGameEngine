@@ -11,7 +11,7 @@ namespace Tusk {
 	bool WindowsInput::isKeyPressedImpl(int keycode) {
 		auto window = static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow());
 		auto state = glfwGetKey(window, keycode);
-		return state == (GLFW_PRESS || GLFW_REPEAT);
+		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
 
 	bool WindowsInput::isMouseButtonPressedImpl(int button) {

@@ -7,9 +7,9 @@ namespace Tusk {
 
 	class RenderCommand{
 	public:
-		static void init()
+		static void init(const Ref<Window> window)
 		{
-			_rendererAPI->init();
+			_rendererAPI->init(window);
 		}
 		/*
 		static void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)

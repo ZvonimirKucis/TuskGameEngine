@@ -4,7 +4,7 @@
 
 namespace Tusk {
 
-	class TUSK_API Input {
+	class Input {
 	public:
 		inline static bool isKeyPressed(int keycode) { return _instance->isKeyPressedImpl(keycode); }
 		

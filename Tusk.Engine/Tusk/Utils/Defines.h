@@ -12,14 +12,6 @@
 #define U64_MAX 0xffffffffffffffffui64
 #endif
 
-#if _WIN32 || _WIN64
-    #ifdef TUSK_BUILD_LIB
-        #define TUSK_API __declspec(dllexport)
-    #else
-        #define TUSK_API __declspec(dllimport)
-       #endif
-#endif
-
 // Assertions
 #define ASSERTIONS_ENABLED
 #ifdef ASSERTIONS_ENABLED
@@ -78,6 +70,6 @@ namespace Tusk {
     template<typename T, typename ... Args>
     constexpr Ref<T> CreateRef(Args&& ... args)
     {
-        return std::make_unique<T>(std::forward<Args>(args)...);
+        return std::make_shared<T>(std::forward<Args>(args)...);
     }
 }

@@ -11,7 +11,7 @@ public:
 	}
 
 	void onEvent(Tusk::Event& event) override {
-		Tusk::Logger::Log("Example layer, event: %s", event.toString().c_str());
+		//Tusk::Logger::Log("Example layer, event: %s", event.toString().c_str());
 
 		if (event.getEventType() == Tusk::EventType::KeyPressed)
 		{

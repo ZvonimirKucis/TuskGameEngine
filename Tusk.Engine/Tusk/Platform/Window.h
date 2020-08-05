@@ -3,6 +3,7 @@
 #include "../Events/Event.h"
 
 namespace Tusk {
+
 	struct WindowCreateInfo
 	{
 		std::string title;
@@ -18,7 +19,7 @@ namespace Tusk {
 		}
 	};
 
-	class TUSK_API Window {
+	class Window {
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;
 
@@ -33,6 +34,6 @@ namespace Tusk {
 
 		virtual void* getNativeWindow() const = 0;
 
-		static Window* create(const WindowCreateInfo& props = WindowCreateInfo());
+		static Ref<Window> create(const WindowCreateInfo& props = WindowCreateInfo());
 	};
 }

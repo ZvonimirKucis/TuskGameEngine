@@ -1,12 +1,15 @@
 #include "tuskpch.h"
 #include "Renderer.h"
+#include "RendererCommand.h"
+
+#include "../Utils/Logger.h"
 
 namespace Tusk {
 
 	//RendererAPI Renderer::_rendererAPI = RendererAPI::Vulkan;
-	void Renderer::Init()
+	void Renderer::init(const Ref<Window> window)
 	{
-		//RenderCommand::Init();
+		RenderCommand::init(window);
 	}
 
 	void Renderer::Shutdown()

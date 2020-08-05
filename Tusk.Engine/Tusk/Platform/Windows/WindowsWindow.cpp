@@ -1,4 +1,5 @@
 #include "tuskpch.h"
+#include "../../Utils/Logger.h"
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
@@ -13,8 +14,9 @@
 
 namespace Tusk {
 	
-	Window* Window::create(const WindowCreateInfo& props) {
-		return new WindowsWindow(props);
+	static void GLFWErrorCallback(int error, const char* description)
+	{
+		Logger::Error("GLFW Error (%d): %s", error, description);
 	}
 
 	WindowsWindow::WindowsWindow(const WindowCreateInfo& props) {
@@ -28,6 +30,9 @@ namespace Tusk {
 
 		glfwInit();
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+
+		glfwSetErrorCallback(GLFWErrorCallback);
 
 		_window = glfwCreateWindow(props.width, props.height, props.title.c_str(), nullptr, nullptr);
 		glfwSetWindowUserPointer(_window, &_data);

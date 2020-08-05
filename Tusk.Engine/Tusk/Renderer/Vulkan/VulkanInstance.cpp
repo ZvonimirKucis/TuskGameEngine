@@ -1,9 +1,12 @@
 #include "tuskpch.h"
 
+#define GLFW_INCLUDE_VULKAN
+#include <GLFW/glfw3.h>
+
 #include "../../Utils/Logger.h"
 #include "VulkanUtils.h"
-#include "VulkanDevice.h"
 #include "VulkanInstance.h"
+#include "../../Platform/Window.h"
 
 namespace Tusk {
     static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
@@ -31,7 +34,8 @@ namespace Tusk {
         return VK_FALSE;
     }
 
-    VulkanInstance::VulkanInstance() {
+    VulkanInstance::VulkanInstance(const Ref<Window> window) {
+        _window = window;
         Logger::Trace("Initializing Vulkan renderer...");
         initVulkan();
     }
@@ -87,7 +91,8 @@ namespace Tusk {
     }
 
     void VulkanInstance::createSurface() {
-       // _platform->createSurface(_instance, &_surface);
+        Logger::Trace("Initializing Vulkan surface...");
+        VK_CHECK(glfwCreateWindowSurface(_instance,(GLFWwindow*) _window->getNativeWindow(), nullptr, &_surface))
     }
 
     void VulkanInstance::createDevice() {
@@ -97,12 +102,9 @@ namespace Tusk {
     std::vector<const char*> VulkanInstance::getRequiredExtensions() {
         unsigned int glfwExtensionCount = 0;
         const char** glfwExtensions;
-        //_platform->getRequiredExtensions(&glfwExtensionCount, &glfwExtensions);
+        glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
 
-        //std::vector<const char*> extensions(glfwExtensions, glfwExtensions + glfwExtensionCount);
-
-        std::vector<const char*> extensions;
-
+        std::vector<const char*> extensions(glfwExtensions, glfwExtensions + glfwExtensionCount);
         if (ENABLE_VALIDATION_LAYERS) {
             extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
         }
