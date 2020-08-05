@@ -1,9 +1,8 @@
 #include "tuskpch.h"
 
 #include "Application.h"
-
 #include "Utils/Logger.h"
-#include "Platform/Input.h"
+#include "Renderer/Renderer.h"
 
 namespace Tusk {
 	Application* Application::_instance = nullptr;

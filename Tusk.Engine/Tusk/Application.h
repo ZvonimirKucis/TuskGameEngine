@@ -28,7 +28,7 @@ namespace Tusk {
 	private:
 		static Application* _instance;
 
-		std::unique_ptr<Window> _window;
+		Scope<Window> _window;
 		bool _running = true;
 		LayerStack _layerStack;
 	};

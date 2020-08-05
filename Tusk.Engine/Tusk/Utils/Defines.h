@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #define BIT(x) (1 << x)
 
 #ifndef U32_MAX
@@ -18,14 +20,12 @@
        #endif
 #endif
 
-#define FORCEINLINE __forceinline
-
 // Assertions
 #define ASSERTIONS_ENABLED
 #ifdef ASSERTIONS_ENABLED
 #include <iostream>
-
 #include <intrin.h>
+
 #define debugBreak() __debugbreak();
 
 #define ASSERT(expr) { \
@@ -54,7 +54,7 @@
 #define ASSERT_DEBUG(expr) // Does nothing at all
 #endif
 
-FORCEINLINE void reportAssertionFailure(const char* expression, const char* message, const char* file, int line) {
+inline void reportAssertionFailure(const char* expression, const char* message, const char* file, int line) {
     std::cerr << "Assertion failure: " << expression << ", message: '" << message << "', in file: " << file << ", line: " << line << "\n";
 }
 
@@ -63,3 +63,21 @@ FORCEINLINE void reportAssertionFailure(const char* expression, const char* mess
 #define ASSERT_MSG(expr, message) // Does nothing at all
 #define ASSERT_DEBUG(expr) // Does nothing at all
 #endif
+
+namespace Tusk {
+    template<typename T>
+    using Scope = std::unique_ptr<T>;
+    template<typename T, typename ... Args>
+    constexpr Scope<T> CreateScope(Args&& ... args)
+    {
+        return std::make_unique<T>(std::forward<Args>(args)...);
+    }
+
+    template<typename T>
+    using Ref = std::shared_ptr<T>;
+    template<typename T, typename ... Args>
+    constexpr Ref<T> CreateRef(Args&& ... args)
+    {
+        return std::make_unique<T>(std::forward<Args>(args)...);
+    }
+}
