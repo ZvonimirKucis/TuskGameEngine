@@ -38,10 +38,11 @@ namespace Tusk {
 
 	void Application::run() {
 		while (_running) {
-
 			for (Layer* layer : _layerStack) {
 				layer->onUpdate();
 			}
+
+			Renderer::update();
 			_window->onUpdate();
 		}
 	}

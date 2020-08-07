@@ -1,15 +1,13 @@
 #pragma once
 
 #include "../Window.h"
-#include "../../Renderer/GraphicsContext.h"
-
 #include <GLFW/glfw3.h>
 
 namespace Tusk {
-	class WindowsWindow : public Window {
+	class GLFWWindow : public Window {
 	public:
-		WindowsWindow(const WindowCreateInfo& props);
-		virtual ~WindowsWindow() override;
+		GLFWWindow(const WindowCreateInfo& props);
+		virtual ~GLFWWindow() override;
 
 		void onUpdate() override;
 
@@ -24,7 +22,6 @@ namespace Tusk {
 
 	private:
 		GLFWwindow* _window;
-		GraphicsContext* _context;
 
 		struct WindowData
 		{

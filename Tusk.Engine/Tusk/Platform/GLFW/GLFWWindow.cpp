@@ -4,13 +4,11 @@
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
-#include "WindowsWindow.h"
+#include "GLFWWindow.h"
 
 #include "../../Events/ApplicationEvent.h"
 #include "../../Events/KeyEvent.h"
 #include "../../Events/MouseEvent.h"
-
-#include "../../Renderer/Vulkan/VulkanContext.h"
 
 namespace Tusk {
 	
@@ -19,11 +17,12 @@ namespace Tusk {
 		Logger::Error("GLFW Error (%d): %s", error, description);
 	}
 
-	WindowsWindow::WindowsWindow(const WindowCreateInfo& props) {
+	GLFWWindow::GLFWWindow(const WindowCreateInfo& props) {
+		Logger::Trace("Creating GLFW window.");
 		init(props);
 	}
 
-	void WindowsWindow::init(const WindowCreateInfo& props) {
+	void GLFWWindow::init(const WindowCreateInfo& props) {
 		_data.title = props.title;
 		_data.width = props.width;
 		_data.height = props.height;		
@@ -36,9 +35,6 @@ namespace Tusk {
 
 		_window = glfwCreateWindow(props.width, props.height, props.title.c_str(), nullptr, nullptr);
 		glfwSetWindowUserPointer(_window, &_data);
-
-		_context = new VulkanContext(_window);
-		_context->init();
 
 		glfwSetWindowSizeCallback(_window, [](GLFWwindow* window, int width, int height){
 			WindowData& data = *(WindowData*) glfwGetWindowUserPointer(window);
@@ -117,12 +113,11 @@ namespace Tusk {
 		});
 	}
 
-	void WindowsWindow::onUpdate() {
+	void GLFWWindow::onUpdate() {
 		glfwPollEvents();
-		_context->swapBuffers();
 	}
 
-	WindowsWindow::~WindowsWindow() {
+	GLFWWindow::~GLFWWindow() {
 		if (_window) {
 			glfwDestroyWindow(_window);
 		}

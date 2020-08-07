@@ -1,18 +1,12 @@
 #include "tuskpch.h"
 
 #include "Shader.h"
+#include "Vulkan/VulkanShader.h"
 
 namespace Tusk{
 
-	Shader::Shader(const std::string& vertexSrc, const std::string& fragmentSrc) {
-
+	Ref<Shader> Shader::create(const std::string& vertexFile, const std::string& fragmentFile) {
+		return CreateRef<VulkanShader>(vertexFile, fragmentFile);
 	}
 
-	Shader::~Shader() {
-
-	}
-
-	void Shader::bind() const {
-
-	}
 }

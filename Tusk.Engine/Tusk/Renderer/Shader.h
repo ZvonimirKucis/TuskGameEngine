@@ -1,17 +1,22 @@
 #pragma once
 
 #include <string>
+#include <vulkan/vulkan.h>
 
 namespace Tusk {
 	
+	class VulkanDevice;
+	class VulkanSwapChain;
+	class VulkanPipeline;
+
 	class Shader {
 	public:
-		Shader(const std::string& vertexSrc, const std::string& fragmentSrc);
-		~Shader();
+		virtual ~Shader() {}
 
-		void bind() const;
+		static Ref<Shader> create(const std::string& vertexFile, const std::string& fragmentFile);
 
-	private:
-		uint32_t _rendererID;
+		virtual void createShaderModules(VulkanDevice* device, VulkanSwapChain* swapchain, VulkanPipeline* pipeline) = 0;
+
+		virtual VkPipeline getGraphicsPipeline() = 0;
 	};
 }

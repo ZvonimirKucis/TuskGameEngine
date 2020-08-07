@@ -2,6 +2,7 @@
 
 #include "Tusk/Application.h"
 #include "Tusk/Layers/Layer.h"
+#include "Tusk/Utils/Defines.h"
 #include "Tusk/Utils/Logger.h"
 
 #include "Tusk/Events/Event.h"
@@ -12,5 +13,8 @@
 #include "Tusk/Platform/Input.h"
 #include "Tusk/Platform/KeyCodes.h"
 #include "Tusk/Platform/MouseButtonCodes.h"
+
+#include "Tusk/Renderer/Renderer.h"
+#include "Tusk/Renderer/Shader.h"
 
 #include "Tusk/EntryPoint.h"

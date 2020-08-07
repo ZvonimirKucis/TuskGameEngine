@@ -24,9 +24,6 @@
     <ClCompile Include="tuskpch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tusk\Platform\Windows\WindowsWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Tusk\Layers\Layer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -34,12 +31,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tusk\GUI\ImGuiLayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Platform\Windows\WindowsInput.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tusk\Renderer\Shader.cpp">
@@ -70,6 +61,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tusk\Platform\Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanSwapChain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Platform\GLFW\GLFWWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Platform\GLFW\GLFWInput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanPipeline.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanFramebuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -107,9 +119,6 @@
     <ClInclude Include="Tusk\Platform\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tusk\Platform\Windows\WindowsWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Tusk\Layers\Layer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -122,19 +131,10 @@
     <ClInclude Include="Tusk\Platform\Input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tusk\Platform\Windows\WindowsInput.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Tusk\Platform\KeyCodes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Platform\MouseButtonCodes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Renderer\GraphicsContext.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanContext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Renderer\Shader.h">
@@ -165,6 +165,27 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Renderer\RendererCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanSwapChain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Platform\GLFW\GLFWWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Platform\GLFW\GLFWInput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanPipeline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanFramebuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

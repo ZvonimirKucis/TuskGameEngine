@@ -54,7 +54,6 @@ namespace Tusk {
 		{
 		}
 
-		// F will be deduced by the compiler
 		template<typename T, typename F>
 		bool dispatch(const F& func)
 		{

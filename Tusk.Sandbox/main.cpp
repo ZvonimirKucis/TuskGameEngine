@@ -2,37 +2,39 @@
 
 class ExampleLayer : public Tusk::Layer {
 public:
-	ExampleLayer() : Layer("example") {}
+	ExampleLayer() : Layer("example") {
+		_shader = Tusk::Shader::create("shaders/main.vert.spv", "shaders/main.frag.spv");
+		_shader2 = Tusk::Shader::create("shaders/main.vert_2.spv", "shaders/main.frag.spv");
+	}
 
 	void onUpdate() override {
-		if (Tusk::Input::isKeyPressed(TUSK_KEY_TAB)) {
-			Tusk::Logger::Log("Tab key is pressed (poll)!");
-		}
+		Tusk::Renderer::beginScene();
+		Tusk::Renderer::clear();
+		Tusk::Renderer::submit(_shader);
+		Tusk::Renderer::submit(_shader2);
+		Tusk::Renderer::endScene();
 	}
 
 	void onEvent(Tusk::Event& event) override {
-		//Tusk::Logger::Log("Example layer, event: %s", event.toString().c_str());
-
 		if (event.getEventType() == Tusk::EventType::KeyPressed)
 		{
 			Tusk::KeyPressedEvent& e = (Tusk::KeyPressedEvent&)event;
 			if (e.getKeyCode() == TUSK_KEY_TAB)
-				Tusk::Logger::Log("Tab key is pressed (event)!");
+				Tusk::Logger::Log("Tab key is pressed!");
 		}
 	}
+private:
+	Tusk::Ref<Tusk::Shader> _shader;
+	Tusk::Ref<Tusk::Shader> _shader2;
 };
 
 class Sandbox : public Tusk::Application {
 public:
 	Sandbox() {
-		Tusk::Layer* layer = new ExampleLayer();
-		Tusk::Logger::Log("Layer created: %s", layer->getName().c_str());
-		
-		pushLayer(layer);		
+		pushLayer(new ExampleLayer());
 	}
 
 	~Sandbox() {
-
 	}
 };
 

@@ -3,5 +3,5 @@
 
 namespace Tusk {
 
-	Scope<RendererAPI> RenderCommand::_rendererAPI = RendererAPI::Create();
+	Scope<RendererAPI> RenderCommand::_rendererAPI = RendererAPI::create();
 }

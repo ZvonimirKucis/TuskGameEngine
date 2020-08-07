@@ -4,7 +4,7 @@
 
 namespace Tusk {
 
-	class WindowsInput : public Input {
+	class GLFWInput : public Input {
 	protected:
 		virtual bool isKeyPressedImpl(int keycode) override;
 

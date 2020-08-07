@@ -2,6 +2,7 @@
 
 #include "../Utils/Defines.h"
 #include "RendererAPI.h"
+#include "Shader.h"
 
 namespace Tusk {
 
@@ -10,6 +11,31 @@ namespace Tusk {
 		static void init(const Ref<Window> window)
 		{
 			_rendererAPI->init(window);
+		}
+
+		static void clear()
+		{
+			_rendererAPI->clearScreen();
+		}
+
+		static void drawFrame() {
+			_rendererAPI->drawFrame();
+		}
+
+		static void bindShader(const Ref<Shader>& shader) {
+			_rendererAPI->bindShader(shader);
+		}
+
+		static void beginDrawing() {
+			_rendererAPI->beginDrawing();
+		}
+
+		static void submitToDraw(const Ref<Shader>& shader) {
+			_rendererAPI->submitToDraw(shader);
+		}
+
+		static void endDrawing() {
+			_rendererAPI->endDrawing();
 		}
 		/*
 		static void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)

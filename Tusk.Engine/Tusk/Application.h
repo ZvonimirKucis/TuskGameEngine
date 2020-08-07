@@ -5,6 +5,7 @@
 #include "Events/ApplicationEvent.h"
 #include "Platform/Window.h"
 #include "Layers/LayerStack.h"
+#include "Renderer/Shader.h"
 
 namespace Tusk {
 	class Application {

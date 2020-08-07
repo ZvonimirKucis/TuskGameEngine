@@ -1,13 +1,9 @@
 #pragma once
 
 #include <vulkan/vulkan.h>
+#include "VulkanUtils.h"
 
 namespace Tusk {
-    struct SwapChainSupportDetails {
-        VkSurfaceCapabilitiesKHR capabilities;
-        std::vector<VkSurfaceFormatKHR> formats;
-        std::vector<VkPresentModeKHR> presentModes;
-    };
 
     class VulkanDevice {
     public:
@@ -15,12 +11,14 @@ namespace Tusk {
         ~VulkanDevice();
 
         VkDevice getDevice() { return _device; }
-
         VkPhysicalDevice getPhysicalDevice() { return _physicalDevice; }
 
         VkQueue getGraphicsQueue() { return _graphicsQueue;  }
-
         VkQueue getPresentationQueue() { return _presentationQueue; }
+        uint32_t getGraphicsFamilyQueueIndex() { return _graphicsFamilyQueueIndex;  }
+        uint32_t getPresentationFamilyQueueIndex() { return _presentationFamilyQueueIndex; }
+
+        SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
 
     private:
         void pickPhysicalDevice();
@@ -28,7 +26,6 @@ namespace Tusk {
         void createLogicalDevice();
 
         bool checkDeviceExtensionSupport(VkPhysicalDevice device);
-        SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
         void detectQueueFamilyIndices(VkPhysicalDevice physicalDevice, uint32_t* graphicsQueueIndex, uint32_t* presentationQueueIndex);
 
     private:

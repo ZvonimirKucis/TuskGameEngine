@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vulkan/vulkan.h>
 #include "../../Utils/Defines.h"
 
 #define VK_CHECK(expr) { ASSERT(expr == VK_SUCCESS) }
@@ -14,3 +15,9 @@ const std::vector<const char*> requiredValidationLayers = {
     "VK_LAYER_KHRONOS_validation"
 };
 #endif
+
+struct SwapChainSupportDetails {
+    VkSurfaceCapabilitiesKHR capabilities;
+    std::vector<VkSurfaceFormatKHR> formats;
+    std::vector<VkPresentModeKHR> presentModes;
+};

@@ -119,23 +119,27 @@
     <ClCompile Include="Tusk\Layers\Layer.cpp" />
     <ClCompile Include="Tusk\Layers\LayerStack.cpp" />
     <ClCompile Include="Tusk\Platform\Window.cpp" />
-    <ClCompile Include="Tusk\Platform\Windows\WindowsInput.cpp" />
-    <ClCompile Include="Tusk\Platform\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="Tusk\Platform\GLFW\GLFWInput.cpp" />
+    <ClCompile Include="Tusk\Platform\GLFW\GLFWWindow.cpp" />
     <ClCompile Include="Tusk\Renderer\Buffer.cpp" />
     <ClCompile Include="Tusk\Renderer\Renderer.cpp" />
     <ClCompile Include="Tusk\Renderer\RendererAPI.cpp" />
     <ClCompile Include="Tusk\Renderer\RendererCommand.cpp" />
     <ClCompile Include="Tusk\Renderer\Shader.cpp" />
+    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanCommand.cpp" />
     <ClCompile Include="Tusk\Renderer\Vulkan\VulkanDevice.cpp" />
+    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanFramebuffer.cpp" />
     <ClCompile Include="Tusk\Renderer\Vulkan\VulkanInstance.cpp" />
     <ClCompile Include="tuskpch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Tusk\Renderer\Vulkan\VulkanBuffer.cpp" />
-    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanContext.cpp" />
+    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanPipeline.cpp" />
     <ClCompile Include="Tusk\Renderer\Vulkan\VulkanRendererAPI.cpp" />
+    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanShader.cpp" />
     <ClCompile Include="Tusk\Utils\Logger.cpp" />
+    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanSwapChain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tusk.h" />
@@ -152,23 +156,26 @@
     <ClInclude Include="Tusk\Platform\KeyCodes.h" />
     <ClInclude Include="Tusk\Platform\MouseButtonCodes.h" />
     <ClInclude Include="Tusk\Platform\Window.h" />
-    <ClInclude Include="Tusk\Platform\Windows\WindowsInput.h" />
-    <ClInclude Include="Tusk\Platform\Windows\WindowsWindow.h" />
+    <ClInclude Include="Tusk\Platform\GLFW\GLFWInput.h" />
+    <ClInclude Include="Tusk\Platform\GLFW\GLFWWindow.h" />
     <ClInclude Include="Tusk\Renderer\Buffer.h" />
-    <ClInclude Include="Tusk\Renderer\GraphicsContext.h" />
     <ClInclude Include="Tusk\Renderer\Renderer.h" />
     <ClInclude Include="Tusk\Renderer\RendererAPI.h" />
     <ClInclude Include="Tusk\Renderer\RendererCommand.h" />
     <ClInclude Include="Tusk\Renderer\Shader.h" />
+    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanCommand.h" />
     <ClInclude Include="Tusk\Renderer\Vulkan\VulkanDevice.h" />
+    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanFramebuffer.h" />
     <ClInclude Include="Tusk\Renderer\Vulkan\VulkanInstance.h" />
+    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanPipeline.h" />
     <ClInclude Include="Tusk\Renderer\Vulkan\VulkanRendererAPI.h" />
+    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanShader.h" />
     <ClInclude Include="Tusk\Renderer\Vulkan\VulkanUtils.h" />
     <ClInclude Include="tuskpch.h" />
     <ClInclude Include="Tusk\Renderer\Vulkan\VulkanBuffer.h" />
-    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanContext.h" />
     <ClInclude Include="Tusk\Utils\Defines.h" />
     <ClInclude Include="Tusk\Utils\Logger.h" />
+    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanSwapChain.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

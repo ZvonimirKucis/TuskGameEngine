@@ -11,7 +11,7 @@ namespace Tusk {
         _instance = instance;
         _surface = surface;
 
-        Logger::Trace("Initializing device...");
+        Logger::Trace("Initializing Vulkan device.");
         pickPhysicalDevice();
         createLogicalDevice();
     }

@@ -1,33 +1,33 @@
 #include "tuskpch.h"
-#include "WindowsInput.h"
+#include "GLFWInput.h"
 
 #include "../../Application.h"
 #include <GLFW/glfw3.h>
 
 namespace Tusk {
 
-	Input* Input::_instance = new WindowsInput();
+	Input* Input::_instance = new GLFWInput();
 
-	bool WindowsInput::isKeyPressedImpl(int keycode) {
+	bool GLFWInput::isKeyPressedImpl(int keycode) {
 		auto window = static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow());
 		auto state = glfwGetKey(window, keycode);
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
 
-	bool WindowsInput::isMouseButtonPressedImpl(int button) {
+	bool GLFWInput::isMouseButtonPressedImpl(int button) {
 		auto window = static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow());
 		auto state = glfwGetKey(window, button);
 		return state == GLFW_PRESS;
 	}
 
-	float WindowsInput::getMouseXImpl() {
+	float GLFWInput::getMouseXImpl() {
 		auto window = static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow());
 		double xpos, ypos;
 		glfwGetCursorPos(window, &xpos, &ypos);
 		return (float)xpos;
 	}
 
-	float WindowsInput::getMouseYImpl() {
+	float GLFWInput::getMouseYImpl() {
 		auto window = static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow());
 		double xpos, ypos;
 		glfwGetCursorPos(window, &xpos, &ypos);
