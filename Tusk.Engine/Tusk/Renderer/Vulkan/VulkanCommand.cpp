@@ -1,6 +1,6 @@
 #include "tuskpch.h"
 
-#include "../../Utils/Logger.h"#
+#include "../../Utils/Logger.h"
 #include "VulkanCommand.h"
 
 namespace Tusk {
@@ -53,7 +53,7 @@ namespace Tusk {
         vkCmdBeginRenderPass(_commandBuffers[_currentFrame], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
     }
 
-    void VulkanCommand::submitToDraw(VkPipeline pipeline, VkBuffer vertexBuffer) {
+    void VulkanCommand::submitToDraw(VkPipeline pipeline, VkPipelineLayout pipelineLayout, VkBuffer vertexBuffer, VkBuffer indexBuffer, uint32_t indicesSize, std::vector<VkDescriptorSet> descriptorSets) {
         auto swapChainExtent = _swapchain->getSwapChainExtent();
         VkViewport viewport{};
         viewport.x = 0.0f;
@@ -74,7 +74,10 @@ namespace Tusk {
         VkBuffer vertexBuffers[] = { vertexBuffer };
         VkDeviceSize offsets[] = { 0 };
         vkCmdBindVertexBuffers(_commandBuffers[_currentFrame], 0, 1, vertexBuffers, offsets);
-        vkCmdDraw(_commandBuffers[_currentFrame], 3, 1, 0, 0);
+        vkCmdBindIndexBuffer(_commandBuffers[_currentFrame], indexBuffer, 0, VK_INDEX_TYPE_UINT32);
+        vkCmdBindDescriptorSets(_commandBuffers[_currentFrame], VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 0, 1, &descriptorSets[_currentFrame], 0, nullptr);
+
+        vkCmdDrawIndexed(_commandBuffers[_currentFrame], indicesSize, 1, 0, 0, 0);
 	}
 
     void VulkanCommand::endDrawing() {

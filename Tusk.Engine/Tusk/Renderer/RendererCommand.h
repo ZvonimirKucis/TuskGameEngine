@@ -23,6 +23,10 @@ namespace Tusk {
 			_rendererAPI->drawFrame();
 		}
 
+		static void bindIndexBuffer(const Ref<IndexBuffer>& indexBuffer) {
+			_rendererAPI->bindIndexBuffer(indexBuffer);
+		}
+
 		static void bindVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) {
 			_rendererAPI->bindVertexBuffer(vertexBuffer);
 		}

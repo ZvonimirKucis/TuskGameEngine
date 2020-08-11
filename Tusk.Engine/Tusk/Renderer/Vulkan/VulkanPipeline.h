@@ -13,13 +13,16 @@ namespace Tusk {
 
 		VkRenderPass getRenderPass() { return _renderPass; }
 		VkPipelineLayout getPipelineLayout() { return _pipelineLayout; }
+		VkDescriptorSetLayout getDescriptorSetLayout() { return _descriptorSetLayout; }
 
 	private:
 		void createRenderPass();
+		void createDescriptorSetLayout();
 		void createPipelineLayout();
 
 	private:
 		VkRenderPass _renderPass;
+		VkDescriptorSetLayout _descriptorSetLayout;
 		VkPipelineLayout _pipelineLayout;
 		VkPipeline _graphicsPipeline;
 

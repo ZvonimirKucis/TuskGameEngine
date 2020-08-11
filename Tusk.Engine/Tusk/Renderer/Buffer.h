@@ -5,6 +5,7 @@
 
 namespace Tusk {
 	class VulkanDevice;
+	class VulkanCommand;
 
 	enum class ShaderDataType {
 		None = 0, 
@@ -83,7 +84,7 @@ namespace Tusk {
 		virtual VkBuffer getBuffer() = 0;
 		virtual VkDeviceMemory getMemory() = 0;
 
-		virtual void bind(VulkanDevice* device) = 0;
+		virtual void bind(VulkanDevice* device, VulkanCommand* command) = 0;
 		virtual void unbind() const = 0;
 
 		virtual void setLayout(const BufferLayout& layout) = 0;
@@ -96,11 +97,14 @@ namespace Tusk {
 	public:
 		virtual ~IndexBuffer() {}
 
-		virtual void bind() const = 0;
+		virtual void bind(VulkanDevice* device, VulkanCommand* command) = 0;
 		virtual void unbind() const = 0;
+
+		virtual VkBuffer getBuffer() = 0;
+		virtual VkDeviceMemory getMemory() = 0;
 
 		virtual uint32_t getCount() const = 0;
 
-		static Ref<IndexBuffer> create(uint32_t* indices, uint32_t count);
+		static Ref<IndexBuffer> create(std::vector<uint32_t> indices);
 	};
 }

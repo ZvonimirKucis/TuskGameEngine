@@ -10,7 +10,7 @@ namespace Tusk {
 		return CreateRef<VulkanVertexBuffer>(vertices);
 	}
 
-	Ref<IndexBuffer> IndexBuffer::create(uint32_t* indices, uint32_t size) {
-		return CreateRef<VulkanIndexBuffer>(indices, size);
+	Ref<IndexBuffer> IndexBuffer::create(std::vector<uint32_t> indices) {
+		return CreateRef<VulkanIndexBuffer>(indices);
 	}
 }

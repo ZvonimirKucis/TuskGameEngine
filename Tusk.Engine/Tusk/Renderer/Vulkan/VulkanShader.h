@@ -8,8 +8,8 @@
 #include "VulkanVertex.h"
 #include "../Buffer.h"
 
-namespace Tusk {
 
+namespace Tusk {
 	class VulkanShader : public Shader {
 	public:
 		VulkanShader(const std::string& vertexFile, const std::string& fragmentFile);

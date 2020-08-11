@@ -20,6 +20,10 @@ namespace Tusk {
 		_instance->drawFrame();
 	}
 
+	void VulkanRendererAPI::bindIndexBuffer(const Ref<IndexBuffer>& indexBuffer) {
+		_instance->bindIndexBuffer(indexBuffer);
+	}
+
 	void VulkanRendererAPI::bindVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) {
 		_instance->bindVertexBuffer(vertexBuffer);
 	}

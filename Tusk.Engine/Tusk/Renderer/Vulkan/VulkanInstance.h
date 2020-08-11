@@ -22,6 +22,7 @@ namespace Tusk {
 		VulkanInstance(const Ref<Window> window);
 		~VulkanInstance();
 
+		void bindIndexBuffer(const Ref<IndexBuffer>& indexBuffer);
 		void bindVertexBuffer(const Ref<VertexBuffer>& vertexBuffer);
 		void bindShader(const Ref<Shader> shader);
 
@@ -41,10 +42,14 @@ namespace Tusk {
 		void createSwapChain();
 		void createPipeline();
 		void createFramebuffer();
+		void createUniformBuffers();
+		void createDescriptorPool();
+		void createDescriptorSets();
 		void createCommand();
 
 		void recreateSwapChain();
-		void cleanupSwapChain(); 
+		void cleanupSwapChain();
+		void updateUniformBuffer(uint32_t currentImage);
 
 		std::vector<const char*> getRequiredExtensions();
 		void checkValidationLayerSupport();
@@ -55,6 +60,8 @@ namespace Tusk {
 
 		Ref<Window> _window;
 		Ref<VertexBuffer> _vertexBuffer;
+		Ref<IndexBuffer> _indexBuffer;
+
 		VkInstance _instance;
 		VkDebugUtilsMessengerEXT _debugMessenger;
 		VkSurfaceKHR _surface;
@@ -73,5 +80,11 @@ namespace Tusk {
 		std::vector<VkSemaphore> _renderFinishedSemaphores;
 		std::vector<VkFence> _inFlightFences;
 		std::vector<VkFence> _imagesInFlight;
+
+		std::vector<VkBuffer> _uniformBuffers;
+		std::vector<VkDeviceMemory> _uniformBuffersMemory;
+
+		VkDescriptorPool _descriptorPool;
+		std::vector<VkDescriptorSet> _descriptorSets;
 	};
 }

@@ -6,15 +6,23 @@
 #include "../Buffer.h"
 #include "VulkanDevice.h"
 #include "VulkanVertex.h"
+#include "VulkanCommand.h"
 
 namespace Tusk {
+
+	class VulkanBufferHelper {
+	public:
+		static void createBuffer(VulkanDevice* device, VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer& buffer, VkDeviceMemory& bufferMemory);
+		static void copyBuffer(VulkanDevice* device, VulkanCommand* command, VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size);
+		static uint32_t findMemoryType(VulkanDevice* device, uint32_t typeFilter, VkMemoryPropertyFlags properties);
+	};
 
 	class VulkanVertexBuffer : public VertexBuffer {
 	public:
 		VulkanVertexBuffer(std::vector <Vertex> vertices);
 		virtual ~VulkanVertexBuffer();
 
-		virtual void bind(VulkanDevice* device) override;
+		virtual void bind(VulkanDevice* device, VulkanCommand* command) override;
 		virtual void unbind() const override;
 
 		virtual VkBuffer getBuffer() override { return _vertexBuffer; };
@@ -24,9 +32,8 @@ namespace Tusk {
 		virtual const BufferLayout& getLayout() const override { return _layout; }
 
 	private:
-		uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
-	private:
 		VulkanDevice* _device;
+		VulkanCommand* _command;
 		VkBuffer _vertexBuffer = VK_NULL_HANDLE;
 		VkDeviceMemory _vertexBufferMemory;
 
@@ -36,15 +43,23 @@ namespace Tusk {
 
 	class VulkanIndexBuffer : public IndexBuffer {
 	public:
-		VulkanIndexBuffer(uint32_t* indices, uint32_t count);
+		VulkanIndexBuffer(std::vector<uint32_t> indices);
 		virtual ~VulkanIndexBuffer();
 
-		virtual void bind() const override;
+		virtual void bind(VulkanDevice* device, VulkanCommand* command) override;
 		virtual void unbind() const override;
 
-		virtual uint32_t getCount() const { return _count; }
+		virtual VkBuffer getBuffer() override { return _indexBuffer; };
+		virtual VkDeviceMemory getMemory() override { return _indexBufferMemory; }
+
+		virtual uint32_t getCount() const { return _indices.size(); }
 
 	private:
-		uint32_t _count;
+		VulkanDevice* _device;
+		VulkanCommand* _command;
+		VkBuffer _indexBuffer = VK_NULL_HANDLE;
+		VkDeviceMemory _indexBufferMemory;
+		
+		std::vector<uint32_t> _indices;
 	};
 }

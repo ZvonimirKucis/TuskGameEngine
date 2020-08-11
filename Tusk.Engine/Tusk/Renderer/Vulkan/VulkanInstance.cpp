@@ -6,7 +6,14 @@
 #include "../../Utils/Logger.h"
 #include "VulkanUtils.h"
 #include "VulkanInstance.h"
+#include "VulkanBuffer.h"
 #include "../../Platform/Window.h"
+
+#define GLM_FORCE_RADIANS
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
+#include <chrono>
 
 namespace Tusk {
     static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
@@ -49,6 +56,9 @@ namespace Tusk {
         createSwapChain();
         createPipeline();
         createFramebuffer();
+        createUniformBuffers();
+        createDescriptorPool();
+        createDescriptorSets();
         createCommand();
         createSyncObjects();
     }
@@ -122,6 +132,14 @@ namespace Tusk {
     }
 
     void VulkanInstance::cleanupSwapChain() {
+        auto swapChainImages = _swapchain->getSwapChainImageViews();
+        for (size_t i = 0; i < swapChainImages.size(); i++) {
+            vkDestroyBuffer(_device->getDevice(), _uniformBuffers[i], nullptr);
+            vkFreeMemory(_device->getDevice(), _uniformBuffersMemory[i], nullptr);
+        }
+
+        vkDestroyDescriptorPool(_device->getDevice(), _descriptorPool, nullptr);
+
         delete _framebuffer;
         delete _command;
         delete _swapchain;
@@ -133,17 +151,86 @@ namespace Tusk {
 
         createSwapChain();
         createFramebuffer();
+        createUniformBuffers();
+        createDescriptorPool();
+        createDescriptorSets();
         createCommand();
     }
 
+    void VulkanInstance::createUniformBuffers() {
+        VkDeviceSize bufferSize = sizeof(UniformBufferObject);
+        auto swapChainImages = _swapchain->getSwapChainImageViews();
+
+        _uniformBuffers.resize(swapChainImages.size());
+        _uniformBuffersMemory.resize(swapChainImages.size());
+
+        for (size_t i = 0; i < swapChainImages.size(); i++) {
+            VulkanBufferHelper::createBuffer(_device, bufferSize, VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, _uniformBuffers[i], _uniformBuffersMemory[i]);
+        }
+    }
+
+    void VulkanInstance::createDescriptorPool() {
+        auto swapChainImages = _swapchain->getSwapChainImageViews();
+        VkDescriptorPoolSize poolSize{};
+        poolSize.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+        poolSize.descriptorCount = static_cast<uint32_t>(swapChainImages.size());
+
+        VkDescriptorPoolCreateInfo poolInfo{};
+        poolInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
+        poolInfo.poolSizeCount = 1;
+        poolInfo.pPoolSizes = &poolSize;
+        poolInfo.maxSets = static_cast<uint32_t>(swapChainImages.size());
+
+        VK_CHECK(vkCreateDescriptorPool(_device->getDevice(), &poolInfo, nullptr, &_descriptorPool))
+    }
+
+    void VulkanInstance::createDescriptorSets() {
+        auto swapChainImages = _swapchain->getSwapChainImageViews();
+
+        std::vector<VkDescriptorSetLayout> layouts(swapChainImages.size(), _pipeline->getDescriptorSetLayout());
+        VkDescriptorSetAllocateInfo allocInfo{};
+        allocInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+        allocInfo.descriptorPool = _descriptorPool;
+        allocInfo.descriptorSetCount = static_cast<uint32_t>(swapChainImages.size());
+        allocInfo.pSetLayouts = layouts.data();
+
+        _descriptorSets.resize(swapChainImages.size());
+        if (vkAllocateDescriptorSets(_device->getDevice(), &allocInfo, _descriptorSets.data()) != VK_SUCCESS) {
+            throw std::runtime_error("failed to allocate descriptor sets!");
+        }
+
+        for (size_t i = 0; i < swapChainImages.size(); i++) {
+            VkDescriptorBufferInfo bufferInfo{};
+            bufferInfo.buffer = _uniformBuffers[i];
+            bufferInfo.offset = 0;
+            bufferInfo.range = sizeof(UniformBufferObject);
+
+            VkWriteDescriptorSet descriptorWrite{};
+            descriptorWrite.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+            descriptorWrite.dstSet = _descriptorSets[i];
+            descriptorWrite.dstBinding = 0;
+            descriptorWrite.dstArrayElement = 0;
+            descriptorWrite.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+            descriptorWrite.descriptorCount = 1;
+            descriptorWrite.pBufferInfo = &bufferInfo;
+
+            vkUpdateDescriptorSets(_device->getDevice(), 1, &descriptorWrite, 0, nullptr);
+        }
+    }
+
+    void VulkanInstance::bindIndexBuffer(const Ref<IndexBuffer>& indexBuffer) {
+        indexBuffer->bind(_device, _command);
+        _indexBuffer = indexBuffer;
+    }
+
     void VulkanInstance::bindVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) {
-        vertexBuffer->bind(_device);
+        vertexBuffer->bind(_device, _command);
         _vertexBuffer = vertexBuffer;
     }
 
     void VulkanInstance::bindShader(const Ref<Shader> shader) {
         shader->createShaderModules(_device, _swapchain, _pipeline);
-        _command->submitToDraw(shader->getGraphicsPipeline(), _vertexBuffer->getBuffer());
+        _command->submitToDraw(shader->getGraphicsPipeline(), _pipeline->getPipelineLayout(), _vertexBuffer->getBuffer(), _indexBuffer->getBuffer(), _indexBuffer->getCount(), _descriptorSets);
     }
 
     void VulkanInstance::beginDrawing() {
@@ -181,6 +268,8 @@ namespace Tusk {
             vkWaitForFences(_device->getDevice(), 1, &_imagesInFlight[imageIndex], VK_TRUE, UINT64_MAX);
         }
         _imagesInFlight[imageIndex] = _inFlightFences[_currentFrame];
+
+        updateUniformBuffer(imageIndex);
 
         VkSubmitInfo submitInfo{};
         submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
@@ -225,6 +314,25 @@ namespace Tusk {
         }
 
         _currentFrame = (_currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
+    }
+
+    void VulkanInstance::updateUniformBuffer(uint32_t currentImage) {
+        auto swapChainExtent = _swapchain->getSwapChainExtent();
+        static auto startTime = std::chrono::high_resolution_clock::now();
+
+        auto currentTime = std::chrono::high_resolution_clock::now();
+        float time = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
+
+        UniformBufferObject ubo{};
+        ubo.model = glm::rotate(glm::mat4(1.0f), time * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+        ubo.view = glm::lookAt(glm::vec3(2.0f, 2.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+        ubo.proj = glm::perspective(glm::radians(45.0f), swapChainExtent.width / (float)swapChainExtent.height, 0.1f, 10.0f);
+        ubo.proj[1][1] *= -1;
+
+        void* data;
+        vkMapMemory(_device->getDevice(), _uniformBuffersMemory[currentImage], 0, sizeof(ubo), 0, &data);
+        memcpy(data, &ubo, sizeof(ubo));
+        vkUnmapMemory(_device->getDevice(), _uniformBuffersMemory[currentImage]);
     }
 
     std::vector<const char*> VulkanInstance::getRequiredExtensions() {
@@ -292,13 +400,16 @@ namespace Tusk {
             vkDestroySemaphore(_device->getDevice(), _imageAvailableSemaphores[i], nullptr);
             vkDestroyFence(_device->getDevice(), _inFlightFences[i], nullptr);
         }
+
+        vkDestroyBuffer(_device->getDevice(), _indexBuffer->getBuffer(), nullptr);
+        vkFreeMemory(_device->getDevice(), _indexBuffer->getMemory(), nullptr);
+
         vkDestroyBuffer(_device->getDevice(), _vertexBuffer->getBuffer(), nullptr);
         vkFreeMemory(_device->getDevice(), _vertexBuffer->getMemory(), nullptr);
 
-        delete _framebuffer;
-        delete _command;
+        cleanupSwapChain();
+
         delete _pipeline;
-        delete _swapchain;
         delete _device;
 
         vkDestroySurfaceKHR(_instance, _surface, nullptr);

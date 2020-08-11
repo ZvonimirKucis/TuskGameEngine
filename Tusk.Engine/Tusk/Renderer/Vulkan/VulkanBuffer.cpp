@@ -1,4 +1,5 @@
 #include "tuskpch.h"
+#include "../../Utils/Logger.h"
 #include "VulkanBuffer.h"
 #include "VulkanUtils.h"
 
@@ -12,46 +13,29 @@ namespace Tusk{
 		
 	}
 
-	void VulkanVertexBuffer::bind(VulkanDevice* device) {
+	void VulkanVertexBuffer::bind(VulkanDevice* device, VulkanCommand* command) {
 		if (_vertexBuffer == VK_NULL_HANDLE) {
 			_device = device;
-			VkBufferCreateInfo bufferInfo{};
-			bufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
-			bufferInfo.size = sizeof(_vertices[0]) * _vertices.size();
-			bufferInfo.usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
-			bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-			VK_CHECK(vkCreateBuffer(_device->getDevice(), &bufferInfo, nullptr, &_vertexBuffer))
+			_command = command;
+			
+			VkDeviceSize bufferSize = sizeof(_vertices[0]) * _vertices.size();
 
-				VkMemoryRequirements memRequirements;
-			vkGetBufferMemoryRequirements(_device->getDevice(), _vertexBuffer, &memRequirements);
-
-			VkMemoryAllocateInfo allocInfo{};
-			allocInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-			allocInfo.allocationSize = memRequirements.size;
-			allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
-
-			VK_CHECK(vkAllocateMemory(_device->getDevice(), &allocInfo, nullptr, &_vertexBufferMemory))
-
-				vkBindBufferMemory(_device->getDevice(), _vertexBuffer, _vertexBufferMemory, 0);
+			VkBuffer stagingBuffer;
+			VkDeviceMemory stagingBufferMemory;
+			VulkanBufferHelper::createBuffer(_device, bufferSize, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, stagingBuffer, stagingBufferMemory);
 
 			void* data;
-			vkMapMemory(_device->getDevice(), _vertexBufferMemory, 0, bufferInfo.size, 0, &data);
-			memcpy(data, _vertices.data(), (size_t)bufferInfo.size);
-			vkUnmapMemory(_device->getDevice(), _vertexBufferMemory);
+			vkMapMemory(_device->getDevice(), stagingBufferMemory, 0, bufferSize, 0, &data);
+			memcpy(data, _vertices.data(), (size_t)bufferSize);
+			vkUnmapMemory(_device->getDevice(), stagingBufferMemory);
+
+			VulkanBufferHelper::createBuffer(_device, bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, _vertexBuffer, _vertexBufferMemory);
+
+			VulkanBufferHelper::copyBuffer(_device, _command, stagingBuffer, _vertexBuffer, bufferSize);
+
+			vkDestroyBuffer(_device->getDevice(), stagingBuffer, nullptr);
+			vkFreeMemory(_device->getDevice(), stagingBufferMemory, nullptr);
 		}	
-	}
-
-	uint32_t VulkanVertexBuffer::findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties) {
-		VkPhysicalDeviceMemoryProperties memProperties;
-		vkGetPhysicalDeviceMemoryProperties(_device->getPhysicalDevice(), &memProperties);
-
-		for (uint32_t i = 0; i < memProperties.memoryTypeCount; i++) {
-			if ((typeFilter & (1 << i)) && (memProperties.memoryTypes[i].propertyFlags & properties) == properties) {
-				return i;
-			}
-		}
-
-		throw std::runtime_error("failed to find suitable memory type!");
 	}
 
 	void VulkanVertexBuffer::unbind() const {
@@ -60,20 +44,115 @@ namespace Tusk{
 
 
 
-	VulkanIndexBuffer::VulkanIndexBuffer(uint32_t* indices, uint32_t count) {
-		_count = count;
+	VulkanIndexBuffer::VulkanIndexBuffer(std::vector<uint32_t> indices) {
+		_indices = indices;
 	}
 
 	VulkanIndexBuffer::~VulkanIndexBuffer() {
 
 	}
 
-	void VulkanIndexBuffer::bind() const {
+	void VulkanIndexBuffer::bind(VulkanDevice* device, VulkanCommand* command) {
+		if (_indexBuffer == VK_NULL_HANDLE) {
+			_device = device;
+			_command = command;
 
+			VkDeviceSize bufferSize = sizeof(_indices[0]) * _indices.size();
+
+			VkBuffer stagingBuffer;
+			VkDeviceMemory stagingBufferMemory;
+			VulkanBufferHelper::createBuffer(_device, bufferSize, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, stagingBuffer, stagingBufferMemory);
+
+			void* data;
+			vkMapMemory(_device->getDevice(), stagingBufferMemory, 0, bufferSize, 0, &data);
+			memcpy(data, _indices.data(), (size_t)bufferSize);
+			vkUnmapMemory(_device->getDevice(), stagingBufferMemory);
+
+			VulkanBufferHelper::createBuffer(_device, bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_INDEX_BUFFER_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, _indexBuffer, _indexBufferMemory);
+
+			VulkanBufferHelper::copyBuffer(_device, _command, stagingBuffer, _indexBuffer, bufferSize);
+
+			vkDestroyBuffer(_device->getDevice(), stagingBuffer, nullptr);
+			vkFreeMemory(_device->getDevice(), stagingBufferMemory, nullptr);
+		}
 	}
+
 
 	void VulkanIndexBuffer::unbind() const {
 
+	}
+
+
+
+
+
+
+	void VulkanBufferHelper::createBuffer(VulkanDevice* device, VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer& buffer, VkDeviceMemory& bufferMemory) {
+		VkBufferCreateInfo bufferInfo{};
+		bufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
+		bufferInfo.size = size;
+		bufferInfo.usage = usage;
+		bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+
+		VK_CHECK(vkCreateBuffer(device->getDevice(), &bufferInfo, nullptr, &buffer))
+
+		VkMemoryRequirements memRequirements;
+		vkGetBufferMemoryRequirements(device->getDevice(), buffer, &memRequirements);
+
+		VkMemoryAllocateInfo allocInfo{};
+		allocInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+		allocInfo.allocationSize = memRequirements.size;
+		allocInfo.memoryTypeIndex = findMemoryType(device, memRequirements.memoryTypeBits, properties);
+
+		VK_CHECK(vkAllocateMemory(device->getDevice(), &allocInfo, nullptr, &bufferMemory))
+
+		vkBindBufferMemory(device->getDevice(), buffer, bufferMemory, 0);
+	}
+
+	void VulkanBufferHelper::copyBuffer(VulkanDevice* device, VulkanCommand* command, VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size) {
+		VkCommandBufferAllocateInfo allocInfo{};
+		allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+		allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+		allocInfo.commandPool = command->getCommandPool();
+		allocInfo.commandBufferCount = 1;
+
+		VkCommandBuffer commandBuffer;
+		vkAllocateCommandBuffers(device->getDevice(), &allocInfo, &commandBuffer);
+
+		VkCommandBufferBeginInfo beginInfo{};
+		beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+		beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+
+		vkBeginCommandBuffer(commandBuffer, &beginInfo);
+
+		VkBufferCopy copyRegion{};
+		copyRegion.size = size;
+		vkCmdCopyBuffer(commandBuffer, srcBuffer, dstBuffer, 1, &copyRegion);
+
+		vkEndCommandBuffer(commandBuffer);
+
+		VkSubmitInfo submitInfo{};
+		submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+		submitInfo.commandBufferCount = 1;
+		submitInfo.pCommandBuffers = &commandBuffer;
+
+		vkQueueSubmit(device->getGraphicsQueue(), 1, &submitInfo, VK_NULL_HANDLE);
+		vkQueueWaitIdle(device->getGraphicsQueue());
+
+		vkFreeCommandBuffers(device->getDevice(), command->getCommandPool(), 1, &commandBuffer);
+	}
+
+	uint32_t VulkanBufferHelper::findMemoryType(VulkanDevice* device, uint32_t typeFilter, VkMemoryPropertyFlags properties) {
+		VkPhysicalDeviceMemoryProperties memProperties;
+		vkGetPhysicalDeviceMemoryProperties(device->getPhysicalDevice(), &memProperties);
+
+		for (uint32_t i = 0; i < memProperties.memoryTypeCount; i++) {
+			if ((typeFilter & (1 << i)) && (memProperties.memoryTypes[i].propertyFlags & properties) == properties) {
+				return i;
+			}
+		}
+
+		Logger::Fatal("Failed to find suitable memory type!");
 	}
 
 }

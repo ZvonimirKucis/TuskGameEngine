@@ -11,6 +11,7 @@ namespace Tusk {
         Logger::Trace("Initializing Vulkan render pass and pipeline layout.");
 
         createRenderPass();
+        createDescriptorSetLayout();
         createPipelineLayout();
 	}
 
@@ -44,16 +45,33 @@ namespace Tusk {
         VK_CHECK(vkCreateRenderPass(_device->getDevice(), &renderPassInfo, nullptr, &_renderPass))
     }
 
+    void VulkanPipeline::createDescriptorSetLayout() {
+        VkDescriptorSetLayoutBinding uboLayoutBinding{};
+        uboLayoutBinding.binding = 0;
+        uboLayoutBinding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+        uboLayoutBinding.descriptorCount = 1;
+        uboLayoutBinding.pImmutableSamplers = nullptr;
+        uboLayoutBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+
+        VkDescriptorSetLayoutCreateInfo layoutInfo{};
+        layoutInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
+        layoutInfo.bindingCount = 1;
+        layoutInfo.pBindings = &uboLayoutBinding;
+
+        VK_CHECK(vkCreateDescriptorSetLayout(_device->getDevice(), &layoutInfo, nullptr, &_descriptorSetLayout))
+    }
+
     void VulkanPipeline::createPipelineLayout() {
         VkPipelineLayoutCreateInfo pipelineLayoutInfo{};
         pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
-        pipelineLayoutInfo.setLayoutCount = 0;
-        pipelineLayoutInfo.pushConstantRangeCount = 0;
+        pipelineLayoutInfo.setLayoutCount = 1;
+        pipelineLayoutInfo.pSetLayouts = &_descriptorSetLayout;
 
         VK_CHECK(vkCreatePipelineLayout(_device->getDevice(), &pipelineLayoutInfo, nullptr, &_pipelineLayout))
     }
 
 	VulkanPipeline::~VulkanPipeline() {
+        vkDestroyDescriptorSetLayout(_device->getDevice(), _descriptorSetLayout, nullptr);
 		vkDestroyPipelineLayout(_device->getDevice(), _pipelineLayout, nullptr);
         vkDestroyRenderPass(_device->getDevice(), _renderPass, nullptr);
 	}

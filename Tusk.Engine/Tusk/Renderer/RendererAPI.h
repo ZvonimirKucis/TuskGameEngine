@@ -14,8 +14,9 @@ namespace Tusk {
 		virtual void init(const Ref<Window> window) = 0;
 		virtual void clearScreen() = 0;
 		virtual void drawFrame() = 0;
-
+		
 		virtual void bindVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) = 0;
+		virtual void bindIndexBuffer(const Ref<IndexBuffer>& indexBuffer) = 0;
 		virtual void bindShader(const Ref<Shader> shader) = 0;
 
 		virtual void beginDrawing() = 0;

@@ -19,7 +19,7 @@ namespace Tusk {
 		static void beginScene();
 		static void endScene();
 
-		static void submit(const Ref<Shader>& shader, const Ref<VertexBuffer>& vertexBuffer);
+		static void submit(const Ref<Shader>& shader, const Ref<VertexBuffer>& vertexBuffer, const Ref<IndexBuffer>& indexBuffer);
 	private:
 	};
 }
