@@ -13,7 +13,6 @@ namespace Tusk {
 
     void VulkanShader::createShaderModules(VulkanDevice* device, VulkanSwapChain* swapchain, VulkanPipeline* pipeline) {
         if (_vertShaderModule == VK_NULL_HANDLE && _fragShaderModule == VK_NULL_HANDLE) {
-            Logger::Log("Creating shader and graphics pipeline!");
             _device = device;
             _swapchain = swapchain;
             _pipeline = pipeline;
@@ -43,8 +42,13 @@ namespace Tusk {
 
         VkPipelineVertexInputStateCreateInfo vertexInputInfo{};
         vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
-        vertexInputInfo.vertexBindingDescriptionCount = 0;
-        vertexInputInfo.vertexAttributeDescriptionCount = 0;
+        auto bindingDescription = Vertex::getBindingDescription();
+        auto attributeDescriptions = Vertex::getAttributeDescriptions();
+
+        vertexInputInfo.vertexBindingDescriptionCount = 1;
+        vertexInputInfo.vertexAttributeDescriptionCount = static_cast<uint32_t>(attributeDescriptions.size());
+        vertexInputInfo.pVertexBindingDescriptions = &bindingDescription;
+        vertexInputInfo.pVertexAttributeDescriptions = attributeDescriptions.data();
 
         VkPipelineInputAssemblyStateCreateInfo inputAssembly{};
         inputAssembly.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
@@ -100,6 +104,18 @@ namespace Tusk {
         colorBlending.blendConstants[2] = 0.0f;
         colorBlending.blendConstants[3] = 0.0f;
 
+        VkDynamicState dynamicStates[2] = {
+           VK_DYNAMIC_STATE_VIEWPORT,
+           VK_DYNAMIC_STATE_SCISSOR
+        };
+
+        VkPipelineDynamicStateCreateInfo dynamicStateCreateInfo;
+        dynamicStateCreateInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
+        dynamicStateCreateInfo.pNext = VK_NULL_HANDLE;
+        dynamicStateCreateInfo.flags = 0;
+        dynamicStateCreateInfo.dynamicStateCount = 2;
+        dynamicStateCreateInfo.pDynamicStates = dynamicStates;
+
         VkGraphicsPipelineCreateInfo pipelineInfo{};
         pipelineInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
         pipelineInfo.stageCount = 2;
@@ -110,6 +126,7 @@ namespace Tusk {
         pipelineInfo.pRasterizationState = &rasterizer;
         pipelineInfo.pMultisampleState = &multisampling;
         pipelineInfo.pColorBlendState = &colorBlending;
+        pipelineInfo.pDynamicState = &dynamicStateCreateInfo;
         pipelineInfo.layout = _pipeline->getPipelineLayout();
         pipelineInfo.renderPass = _pipeline->getRenderPass();
         pipelineInfo.subpass = 0;

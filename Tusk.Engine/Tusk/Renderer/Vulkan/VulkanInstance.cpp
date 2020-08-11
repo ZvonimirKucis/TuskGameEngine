@@ -106,7 +106,7 @@ namespace Tusk {
     }
 
     void VulkanInstance::createSwapChain() {
-        _swapchain = new VulkanSwapChain(_device, _window->getWidth(), _window->getHeight(), _surface);
+        _swapchain = new VulkanSwapChain(_device, _window, _surface);
     }
 
     void VulkanInstance::createPipeline() {
@@ -121,9 +121,29 @@ namespace Tusk {
         _command = new VulkanCommand(_device, _swapchain, _pipeline, _framebuffer);
     }
 
+    void VulkanInstance::cleanupSwapChain() {
+        delete _framebuffer;
+        delete _command;
+        delete _swapchain;
+    }
+
+    void VulkanInstance::recreateSwapChain() {
+        vkDeviceWaitIdle(_device->getDevice());
+        cleanupSwapChain();
+
+        createSwapChain();
+        createFramebuffer();
+        createCommand();
+    }
+
+    void VulkanInstance::bindVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) {
+        vertexBuffer->bind(_device);
+        _vertexBuffer = vertexBuffer;
+    }
+
     void VulkanInstance::bindShader(const Ref<Shader> shader) {
         shader->createShaderModules(_device, _swapchain, _pipeline);
-        _command->submitToDraw(shader->getGraphicsPipeline());
+        _command->submitToDraw(shader->getGraphicsPipeline(), _vertexBuffer->getBuffer());
     }
 
     void VulkanInstance::beginDrawing() {
@@ -147,7 +167,15 @@ namespace Tusk {
         auto commandBuffers = _command->getCommandBuffers();
 
         uint32_t imageIndex;
-        vkAcquireNextImageKHR(_device->getDevice(), _swapchain->getSwapChain(), UINT64_MAX, _imageAvailableSemaphores[_currentFrame], VK_NULL_HANDLE, &imageIndex);
+        VkResult result = vkAcquireNextImageKHR(_device->getDevice(), _swapchain->getSwapChain(), UINT64_MAX, _imageAvailableSemaphores[_currentFrame], VK_NULL_HANDLE, &imageIndex);
+
+        if (result == VK_ERROR_OUT_OF_DATE_KHR) {
+            recreateSwapChain();
+            return;
+        }
+        else if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR) {
+            Logger::Fatal("Failed to acquire  swap chain image!");
+        }
 
         if (_imagesInFlight[imageIndex] != VK_NULL_HANDLE) {
             vkWaitForFences(_device->getDevice(), 1, &_imagesInFlight[imageIndex], VK_TRUE, UINT64_MAX);
@@ -186,7 +214,15 @@ namespace Tusk {
 
         presentInfo.pImageIndices = &imageIndex;
 
-        vkQueuePresentKHR(_device->getPresentationQueue(), &presentInfo);
+        result = vkQueuePresentKHR(_device->getPresentationQueue(), &presentInfo);
+
+        if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || _framebufferResized) {
+            _framebufferResized = false;
+            recreateSwapChain();
+        }
+        else if (result != VK_SUCCESS) {
+            Logger::Fatal("Failed to present swap chain image!");
+        }
 
         _currentFrame = (_currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
     }
@@ -256,9 +292,11 @@ namespace Tusk {
             vkDestroySemaphore(_device->getDevice(), _imageAvailableSemaphores[i], nullptr);
             vkDestroyFence(_device->getDevice(), _inFlightFences[i], nullptr);
         }
+        vkDestroyBuffer(_device->getDevice(), _vertexBuffer->getBuffer(), nullptr);
+        vkFreeMemory(_device->getDevice(), _vertexBuffer->getMemory(), nullptr);
 
-        delete _command;
         delete _framebuffer;
+        delete _command;
         delete _pipeline;
         delete _swapchain;
         delete _device;

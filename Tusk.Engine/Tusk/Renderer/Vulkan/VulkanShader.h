@@ -5,6 +5,8 @@
 #include "VulkanDevice.h"
 #include "VulkanPipeline.h"
 #include "VulkanSwapChain.h"
+#include "VulkanVertex.h"
+#include "../Buffer.h"
 
 namespace Tusk {
 
@@ -16,9 +18,6 @@ namespace Tusk {
 		virtual void createShaderModules(VulkanDevice* device, VulkanSwapChain* swapchain, VulkanPipeline* pipeline) override;
 
 		virtual VkPipeline getGraphicsPipeline() override { return _graphicsPipeline; }
-
-		/*virtual std::vector<char> getVertexShaderCode() const override { return _vertShaderCode; }
-		virtual std::vector<char> getFragmentShaderCode() const override { return _fragShaderCode; }*/
 
 	private:
 		std::vector<char> readFile(const std::string& filename);

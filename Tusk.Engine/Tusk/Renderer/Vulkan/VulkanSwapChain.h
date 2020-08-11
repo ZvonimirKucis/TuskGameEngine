@@ -5,10 +5,11 @@
 namespace Tusk {
 
 	class VulkanDevice;
+	class Window;
 
 	class VulkanSwapChain {
 	public:
-		VulkanSwapChain(VulkanDevice* device, uint32_t width, uint32_t height, VkSurfaceKHR surface);
+		VulkanSwapChain(VulkanDevice* device, const Ref<Window> window, VkSurfaceKHR surface);
 		~VulkanSwapChain();
 
 		VkSwapchainKHR getSwapChain() { return _swapChain; };
@@ -25,8 +26,7 @@ namespace Tusk {
 		void createImageViews();
 
 	private:
-		uint32_t _width;
-		uint32_t _height;
+		Ref<Window> _window;
 		VulkanDevice* _device;
 		VkSurfaceKHR _surface;
 

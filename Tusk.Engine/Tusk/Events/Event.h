@@ -33,7 +33,7 @@ namespace Tusk {
 	public:
 		virtual ~Event() = default;
 
-		bool Handled = false;
+		bool handled = false;
 
 		virtual EventType getEventType() const = 0;
 		virtual const char* getName() const = 0;
@@ -59,7 +59,7 @@ namespace Tusk {
 		{
 			if (_event.getEventType() == T::getStaticType())
 			{
-				_event.Handled = func(static_cast<T&>(_event));
+				_event.handled = func(static_cast<T&>(_event));
 				return true;
 			}
 			return false;

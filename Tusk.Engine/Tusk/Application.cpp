@@ -1,7 +1,6 @@
 #include "tuskpch.h"
 
 #include "Application.h"
-#include "Utils/Logger.h"
 #include "Renderer/Renderer.h"
 
 namespace Tusk {
@@ -27,10 +26,11 @@ namespace Tusk {
 	void Application::onEvent(Event& e) {
 		EventDispatcher dispatcher(e);
 		dispatcher.dispatch<WindowCloseEvent>(std::bind(&Application::onWindowClose, this, std::placeholders::_1));
+		dispatcher.dispatch<WindowResizeEvent>(std::bind(&Application::onWindowResize, this, std::placeholders::_1));
 
 		for (auto it = _layerStack.end(); it != _layerStack.begin();) {
 			(*--it)->onEvent(e);
-			if (e.Handled) {
+			if (e.handled) {
 				break;
 			}
 		}
@@ -38,11 +38,17 @@ namespace Tusk {
 
 	void Application::run() {
 		while (_running) {
-			for (Layer* layer : _layerStack) {
-				layer->onUpdate();
+
+			if (!_minimized) {
+				Renderer::beginScene();
+				Renderer::clear();
+				for (Layer* layer : _layerStack) {
+					layer->onUpdate();
+				}
+				Renderer::endScene();
+				Renderer::update();
 			}
 
-			Renderer::update();
 			_window->onUpdate();
 		}
 	}
@@ -50,6 +56,16 @@ namespace Tusk {
 	bool Application::onWindowClose(WindowCloseEvent& e) {
 		_running = false;
 		return true;
+	}
+
+	bool Application::onWindowResize(WindowResizeEvent& e) {
+		if (e.getWidth() == 0 || e.getHeight() == 0){
+			_minimized = true;
+			return false;
+		}
+		_minimized = false;
+		Renderer::onWindowResize();
+		return false;
 	}
 
 	Application::~Application() {

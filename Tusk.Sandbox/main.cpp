@@ -1,18 +1,25 @@
 #include <Tusk.h>
 
 class ExampleLayer : public Tusk::Layer {
+
 public:
 	ExampleLayer() : Layer("example") {
-		_shader = Tusk::Shader::create("shaders/main.vert.spv", "shaders/main.frag.spv");
-		_shader2 = Tusk::Shader::create("shaders/main.vert_2.spv", "shaders/main.frag.spv");
+		const std::vector <Tusk::Vertex> vertices = {
+			{{0.0f, -0.5f}, {1.0f, 1.0f, 1.0f}},
+			{{0.5f, 0.5f}, {0.0f, 1.0f, 0.0f}},
+			{{-0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}}
+		};
+
+		const std::vector<uint16_t> indices = {
+			0, 1, 2, 2, 3, 0
+		};
+
+		_vertexBuffer = Tusk::VertexBuffer::create(vertices);
+		_shader = Tusk::Shader::create("assets/shaders/main.vert.spv", "assets/shaders/main.frag.spv");
 	}
 
 	void onUpdate() override {
-		Tusk::Renderer::beginScene();
-		Tusk::Renderer::clear();
-		Tusk::Renderer::submit(_shader);
-		Tusk::Renderer::submit(_shader2);
-		Tusk::Renderer::endScene();
+		Tusk::Renderer::submit(_shader, _vertexBuffer);
 	}
 
 	void onEvent(Tusk::Event& event) override {
@@ -25,7 +32,7 @@ public:
 	}
 private:
 	Tusk::Ref<Tusk::Shader> _shader;
-	Tusk::Ref<Tusk::Shader> _shader2;
+	Tusk::Ref<Tusk::VertexBuffer> _vertexBuffer;
 };
 
 class Sandbox : public Tusk::Application {

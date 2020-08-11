@@ -12,8 +12,16 @@ namespace Tusk {
 		_instance->clearScreen();
 	}
 
+	void VulkanRendererAPI::handleResize() {
+		_instance->setFramebufferResized();
+	}
+
 	void VulkanRendererAPI::drawFrame() {
 		_instance->drawFrame();
+	}
+
+	void VulkanRendererAPI::bindVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) {
+		_instance->bindVertexBuffer(vertexBuffer);
 	}
 
 	void VulkanRendererAPI::bindShader(const Ref<Shader> shader) {

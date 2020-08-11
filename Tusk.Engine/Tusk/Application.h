@@ -25,12 +25,14 @@ namespace Tusk {
 		static Application& get() { return *_instance; }
 	private:
 		bool onWindowClose(WindowCloseEvent& e);
+		bool onWindowResize(WindowResizeEvent& e);
 
 	private:
 		static Application* _instance;
 
 		Ref<Window> _window;
 		bool _running = true;
+		bool _minimized = false;
 		LayerStack _layerStack;
 	};
 

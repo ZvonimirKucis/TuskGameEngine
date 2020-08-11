@@ -3,6 +3,7 @@
 #include "../Utils/Defines.h"
 #include "RendererAPI.h"
 #include "Shader.h"
+#include "Buffer.h"
 
 namespace Tusk {
 
@@ -22,6 +23,10 @@ namespace Tusk {
 			_rendererAPI->drawFrame();
 		}
 
+		static void bindVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) {
+			_rendererAPI->bindVertexBuffer(vertexBuffer);
+		}
+
 		static void bindShader(const Ref<Shader>& shader) {
 			_rendererAPI->bindShader(shader);
 		}
@@ -37,26 +42,11 @@ namespace Tusk {
 		static void endDrawing() {
 			_rendererAPI->endDrawing();
 		}
-		/*
-		static void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
-		{
-			_rendererAPI->SetViewport(x, y, width, height);
+
+		static void handleResize() {
+			_rendererAPI->handleResize();
 		}
 
-		static void SetClearColor(const glm::vec4& color)
-		{
-			_rendererAPI->SetClearColor(color);
-		}
-
-		static void Clear()
-		{
-			_rendererAPI->Clear();
-		}
-		*/
-		/*static void DrawIndexed(const Ref<VertexArray>& vertexArray, uint32_t count = 0)
-		{
-			s_RendererAPI->DrawIndexed(vertexArray, count);
-		}*/
 	private:
 		static Scope<RendererAPI> _rendererAPI;
 	};

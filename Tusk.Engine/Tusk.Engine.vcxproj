@@ -173,6 +173,7 @@
     <ClInclude Include="Tusk\Renderer\Vulkan\VulkanUtils.h" />
     <ClInclude Include="tuskpch.h" />
     <ClInclude Include="Tusk\Renderer\Vulkan\VulkanBuffer.h" />
+    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanVertex.h" />
     <ClInclude Include="Tusk\Utils\Defines.h" />
     <ClInclude Include="Tusk\Utils\Logger.h" />
     <ClInclude Include="Tusk\Renderer\Vulkan\VulkanSwapChain.h" />

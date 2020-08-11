@@ -4,10 +4,11 @@
 #include "VulkanSwapChain.h"
 #include "VulkanDevice.h"
 #include "VulkanUtils.h"
+#include "../../Platform/Window.h"
 
 namespace Tusk {
-	VulkanSwapChain::VulkanSwapChain(VulkanDevice* device, uint32_t width, uint32_t height, VkSurfaceKHR surface)
-		: _device(device), _width(width), _height(height), _surface(surface) {
+	VulkanSwapChain::VulkanSwapChain(VulkanDevice* device, const Ref<Window> window, VkSurfaceKHR surface)
+		: _device(device), _window(window), _surface(surface) {
 		Logger::Trace("Initializing Vulkan swap chain.");
 		createSwapChain();
 		createImageViews();
@@ -88,7 +89,7 @@ namespace Tusk {
 			return capabilities.currentExtent;
 		}
 		else {
-			VkExtent2D actualExtent = { _width, _height };
+			VkExtent2D actualExtent = { _window->getWidth(), _window->getHeight() };
 
 			actualExtent.width = std::max(capabilities.minImageExtent.width, std::min(capabilities.maxImageExtent.width, actualExtent.width));
 			actualExtent.height = std::max(capabilities.minImageExtent.height, std::min(capabilities.maxImageExtent.height, actualExtent.height));
@@ -121,7 +122,6 @@ namespace Tusk {
 	}
 
 	VulkanSwapChain::~VulkanSwapChain() {
-		vkDeviceWaitIdle(_device->getDevice());
 		for (auto imageView : _swapChainImageViews) {
 			vkDestroyImageView(_device->getDevice(), imageView, nullptr);
 		}

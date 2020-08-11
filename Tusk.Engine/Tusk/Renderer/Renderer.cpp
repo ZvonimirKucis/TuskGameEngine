@@ -6,7 +6,6 @@
 
 namespace Tusk {
 
-	//RendererAPI Renderer::_rendererAPI = RendererAPI::Vulkan;
 	void Renderer::init(const Ref<Window> window) {
 		RenderCommand::init(window);
 	}
@@ -19,22 +18,17 @@ namespace Tusk {
 		RenderCommand::drawFrame();
 	}
 
-	/*void Renderer::Shutdown()
+	void Renderer::onWindowResize()
 	{
-		//Renderer2D::Shutdown();
-	}*/
-
-	/*void Renderer::OnWindowResize(uint32_t width, uint32_t height)
-	{
-		//RenderCommand::SetViewport(0, 0, width, height);
-	}*/
+		RenderCommand::handleResize();
+	}
 
 	void Renderer::beginScene() {
 		RenderCommand::beginDrawing();
-		//s_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
 	}
 
-	void Renderer::submit(const Ref<Shader>& shader) {
+	void Renderer::submit(const Ref<Shader>& shader, const Ref<VertexBuffer>& vertexBuffer) {
+		RenderCommand::bindVertexBuffer(vertexBuffer);
 		RenderCommand::bindShader(shader);
 		RenderCommand::submitToDraw(shader);
 	}

@@ -53,10 +53,6 @@ namespace Tusk {
         VK_CHECK(vkCreatePipelineLayout(_device->getDevice(), &pipelineLayoutInfo, nullptr, &_pipelineLayout))
     }
 
-/*void VulkanPipeline::createGraphicsPipeline(VkShaderModule vertShaderModule, VkShaderModule fragShaderModule) {
-        
-    }*/
-
 	VulkanPipeline::~VulkanPipeline() {
 		vkDestroyPipelineLayout(_device->getDevice(), _pipelineLayout, nullptr);
         vkDestroyRenderPass(_device->getDevice(), _renderPass, nullptr);

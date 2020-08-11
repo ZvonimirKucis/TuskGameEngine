@@ -11,10 +11,8 @@ namespace Tusk {
 		VulkanPipeline(VulkanDevice* device, VulkanSwapChain* swapchain);
 		~VulkanPipeline();
 
-		//void createGraphicsPipeline(VkShaderModule vertShaderModule, VkShaderModule fragShaderModule);
 		VkRenderPass getRenderPass() { return _renderPass; }
 		VkPipelineLayout getPipelineLayout() { return _pipelineLayout; }
-		//VkPipeline getGraphicsPipeline() { return _graphicsPipeline; }
 
 	private:
 		void createRenderPass();

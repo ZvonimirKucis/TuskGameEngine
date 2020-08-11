@@ -53,8 +53,27 @@ namespace Tusk {
         vkCmdBeginRenderPass(_commandBuffers[_currentFrame], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
     }
 
-    void VulkanCommand::submitToDraw(VkPipeline pipeline) {
+    void VulkanCommand::submitToDraw(VkPipeline pipeline, VkBuffer vertexBuffer) {
+        auto swapChainExtent = _swapchain->getSwapChainExtent();
+        VkViewport viewport{};
+        viewport.x = 0.0f;
+        viewport.y = 0.0f;
+        viewport.width = (float)swapChainExtent.width;
+        viewport.height = (float)swapChainExtent.height;
+        viewport.minDepth = 0.0f;
+        viewport.maxDepth = 1.0f;
+
+        VkRect2D scissor{};
+        scissor.offset = { 0, 0 };
+        scissor.extent = swapChainExtent;
+
         vkCmdBindPipeline(_commandBuffers[_currentFrame], VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline);
+        vkCmdSetViewport(_commandBuffers[_currentFrame], 0, 1, &viewport);
+        vkCmdSetScissor(_commandBuffers[_currentFrame], 0, 1, &scissor);
+
+        VkBuffer vertexBuffers[] = { vertexBuffer };
+        VkDeviceSize offsets[] = { 0 };
+        vkCmdBindVertexBuffers(_commandBuffers[_currentFrame], 0, 1, vertexBuffers, offsets);
         vkCmdDraw(_commandBuffers[_currentFrame], 3, 1, 0, 0);
 	}
 
@@ -66,6 +85,7 @@ namespace Tusk {
     }
 
 	VulkanCommand::~VulkanCommand() {
+        vkFreeCommandBuffers(_device->getDevice(), _commandPool, static_cast<uint32_t>(_commandBuffers.size()), _commandBuffers.data());
 		vkDestroyCommandPool(_device->getDevice(), _commandPool, nullptr);
 	}
 }
