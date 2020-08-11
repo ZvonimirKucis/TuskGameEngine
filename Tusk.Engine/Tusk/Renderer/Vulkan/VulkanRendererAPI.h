@@ -2,6 +2,7 @@
 #include "../RendererAPI.h"
 #include "VulkanInstance.h"
 #include "../Buffer.h"
+#include "../Texture.h"
 
 namespace Tusk {
 
@@ -15,6 +16,7 @@ namespace Tusk {
 
 		virtual void bindIndexBuffer(const Ref<IndexBuffer>& indexBuffer) override;
 		virtual void bindVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) override;
+		virtual void bindTexture(const Ref<Texture>& texture) override;
 		virtual void bindShader(const Ref<Shader> shader) override;
 
 		virtual void beginDrawing() override;

@@ -5,6 +5,7 @@
 #include "RendererAPI.h"
 #include "Shader.h"
 #include "Buffer.h"
+#include "Texture.h"
 
 namespace Tusk {
 
@@ -19,7 +20,7 @@ namespace Tusk {
 		static void beginScene();
 		static void endScene();
 
-		static void submit(const Ref<Shader>& shader, const Ref<VertexBuffer>& vertexBuffer, const Ref<IndexBuffer>& indexBuffer);
+		static void submit(const Ref<Shader>& shader, const Ref<VertexBuffer>& vertexBuffer, const Ref<IndexBuffer>& indexBuffer, const Ref<Texture>& texture);
 	private:
 	};
 }

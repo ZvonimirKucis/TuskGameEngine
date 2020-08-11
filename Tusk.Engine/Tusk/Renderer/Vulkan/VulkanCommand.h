@@ -15,6 +15,9 @@ namespace Tusk {
 
 		void clearScreen(VkClearValue color = { 0.0f, 0.0f, 0.0f, 1.0f });
 
+		VkCommandBuffer beginSingleTimeCommands();
+		void endSingleTimeCommands(VkCommandBuffer commandBuffer);
+
 		void beginDrawing();
 		void submitToDraw(VkPipeline pipeline, VkPipelineLayout pipelineLayout, VkBuffer vertexBuffer, VkBuffer indexBuffer, uint32_t indicesSize, std::vector<VkDescriptorSet> descriptorSets);
 		void endDrawing();

@@ -58,7 +58,6 @@ namespace Tusk {
         createFramebuffer();
         createUniformBuffers();
         createDescriptorPool();
-        createDescriptorSets();
         createCommand();
         createSyncObjects();
     }
@@ -153,7 +152,9 @@ namespace Tusk {
         createFramebuffer();
         createUniformBuffers();
         createDescriptorPool();
-        createDescriptorSets();
+        if (_texture) {
+            createDescriptorSets();
+        }
         createCommand();
     }
 
@@ -171,14 +172,16 @@ namespace Tusk {
 
     void VulkanInstance::createDescriptorPool() {
         auto swapChainImages = _swapchain->getSwapChainImageViews();
-        VkDescriptorPoolSize poolSize{};
-        poolSize.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-        poolSize.descriptorCount = static_cast<uint32_t>(swapChainImages.size());
+        std::array<VkDescriptorPoolSize, 2> poolSizes{};
+        poolSizes[0].type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+        poolSizes[0].descriptorCount = static_cast<uint32_t>(swapChainImages.size());
+        poolSizes[1].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+        poolSizes[1].descriptorCount = static_cast<uint32_t>(swapChainImages.size());
 
         VkDescriptorPoolCreateInfo poolInfo{};
         poolInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
-        poolInfo.poolSizeCount = 1;
-        poolInfo.pPoolSizes = &poolSize;
+        poolInfo.poolSizeCount = static_cast<uint32_t>(poolSizes.size());
+        poolInfo.pPoolSizes = poolSizes.data();
         poolInfo.maxSets = static_cast<uint32_t>(swapChainImages.size());
 
         VK_CHECK(vkCreateDescriptorPool(_device->getDevice(), &poolInfo, nullptr, &_descriptorPool))
@@ -195,9 +198,7 @@ namespace Tusk {
         allocInfo.pSetLayouts = layouts.data();
 
         _descriptorSets.resize(swapChainImages.size());
-        if (vkAllocateDescriptorSets(_device->getDevice(), &allocInfo, _descriptorSets.data()) != VK_SUCCESS) {
-            throw std::runtime_error("failed to allocate descriptor sets!");
-        }
+        VK_CHECK(vkAllocateDescriptorSets(_device->getDevice(), &allocInfo, _descriptorSets.data()))
 
         for (size_t i = 0; i < swapChainImages.size(); i++) {
             VkDescriptorBufferInfo bufferInfo{};
@@ -205,16 +206,30 @@ namespace Tusk {
             bufferInfo.offset = 0;
             bufferInfo.range = sizeof(UniformBufferObject);
 
-            VkWriteDescriptorSet descriptorWrite{};
-            descriptorWrite.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
-            descriptorWrite.dstSet = _descriptorSets[i];
-            descriptorWrite.dstBinding = 0;
-            descriptorWrite.dstArrayElement = 0;
-            descriptorWrite.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-            descriptorWrite.descriptorCount = 1;
-            descriptorWrite.pBufferInfo = &bufferInfo;
+            VkDescriptorImageInfo imageInfo{};
+            imageInfo.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+            imageInfo.imageView = _texture->getTextureImageView();
+            imageInfo.sampler = _texture->getTextureSampler();
 
-            vkUpdateDescriptorSets(_device->getDevice(), 1, &descriptorWrite, 0, nullptr);
+            std::array<VkWriteDescriptorSet, 2> descriptorWrites{};
+
+            descriptorWrites[0].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+            descriptorWrites[0].dstSet = _descriptorSets[i];
+            descriptorWrites[0].dstBinding = 0;
+            descriptorWrites[0].dstArrayElement = 0;
+            descriptorWrites[0].descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+            descriptorWrites[0].descriptorCount = 1;
+            descriptorWrites[0].pBufferInfo = &bufferInfo;
+
+            descriptorWrites[1].sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+            descriptorWrites[1].dstSet = _descriptorSets[i];
+            descriptorWrites[1].dstBinding = 1;
+            descriptorWrites[1].dstArrayElement = 0;
+            descriptorWrites[1].descriptorType = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+            descriptorWrites[1].descriptorCount = 1;
+            descriptorWrites[1].pImageInfo = &imageInfo;
+
+            vkUpdateDescriptorSets(_device->getDevice(), static_cast<uint32_t>(descriptorWrites.size()), descriptorWrites.data(), 0, nullptr);
         }
     }
 
@@ -226,6 +241,15 @@ namespace Tusk {
     void VulkanInstance::bindVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) {
         vertexBuffer->bind(_device, _command);
         _vertexBuffer = vertexBuffer;
+    }
+
+    void VulkanInstance::bindTexture(const Ref<Texture>& texture) {
+        if (!_texture) {
+            _texture = texture;
+            _texture->bind(_device, _command);
+
+            createDescriptorSets();
+        }
     }
 
     void VulkanInstance::bindShader(const Ref<Shader> shader) {

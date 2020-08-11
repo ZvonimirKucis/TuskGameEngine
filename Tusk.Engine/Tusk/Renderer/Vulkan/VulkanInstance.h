@@ -9,6 +9,7 @@
 #include "VulkanShader.h"
 #include "VulkanFramebuffer.h"
 #include "VulkanCommand.h"
+#include "VulkanTexture.h"
 
 namespace Tusk {
 	
@@ -25,6 +26,7 @@ namespace Tusk {
 		void bindIndexBuffer(const Ref<IndexBuffer>& indexBuffer);
 		void bindVertexBuffer(const Ref<VertexBuffer>& vertexBuffer);
 		void bindShader(const Ref<Shader> shader);
+		void bindTexture(const Ref<Texture>& texture);
 
 		void clearScreen();
 		void beginDrawing();
@@ -61,6 +63,7 @@ namespace Tusk {
 		Ref<Window> _window;
 		Ref<VertexBuffer> _vertexBuffer;
 		Ref<IndexBuffer> _indexBuffer;
+		Ref<Texture> _texture;
 
 		VkInstance _instance;
 		VkDebugUtilsMessengerEXT _debugMessenger;

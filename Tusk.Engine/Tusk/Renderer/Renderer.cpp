@@ -27,9 +27,10 @@ namespace Tusk {
 		RenderCommand::beginDrawing();
 	}
 
-	void Renderer::submit(const Ref<Shader>& shader, const Ref<VertexBuffer>& vertexBuffer, const Ref<IndexBuffer>& indexBuffer) {
+	void Renderer::submit(const Ref<Shader>& shader, const Ref<VertexBuffer>& vertexBuffer, const Ref<IndexBuffer>& indexBuffer, const Ref<Texture>& texture) {
 		RenderCommand::bindIndexBuffer(indexBuffer);
 		RenderCommand::bindVertexBuffer(vertexBuffer);
+		RenderCommand::bindTexture(texture);
 		RenderCommand::bindShader(shader);
 		RenderCommand::submitToDraw(shader);
 	}

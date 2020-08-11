@@ -17,5 +17,6 @@
 #include "Tusk/Renderer/Renderer.h"
 #include "Tusk/Renderer/Shader.h"
 #include "Tusk/Renderer/Buffer.h"
+#include "Tusk/Renderer/Texture.h"
 
 #include "Tusk/EntryPoint.h"

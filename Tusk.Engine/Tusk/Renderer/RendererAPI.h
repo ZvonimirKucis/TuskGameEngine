@@ -4,6 +4,7 @@
 #include "../Platform/Window.h"
 #include "Shader.h"
 #include "Buffer.h"
+#include "Texture.h"
 
 namespace Tusk {
 
@@ -17,6 +18,7 @@ namespace Tusk {
 		
 		virtual void bindVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) = 0;
 		virtual void bindIndexBuffer(const Ref<IndexBuffer>& indexBuffer) = 0;
+		virtual void bindTexture(const Ref<Texture>& texture) = 0;
 		virtual void bindShader(const Ref<Shader> shader) = 0;
 
 		virtual void beginDrawing() = 0;

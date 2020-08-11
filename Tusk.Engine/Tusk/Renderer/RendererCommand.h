@@ -4,6 +4,7 @@
 #include "RendererAPI.h"
 #include "Shader.h"
 #include "Buffer.h"
+#include "Texture.h"
 
 namespace Tusk {
 
@@ -29,6 +30,10 @@ namespace Tusk {
 
 		static void bindVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) {
 			_rendererAPI->bindVertexBuffer(vertexBuffer);
+		}
+
+		static void bindTexture(const Ref<Texture>& texture) {
+			_rendererAPI->bindTexture(texture);
 		}
 
 		static void bindShader(const Ref<Shader>& shader) {

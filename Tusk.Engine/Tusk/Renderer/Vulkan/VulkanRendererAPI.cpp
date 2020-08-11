@@ -28,6 +28,10 @@ namespace Tusk {
 		_instance->bindVertexBuffer(vertexBuffer);
 	}
 
+	void VulkanRendererAPI::bindTexture(const Ref<Texture>& texture) {
+		_instance->bindTexture(texture);
+	}
+
 	void VulkanRendererAPI::bindShader(const Ref<Shader> shader) {
 		_instance->bindShader(shader);
 	}
