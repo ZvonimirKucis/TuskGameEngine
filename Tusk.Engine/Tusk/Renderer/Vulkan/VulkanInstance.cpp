@@ -3,7 +3,6 @@
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
-#include "../../Utils/Logger.h"
 #include "VulkanUtils.h"
 #include "VulkanInstance.h"
 #include "VulkanBuffer.h"
@@ -55,6 +54,7 @@ namespace Tusk {
         createDevice();
         createSwapChain();
         createPipeline();
+        createDepthBuffer();
         createFramebuffer();
         createUniformBuffers();
         createDescriptorPool();
@@ -122,8 +122,12 @@ namespace Tusk {
         _pipeline = new VulkanPipeline(_device, _swapchain);
     }
 
+    void VulkanInstance::createDepthBuffer() {
+        _depthBuffer = new VulkanDepthBuffer(_device, _swapchain);
+    }
+
     void VulkanInstance::createFramebuffer() {
-        _framebuffer = new VulkanFramebuffer(_device, _swapchain, _pipeline);
+        _framebuffer = new VulkanFramebuffer(_device, _swapchain, _pipeline, _depthBuffer);
     }
 
     void VulkanInstance::createCommand() {
@@ -139,6 +143,7 @@ namespace Tusk {
 
         vkDestroyDescriptorPool(_device->getDevice(), _descriptorPool, nullptr);
 
+        delete _depthBuffer;
         delete _framebuffer;
         delete _command;
         delete _swapchain;
@@ -149,6 +154,7 @@ namespace Tusk {
         cleanupSwapChain();
 
         createSwapChain();
+        createDepthBuffer();
         createFramebuffer();
         createUniformBuffers();
         createDescriptorPool();

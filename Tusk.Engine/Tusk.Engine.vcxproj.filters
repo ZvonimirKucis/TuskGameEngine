@@ -90,6 +90,9 @@
     <ClCompile Include="Tusk\Renderer\Vulkan\VulkanTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanDepthBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tusk\Utils\Defines.h">
@@ -201,6 +204,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Renderer\Vulkan\VulkanTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanDepthBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

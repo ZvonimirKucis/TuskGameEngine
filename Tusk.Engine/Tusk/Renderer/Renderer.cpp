@@ -2,8 +2,6 @@
 #include "Renderer.h"
 #include "RendererCommand.h"
 
-#include "../Utils/Logger.h"
-
 namespace Tusk {
 
 	void Renderer::init(const Ref<Window> window) {

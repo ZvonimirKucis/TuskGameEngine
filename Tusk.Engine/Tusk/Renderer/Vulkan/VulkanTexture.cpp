@@ -4,7 +4,6 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
 
-#include "../../Utils/Logger.h"
 #include "VulkanTexture.h"
 #include "VulkanBuffer.h"
 
@@ -44,11 +43,11 @@ namespace Tusk {
         vkUnmapMemory(_device->getDevice(), stagingBufferMemory);
         stbi_image_free(pixels);
 
-        createImage(texWidth, texHeight, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, _textureImage, _textureImageMemory);
+        VulkanImageHelper::createImage(_device, texWidth, texHeight, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, _textureImage, _textureImageMemory);
 
-        transitionImageLayout(_textureImage, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
-        copyBufferToImage(stagingBuffer, _textureImage, static_cast<uint32_t>(texWidth), static_cast<uint32_t>(texHeight));
-        transitionImageLayout(_textureImage, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        VulkanImageHelper::transitionImageLayout(_command, _textureImage, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
+        VulkanImageHelper::copyBufferToImage(_command, stagingBuffer, _textureImage, static_cast<uint32_t>(texWidth), static_cast<uint32_t>(texHeight));
+        VulkanImageHelper::transitionImageLayout(_command, _textureImage, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
 
         vkDestroyBuffer(_device->getDevice(), stagingBuffer, nullptr);
         vkFreeMemory(_device->getDevice(), stagingBufferMemory, nullptr);
@@ -88,7 +87,22 @@ namespace Tusk {
         VK_CHECK(vkCreateSampler(_device->getDevice(), &samplerInfo, nullptr, &_textureSampler))
     }
 
-    void VulkanTexture::createImage(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties, VkImage& image, VkDeviceMemory& imageMemory) {
+
+    VulkanTexture::~VulkanTexture() {
+        /*vkDestroySampler(_device->getDevice(), _textureSampler, nullptr);
+        vkDestroyImageView(_device->getDevice(), _textureImageView, nullptr);
+        vkDestroyImage(_device->getDevice(), _textureImage, nullptr);
+        vkFreeMemory(_device->getDevice(), _textureImageMemory, nullptr);*/
+    }
+
+
+
+
+
+
+
+
+    void VulkanImageHelper::createImage(VulkanDevice* device, uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties, VkImage& image, VkDeviceMemory& imageMemory) {
         VkImageCreateInfo imageInfo{};
         imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
         imageInfo.imageType = VK_IMAGE_TYPE_2D;
@@ -104,27 +118,23 @@ namespace Tusk {
         imageInfo.samples = VK_SAMPLE_COUNT_1_BIT;
         imageInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
 
-        if (vkCreateImage(_device->getDevice(), &imageInfo, nullptr, &image) != VK_SUCCESS) {
-            throw std::runtime_error("failed to create image!");
-        }
+        VK_CHECK(vkCreateImage(device->getDevice(), &imageInfo, nullptr, &image))
 
         VkMemoryRequirements memRequirements;
-        vkGetImageMemoryRequirements(_device->getDevice(), image, &memRequirements);
+        vkGetImageMemoryRequirements(device->getDevice(), image, &memRequirements);
 
         VkMemoryAllocateInfo allocInfo{};
         allocInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
         allocInfo.allocationSize = memRequirements.size;
-        allocInfo.memoryTypeIndex = VulkanBufferHelper::findMemoryType(_device, memRequirements.memoryTypeBits, properties);
+        allocInfo.memoryTypeIndex = VulkanBufferHelper::findMemoryType(device, memRequirements.memoryTypeBits, properties);
 
-        if (vkAllocateMemory(_device->getDevice(), &allocInfo, nullptr, &imageMemory) != VK_SUCCESS) {
-            throw std::runtime_error("failed to allocate image memory!");
-        }
+        VK_CHECK(vkAllocateMemory(device->getDevice(), &allocInfo, nullptr, &imageMemory))
 
-        vkBindImageMemory(_device->getDevice(), image, imageMemory, 0);
+        vkBindImageMemory(device->getDevice(), image, imageMemory, 0);
     }
 
-    void VulkanTexture::transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout) {
-        VkCommandBuffer commandBuffer = _command->beginSingleTimeCommands();
+    void VulkanImageHelper::transitionImageLayout(VulkanCommand* command, VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout) {
+        VkCommandBuffer commandBuffer = command->beginSingleTimeCommands();
 
         VkImageMemoryBarrier barrier{};
         barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
@@ -169,11 +179,11 @@ namespace Tusk {
             1, &barrier
         );
 
-        _command->endSingleTimeCommands(commandBuffer);
+        command->endSingleTimeCommands(commandBuffer);
     }
 
-    void VulkanTexture::copyBufferToImage(VkBuffer buffer, VkImage image, uint32_t width, uint32_t height) {
-        VkCommandBuffer commandBuffer = _command->beginSingleTimeCommands();
+    void VulkanImageHelper::copyBufferToImage(VulkanCommand* command, VkBuffer buffer, VkImage image, uint32_t width, uint32_t height) {
+        VkCommandBuffer commandBuffer = command->beginSingleTimeCommands();
 
         VkBufferImageCopy region{};
         region.bufferOffset = 0;
@@ -192,13 +202,27 @@ namespace Tusk {
 
         vkCmdCopyBufferToImage(commandBuffer, buffer, image, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
 
-        _command->endSingleTimeCommands(commandBuffer);
+        command->endSingleTimeCommands(commandBuffer);
     }
 
-	VulkanTexture::~VulkanTexture() {
-        /*vkDestroySampler(_device->getDevice(), _textureSampler, nullptr);
-        vkDestroyImageView(_device->getDevice(), _textureImageView, nullptr);
-        vkDestroyImage(_device->getDevice(), _textureImage, nullptr);
-        vkFreeMemory(_device->getDevice(), _textureImageMemory, nullptr);*/
-	}
+    VkImageView VulkanImageHelper::createImageView(VulkanDevice* device, VkImage image, VkFormat format, VkImageAspectFlags aspectFlags) {
+        VkImageViewCreateInfo viewInfo{};
+        viewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+        viewInfo.image = image;
+        viewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+        viewInfo.format = format;
+        viewInfo.subresourceRange.aspectMask = aspectFlags;
+        viewInfo.subresourceRange.baseMipLevel = 0;
+        viewInfo.subresourceRange.levelCount = 1;
+        viewInfo.subresourceRange.baseArrayLayer = 0;
+        viewInfo.subresourceRange.layerCount = 1;
+
+        VkImageView imageView;
+        if (vkCreateImageView(device->getDevice(), &viewInfo, nullptr, &imageView) != VK_SUCCESS) {
+            throw std::runtime_error("failed to create texture image view!");
+        }
+
+        return imageView;
+    }
+
 }

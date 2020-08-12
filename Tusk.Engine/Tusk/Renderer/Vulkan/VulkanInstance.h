@@ -10,6 +10,7 @@
 #include "VulkanFramebuffer.h"
 #include "VulkanCommand.h"
 #include "VulkanTexture.h"
+#include "VulkanDepthBuffer.h"
 
 namespace Tusk {
 	
@@ -43,6 +44,7 @@ namespace Tusk {
 		void createDevice();
 		void createSwapChain();
 		void createPipeline();
+		void createDepthBuffer();
 		void createFramebuffer();
 		void createUniformBuffers();
 		void createDescriptorPool();
@@ -74,6 +76,7 @@ namespace Tusk {
 		VulkanPipeline* _pipeline;
 		VulkanFramebuffer* _framebuffer;
 		VulkanCommand* _command;
+		VulkanDepthBuffer* _depthBuffer;
 
 		uint32_t _imageIndex;
 		size_t _currentFrame = 0;

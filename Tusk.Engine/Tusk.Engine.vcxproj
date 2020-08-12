@@ -128,6 +128,7 @@
     <ClCompile Include="Tusk\Renderer\Shader.cpp" />
     <ClCompile Include="Tusk\Renderer\Texture.cpp" />
     <ClCompile Include="Tusk\Renderer\Vulkan\VulkanCommand.cpp" />
+    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanDepthBuffer.cpp" />
     <ClCompile Include="Tusk\Renderer\Vulkan\VulkanDevice.cpp" />
     <ClCompile Include="Tusk\Renderer\Vulkan\VulkanFramebuffer.cpp" />
     <ClCompile Include="Tusk\Renderer\Vulkan\VulkanInstance.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="Tusk\Renderer\Shader.h" />
     <ClInclude Include="Tusk\Renderer\Texture.h" />
     <ClInclude Include="Tusk\Renderer\Vulkan\VulkanCommand.h" />
+    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanDepthBuffer.h" />
     <ClInclude Include="Tusk\Renderer\Vulkan\VulkanDevice.h" />
     <ClInclude Include="Tusk\Renderer\Vulkan\VulkanFramebuffer.h" />
     <ClInclude Include="Tusk\Renderer\Vulkan\VulkanInstance.h" />
