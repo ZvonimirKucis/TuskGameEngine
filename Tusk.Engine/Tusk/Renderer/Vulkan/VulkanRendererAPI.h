@@ -14,8 +14,8 @@ namespace Tusk {
 		virtual void clearScreen() override;
 		virtual void drawFrame() override;
 
-		virtual void bindIndexBuffer(const Ref<IndexBuffer>& indexBuffer) override;
-		virtual void bindVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) override;
+		virtual void bindIndexBuffer(IndexBuffer* indexBuffer) override;
+		virtual void bindVertexBuffer(VertexBuffer* vertexBuffer) override;
 		virtual void bindTexture(const Ref<Texture>& texture) override;
 		virtual void bindShader(const Ref<Shader> shader) override;
 

@@ -38,14 +38,15 @@ namespace Tusk {
 
 	void Application::run() {
 		while (_running) {
+			auto time = std::chrono::system_clock::now();
+			std::chrono::duration<double> elapsed_seconds = time - _lastFrameTime;
+			float deltaTime = elapsed_seconds.count();
+			_lastFrameTime = time;
 
 			if (!_minimized) {
-				Renderer::beginScene();
-				Renderer::clear();
 				for (Layer* layer : _layerStack) {
-					layer->onUpdate();
+					layer->onUpdate(deltaTime);
 				}
-				Renderer::endScene();
 				Renderer::update();
 			}
 

@@ -24,8 +24,8 @@ namespace Tusk {
 		VulkanInstance(const Ref<Window> window);
 		~VulkanInstance();
 
-		void bindIndexBuffer(const Ref<IndexBuffer>& indexBuffer);
-		void bindVertexBuffer(const Ref<VertexBuffer>& vertexBuffer);
+		void bindIndexBuffer(IndexBuffer* indexBuffer);
+		void bindVertexBuffer(VertexBuffer* vertexBuffer);
 		void bindShader(const Ref<Shader> shader);
 		void bindTexture(const Ref<Texture>& texture);
 
@@ -63,8 +63,8 @@ namespace Tusk {
 		const int MAX_FRAMES_IN_FLIGHT = 2;
 
 		Ref<Window> _window;
-		Ref<VertexBuffer> _vertexBuffer;
-		Ref<IndexBuffer> _indexBuffer;
+		VertexBuffer* _vertexBuffer;
+		IndexBuffer* _indexBuffer;
 		Ref<Texture> _texture;
 
 		VkInstance _instance;

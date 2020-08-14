@@ -6,11 +6,11 @@
 
 namespace Tusk {
 
-	Ref<VertexBuffer> VertexBuffer::create(std::vector <Vertex> vertices) {
-		return CreateRef<VulkanVertexBuffer>(vertices);
+	VertexBuffer* VertexBuffer::create(std::vector <Vertex> vertices) {
+		return new VulkanVertexBuffer(vertices);
 	}
 
-	Ref<IndexBuffer> IndexBuffer::create(std::vector<uint32_t> indices) {
-		return CreateRef<VulkanIndexBuffer>(indices);
+	IndexBuffer* IndexBuffer::create(std::vector<uint32_t> indices) {
+		return new VulkanIndexBuffer(indices);
 	}
 }

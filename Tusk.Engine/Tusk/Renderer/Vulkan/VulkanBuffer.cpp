@@ -10,7 +10,8 @@ namespace Tusk{
 	}
 
 	VulkanVertexBuffer::~VulkanVertexBuffer() {
-		
+		vkDestroyBuffer(_device->getDevice(), _vertexBuffer, nullptr);
+		vkFreeMemory(_device->getDevice(), _vertexBufferMemory, nullptr);
 	}
 
 	void VulkanVertexBuffer::bind(VulkanDevice* device, VulkanCommand* command) {
@@ -49,7 +50,8 @@ namespace Tusk{
 	}
 
 	VulkanIndexBuffer::~VulkanIndexBuffer() {
-
+		vkDestroyBuffer(_device->getDevice(), _indexBuffer, nullptr);
+		vkFreeMemory(_device->getDevice(), _indexBufferMemory, nullptr);
 	}
 
 	void VulkanIndexBuffer::bind(VulkanDevice* device, VulkanCommand* command) {

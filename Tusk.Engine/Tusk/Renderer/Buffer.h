@@ -90,7 +90,7 @@ namespace Tusk {
 		virtual void setLayout(const BufferLayout& layout) = 0;
 		virtual const BufferLayout& getLayout() const = 0;
 
-		static Ref<VertexBuffer> create(std::vector <Vertex> vertices);
+		static VertexBuffer* create(std::vector <Vertex> vertices);
 	};
 
 	class IndexBuffer {
@@ -105,6 +105,6 @@ namespace Tusk {
 
 		virtual uint32_t getCount() const = 0;
 
-		static Ref<IndexBuffer> create(std::vector<uint32_t> indices);
+		static IndexBuffer* create(std::vector<uint32_t> indices);
 	};
 }

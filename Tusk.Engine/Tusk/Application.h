@@ -33,6 +33,9 @@ namespace Tusk {
 		Ref<Window> _window;
 		bool _running = true;
 		bool _minimized = false;
+
+		std::chrono::system_clock::time_point _lastFrameTime = std::chrono::system_clock::now();
+
 		LayerStack _layerStack;
 	};
 

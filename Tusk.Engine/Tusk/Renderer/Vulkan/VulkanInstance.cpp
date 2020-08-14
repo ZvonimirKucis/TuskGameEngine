@@ -239,12 +239,12 @@ namespace Tusk {
         }
     }
 
-    void VulkanInstance::bindIndexBuffer(const Ref<IndexBuffer>& indexBuffer) {
+    void VulkanInstance::bindIndexBuffer(IndexBuffer* indexBuffer) {
         indexBuffer->bind(_device, _command);
         _indexBuffer = indexBuffer;
     }
 
-    void VulkanInstance::bindVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) {
+    void VulkanInstance::bindVertexBuffer(VertexBuffer* vertexBuffer) {
         vertexBuffer->bind(_device, _command);
         _vertexBuffer = vertexBuffer;
     }
@@ -430,12 +430,6 @@ namespace Tusk {
             vkDestroySemaphore(_device->getDevice(), _imageAvailableSemaphores[i], nullptr);
             vkDestroyFence(_device->getDevice(), _inFlightFences[i], nullptr);
         }
-
-        vkDestroyBuffer(_device->getDevice(), _indexBuffer->getBuffer(), nullptr);
-        vkFreeMemory(_device->getDevice(), _indexBuffer->getMemory(), nullptr);
-
-        vkDestroyBuffer(_device->getDevice(), _vertexBuffer->getBuffer(), nullptr);
-        vkFreeMemory(_device->getDevice(), _vertexBuffer->getMemory(), nullptr);
 
         cleanupSwapChain();
 

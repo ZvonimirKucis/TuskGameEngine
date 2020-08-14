@@ -3,32 +3,18 @@
 class ExampleLayer : public Tusk::Layer {
 
 public:
-	ExampleLayer() : Layer("example") {
-		const std::vector<Tusk::Vertex> vertices = {
-			{{-0.5f, -0.5f, 0.0f}, {1.0f, 0.0f, 0.0f}, {0.0f, 0.0f}},
-			{{0.5f, -0.5f, 0.0f}, {0.0f, 1.0f, 0.0f}, {1.0f, 0.0f}},
-			{{0.5f, 0.5f, 0.0f}, {0.0f, 0.0f, 1.0f}, {1.0f, 1.0f}},
-			{{-0.5f, 0.5f, 0.0f}, {1.0f, 1.0f, 1.0f}, {0.0f, 1.0f}},
+	ExampleLayer() : Layer("example") {}
 
-			{{-0.5f, -0.5f, -0.5f}, {1.0f, 0.0f, 0.0f}, {0.0f, 0.0f}},
-			{{0.5f, -0.5f, -0.5f}, {0.0f, 1.0f, 0.0f}, {1.0f, 0.0f}},
-			{{0.5f, 0.5f, -0.5f}, {0.0f, 0.0f, 1.0f}, {1.0f, 1.0f}},
-			{{-0.5f, 0.5f, -0.5f}, {1.0f, 1.0f, 1.0f}, {0.0f, 1.0f}}
-		};
+	void onAttach() override {
+		_activeScene = new Tusk::Scene();
+		_mesh = new Tusk::Mesh("assets/objects/viking_room.obj");
 
-		const std::vector<uint32_t> indices = {
-			0, 1, 2, 2, 3, 0,
-			4, 5, 6, 6, 7, 4
-		};
-
-		_vertexBuffer = Tusk::VertexBuffer::create(vertices);
-		_indexBuffer = Tusk::IndexBuffer::create(indices);
-		_shader = Tusk::Shader::create("assets/shaders/main.vert.spv", "assets/shaders/main.frag.spv");
-		_texture = Tusk::Texture::create("assets/textures/statue.jpg");
+		_roomEntity = _activeScene->createEntity("room");
+		_roomEntity.addComponent<Tusk::MeshComponent>(_mesh);
 	}
 
-	void onUpdate() override {
-		Tusk::Renderer::submit(_shader, _vertexBuffer, _indexBuffer, _texture);
+	void onUpdate(float deltaTime) override {
+		_activeScene->onUpdate(deltaTime);
 	}
 
 	void onEvent(Tusk::Event& event) override {
@@ -39,11 +25,17 @@ public:
 				Tusk::Logger::Log("Tab key is pressed!");
 		}
 	}
+
+	void onDetach() override {
+		delete _mesh;
+		delete _activeScene;
+	}
+
 private:
-	Tusk::Ref<Tusk::Shader> _shader;
-	Tusk::Ref<Tusk::VertexBuffer> _vertexBuffer;
-	Tusk::Ref<Tusk::IndexBuffer> _indexBuffer;
-	Tusk::Ref<Tusk::Texture> _texture;
+	Tusk::Mesh* _mesh;
+
+	Tusk::Scene* _activeScene;
+	Tusk::Entity _roomEntity;
 };
 
 class Sandbox : public Tusk::Application {

@@ -12,7 +12,7 @@ namespace Tusk {
 
 		virtual void onAttach() {}
 		virtual void onDetach() {}
-		virtual void onUpdate() {}
+		virtual void onUpdate(float deltaTime) {}
 		//virtual void OnImGuiRender() {}
 		virtual void onEvent(Event& event) {}
 
