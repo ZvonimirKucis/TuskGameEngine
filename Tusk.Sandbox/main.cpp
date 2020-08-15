@@ -14,7 +14,7 @@ public:
 	}
 
 	void onUpdate(float deltaTime) override {
-		_activeScene->onUpdate(deltaTime);
+		//_activeScene->onUpdate(deltaTime);
 	}
 
 	void onEvent(Tusk::Event& event) override {

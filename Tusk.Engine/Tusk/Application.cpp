@@ -3,6 +3,8 @@
 #include "Application.h"
 #include "Renderer/Renderer.h"
 
+#include <glad/glad.h>
+
 namespace Tusk {
 	Application* Application::_instance = nullptr;
 
