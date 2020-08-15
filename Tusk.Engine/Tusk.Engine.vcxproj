@@ -120,6 +120,7 @@
     <ClCompile Include="Tusk\Layers\LayerStack.cpp" />
     <ClCompile Include="Tusk\Model\Material.cpp" />
     <ClCompile Include="Tusk\Model\Mesh.cpp" />
+    <ClCompile Include="Tusk\Model\Source.cpp" />
     <ClCompile Include="Tusk\Platform\Window.cpp" />
     <ClCompile Include="Tusk\Platform\GLFW\GLFWInput.cpp" />
     <ClCompile Include="Tusk\Platform\GLFW\GLFWWindow.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Tusk\Layers\LayerStack.h" />
     <ClInclude Include="Tusk\Model\Material.h" />
     <ClInclude Include="Tusk\Model\Mesh.h" />
+    <ClInclude Include="Tusk\Model\Model.h" />
     <ClInclude Include="Tusk\Platform\Input.h" />
     <ClInclude Include="Tusk\Platform\KeyCodes.h" />
     <ClInclude Include="Tusk\Platform\MouseButtonCodes.h" />
