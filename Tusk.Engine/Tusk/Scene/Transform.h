@@ -7,9 +7,9 @@ namespace Tusk {
 	class Transform {
 	public:
 		Transform() {
-			recalculatePositionMatrix();
+			/*recalculatePositionMatrix();
 			recalculateRotationMatrix();
-			recalculateScaleMatrix();
+			recalculateScaleMatrix();*/
 		}
 
 		/*glm::vec3 getPosition() { return _position; }
@@ -36,7 +36,7 @@ namespace Tusk {
 		glm::mat4 getTransformMatrix() { return _positionMatrix * _rotationMatrix * _scaleMatrix; };
 
 	private:
-		void recalculatePositionMatrix() {
+		/*void recalculatePositionMatrix() {
 			_positionMatrix = glm::translate(glm::mat4{ 1.0f }, _position);
 		}
 
@@ -48,7 +48,7 @@ namespace Tusk {
 			_rotationMatrix = glm::rotate(glm::mat4{ 1.0f }, _rotation.x, glm::vec3(1.0f, 0.0f, 0.0f));
 			_rotationMatrix = glm::rotate(_rotationMatrix, _rotation.y, glm::vec3(0.0f, 1.0f, 0.0f));
 			_rotationMatrix = glm::rotate(_rotationMatrix, _rotation.z, glm::vec3(0.0f, 0.0f, 1.0f));
-		}
+		}*/
 
 	private:
 		glm::vec3 _position{0.0f};

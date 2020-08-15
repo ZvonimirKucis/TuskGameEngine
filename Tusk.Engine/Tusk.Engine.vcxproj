@@ -80,7 +80,7 @@
       <AdditionalDependencies>glfw3.lib;vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;vulkan-1.lib</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)External\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -107,7 +107,7 @@
       <AdditionalDependencies>glfw3.lib;vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib;vulkan-1.lib</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)External\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -125,29 +125,30 @@
     <ClCompile Include="Tusk\Platform\GLFW\GLFWInput.cpp" />
     <ClCompile Include="Tusk\Platform\GLFW\GLFWWindow.cpp" />
     <ClCompile Include="Tusk\Renderer\Buffer.cpp" />
+    <ClCompile Include="Tusk\Renderer\Framebuffer.cpp" />
+    <ClCompile Include="Tusk\Renderer\GraphicsContext.cpp" />
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLFramebuffer.cpp" />
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLTexture.cpp" />
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="Tusk\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="Tusk\Renderer\OrthographicCameraController.cpp" />
+    <ClCompile Include="Tusk\Renderer\RenderCommand.cpp" />
     <ClCompile Include="Tusk\Renderer\Renderer.cpp" />
     <ClCompile Include="Tusk\Renderer\RendererAPI.cpp" />
-    <ClCompile Include="Tusk\Renderer\RendererCommand.cpp" />
     <ClCompile Include="Tusk\Renderer\Shader.cpp" />
     <ClCompile Include="Tusk\Renderer\Texture.cpp" />
-    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanCommand.cpp" />
-    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanDepthBuffer.cpp" />
-    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanDevice.cpp" />
-    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanFramebuffer.cpp" />
-    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanInstance.cpp" />
     <ClCompile Include="tuskpch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanBuffer.cpp" />
-    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanPipeline.cpp" />
-    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanRendererAPI.cpp" />
-    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanShader.cpp" />
-    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanTexture.cpp" />
+    <ClCompile Include="Tusk\Renderer\VertexArray.cpp" />
     <ClCompile Include="Tusk\Scene\Entity.cpp" />
     <ClCompile Include="Tusk\Scene\Scene.cpp" />
     <ClCompile Include="Tusk\Utils\Logger.cpp" />
-    <ClCompile Include="Tusk\Renderer\Vulkan\VulkanSwapChain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tusk.h" />
@@ -170,24 +171,25 @@
     <ClInclude Include="Tusk\Platform\GLFW\GLFWInput.h" />
     <ClInclude Include="Tusk\Platform\GLFW\GLFWWindow.h" />
     <ClInclude Include="Tusk\Renderer\Buffer.h" />
+    <ClInclude Include="Tusk\Renderer\Camera.h" />
+    <ClInclude Include="Tusk\Renderer\Framebuffer.h" />
+    <ClInclude Include="Tusk\Renderer\GraphicsContext.h" />
+    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLFramebuffer.h" />
+    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLTexture.h" />
+    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="Tusk\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="Tusk\Renderer\OrthographicCameraController.h" />
+    <ClInclude Include="Tusk\Renderer\RenderCommand.h" />
     <ClInclude Include="Tusk\Renderer\Renderer.h" />
     <ClInclude Include="Tusk\Renderer\RendererAPI.h" />
-    <ClInclude Include="Tusk\Renderer\RendererCommand.h" />
     <ClInclude Include="Tusk\Renderer\Shader.h" />
     <ClInclude Include="Tusk\Renderer\Texture.h" />
-    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanCommand.h" />
-    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanDepthBuffer.h" />
-    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanDevice.h" />
-    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanFramebuffer.h" />
-    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanInstance.h" />
-    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanPipeline.h" />
-    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanRendererAPI.h" />
-    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanShader.h" />
-    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanTexture.h" />
-    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanUtils.h" />
     <ClInclude Include="tuskpch.h" />
-    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanBuffer.h" />
-    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanVertex.h" />
+    <ClInclude Include="Tusk\Renderer\VertexArray.h" />
     <ClInclude Include="Tusk\Scene\Components.h" />
     <ClInclude Include="Tusk\Scene\Entity.h" />
     <ClInclude Include="Tusk\Scene\Scene.h" />
@@ -195,7 +197,6 @@
     <ClInclude Include="Tusk\Scene\Transform.h" />
     <ClInclude Include="Tusk\Utils\Defines.h" />
     <ClInclude Include="Tusk\Utils\Logger.h" />
-    <ClInclude Include="Tusk\Renderer\Vulkan\VulkanSwapChain.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

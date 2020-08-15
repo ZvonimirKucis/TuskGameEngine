@@ -1,39 +1,41 @@
 #include "tuskpch.h"
 #include "Renderer.h"
-#include "RendererCommand.h"
 
 namespace Tusk {
 
-	void Renderer::init(const Ref<Window> window) {
-		RenderCommand::init(window);
-	}
+	Scope<Renderer::SceneData> Renderer::s_SceneData = CreateScope<Renderer::SceneData>();
 
-	void Renderer::clear() {
-		RenderCommand::clear();
-	}
-
-	void Renderer::update() {
-		RenderCommand::drawFrame();
-	}
-
-	void Renderer::onWindowResize()
+	void Renderer::Init()
 	{
-		RenderCommand::handleResize();
+		RenderCommand::Init();
 	}
 
-	void Renderer::beginScene() {
-		RenderCommand::beginDrawing();
+	void Renderer::Shutdown()
+	{
 	}
 
-	void Renderer::submit(const Ref<Shader>& shader, VertexBuffer* vertexBuffer, IndexBuffer* indexBuffer, const Ref<Texture>& texture) {
-		RenderCommand::bindIndexBuffer(indexBuffer);
-		RenderCommand::bindVertexBuffer(vertexBuffer);
-		RenderCommand::bindTexture(texture);
-		RenderCommand::bindShader(shader);
-		RenderCommand::submitToDraw(shader);
+	void Renderer::OnWindowResize(uint32_t width, uint32_t height)
+	{
+		RenderCommand::SetViewport(0, 0, width, height);
 	}
 
-	void Renderer::endScene() {
-		RenderCommand::endDrawing();
+	void Renderer::BeginScene(OrthographicCamera& camera)
+	{
+		s_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
 	}
+
+	void Renderer::EndScene()
+	{
+	}
+
+	void Renderer::Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform)
+	{
+		shader->Bind();
+		shader->SetMat4("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
+		shader->SetMat4("u_Transform", transform);
+
+		vertexArray->Bind();
+		RenderCommand::DrawIndexed(vertexArray);
+	}
+
 }

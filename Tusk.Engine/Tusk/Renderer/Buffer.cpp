@@ -2,15 +2,24 @@
 #include "Buffer.h"
 
 #include "Renderer.h"
-#include "Vulkan/VulkanBuffer.h"
+
+#include "OpenGL/OpenGLBuffer.h"
 
 namespace Tusk {
 
-	VertexBuffer* VertexBuffer::create(std::vector <Vertex> vertices) {
-		return new VulkanVertexBuffer(vertices);
+	Ref<VertexBuffer> VertexBuffer::Create(uint32_t size)
+	{
+		  return CreateRef<OpenGLVertexBuffer>(size);
 	}
 
-	IndexBuffer* IndexBuffer::create(std::vector<uint32_t> indices) {
-		return new VulkanIndexBuffer(indices);
+	Ref<VertexBuffer> VertexBuffer::Create(float* vertices, uint32_t size)
+	{
+		return CreateRef<OpenGLVertexBuffer>(vertices, size);
 	}
+
+	Ref<IndexBuffer> IndexBuffer::Create(uint32_t* indices, uint32_t size)
+	{
+		return CreateRef<OpenGLIndexBuffer>(indices, size);
+	}
+
 }

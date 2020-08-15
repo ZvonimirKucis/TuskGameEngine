@@ -1,11 +1,17 @@
 #include "tuskpch.h"
 #include "Texture.h"
 
-#include "Vulkan/VulkanTexture.h"
+#include "Renderer.h"
+#include "OpenGL/OpenGLTexture.h"
 
 namespace Tusk {
 
-	Ref<Texture> Texture::create(const std::string& textureFile) {
-		return CreateRef<VulkanTexture>(textureFile);
+	Ref<Texture2D> Texture2D::Create(uint32_t width, uint32_t height) {
+		return CreateRef<OpenGLTexture2D>(width, height);
 	}
+
+	Ref<Texture2D> Texture2D::Create(const std::string& path) {
+		return CreateRef<OpenGLTexture2D>(path);
+	}
+
 }

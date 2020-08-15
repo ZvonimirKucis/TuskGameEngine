@@ -14,7 +14,7 @@ namespace Tusk {
 		_window = Window::create();
 		_window->setEventCallback(std::bind(&Application::onEvent, this, std::placeholders::_1));
 
-		Renderer::init(_window);
+		//Renderer::init(_window);
 	}
 
 	void Application::pushLayer(Layer* layer) {
@@ -49,7 +49,7 @@ namespace Tusk {
 				for (Layer* layer : _layerStack) {
 					layer->onUpdate(deltaTime);
 				}
-				Renderer::update();
+				//Renderer::update();
 			}
 
 			_window->onUpdate();
@@ -67,7 +67,7 @@ namespace Tusk {
 			return false;
 		}
 		_minimized = false;
-		Renderer::onWindowResize();
+		//Renderer::onWindowResize();
 		return false;
 	}
 

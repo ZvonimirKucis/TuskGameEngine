@@ -14,7 +14,7 @@ namespace Tusk {
 	}
 
 	void Mesh::loadModel(std::string modelPath) {
-        tinyobj::attrib_t attrib;
+        /*tinyobj::attrib_t attrib;
         std::vector<tinyobj::shape_t> shapes;
         std::vector<tinyobj::material_t> materials;
         std::string warn, err;
@@ -52,15 +52,15 @@ namespace Tusk {
                 }
                 _indices.push_back(uniqueVertices[vertex]);
             }
-        }
+        }*/
 	}
 
     void Mesh::createBuffers() {
-        _vertexBuffer = VertexBuffer::create(_vertices);
+        /*_vertexBuffer = VertexBuffer::create(_vertices);
         _indexBuffer = IndexBuffer::create(_indices);
 
         _vertices.clear();
-        _indices.clear();
+        _indices.clear();*/
     }
 
 	Mesh::~Mesh() {

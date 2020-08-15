@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Renderer/Vulkan/VulkanVertex.h"
+//#include "../Renderer/Vulkan/VulkanVertex.h"
 #include "../Renderer/Buffer.h"
 
 namespace Tusk {
@@ -18,7 +18,7 @@ namespace Tusk {
 		void createBuffers();
 
 	private:
-		std::vector<Vertex> _vertices;
+		//std::vector<Vertex> _vertices;
 		std::vector<uint32_t> _indices;
 
 		VertexBuffer* _vertexBuffer;

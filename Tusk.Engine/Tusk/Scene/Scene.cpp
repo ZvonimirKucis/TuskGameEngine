@@ -9,8 +9,8 @@
 namespace Tusk {
 
 	Scene::Scene() {
-		_shader = Tusk::Shader::create("assets/shaders/main.vert.spv", "assets/shaders/main.frag.spv");
-		_texture = Tusk::Texture::create("assets/textures/viking_room.png");
+		//_shader = Tusk::Shader::create("assets/shaders/main.vert.spv", "assets/shaders/main.frag.spv");
+		//_texture = Tusk::Texture::create("assets/textures/viking_room.png");
 	}
 
 	Entity Scene::createEntity(const std::string& name) {
@@ -55,7 +55,7 @@ namespace Tusk {
 				}
 			}*/
 
-			Renderer::beginScene();
+			/*Renderer::beginScene();
 			Renderer::clear();
 			auto view = _registry.view<TransformComponent, MeshComponent>();
 			for (auto entity : view) {
@@ -63,7 +63,7 @@ namespace Tusk {
 				
 				Renderer::submit(_shader, mesh.mesh->getVertexBuffer(), mesh.mesh->getIndexBuffer(), _texture);
 			}
-			Renderer::endScene();
+			Renderer::endScene();*/
 		}
 	}
 

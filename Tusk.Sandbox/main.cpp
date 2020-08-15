@@ -6,11 +6,11 @@ public:
 	ExampleLayer() : Layer("example") {}
 
 	void onAttach() override {
-		_activeScene = new Tusk::Scene();
+		/*_activeScene = new Tusk::Scene();
 		_mesh = new Tusk::Mesh("assets/objects/viking_room.obj");
 
 		_roomEntity = _activeScene->createEntity("room");
-		_roomEntity.addComponent<Tusk::MeshComponent>(_mesh);
+		_roomEntity.addComponent<Tusk::MeshComponent>(_mesh);*/
 	}
 
 	void onUpdate(float deltaTime) override {
@@ -27,8 +27,6 @@ public:
 	}
 
 	void onDetach() override {
-		delete _mesh;
-		delete _activeScene;
 	}
 
 private:
