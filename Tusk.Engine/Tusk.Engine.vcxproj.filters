@@ -111,6 +111,9 @@
     <ClCompile Include="Tusk\Renderer\VertexArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Tusk\GUI\ImGuiBuild.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tusk\Utils\Defines.h">

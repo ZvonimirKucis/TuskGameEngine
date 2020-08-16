@@ -6,6 +6,7 @@
 #include "Platform/Window.h"
 #include "Layers/LayerStack.h"
 #include "Renderer/Shader.h"
+#include "GUI/ImGuiLayer.h"
 
 namespace Tusk {
 	class Application {
@@ -20,9 +21,9 @@ namespace Tusk {
 		void pushLayer(Layer* layer);
 		void pushOverlay(Layer* layer);
 
-		Window& getWindow() { return *_window; }
+		inline Window& getWindow() { return *_window; }
 
-		static Application& get() { return *_instance; }
+		inline static Application& get() { return *_instance; }
 	private:
 		bool onWindowClose(WindowCloseEvent& e);
 		bool onWindowResize(WindowResizeEvent& e);
@@ -31,6 +32,7 @@ namespace Tusk {
 		static Application* _instance;
 
 		Ref<Window> _window;
+		ImGuiLayer* _imGuiLayer;
 		bool _running = true;
 		bool _minimized = false;
 

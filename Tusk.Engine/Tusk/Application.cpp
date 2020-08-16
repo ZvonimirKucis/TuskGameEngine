@@ -3,8 +3,6 @@
 #include "Application.h"
 #include "Renderer/Renderer.h"
 
-#include <glad/glad.h>
-
 namespace Tusk {
 	Application* Application::_instance = nullptr;
 
@@ -13,6 +11,9 @@ namespace Tusk {
 
 		_window = Window::create();
 		_window->setEventCallback(std::bind(&Application::onEvent, this, std::placeholders::_1));
+
+		_imGuiLayer = new ImGuiLayer();
+		pushOverlay(_imGuiLayer);
 
 		//Renderer::init(_window);
 	}
@@ -49,7 +50,12 @@ namespace Tusk {
 				for (Layer* layer : _layerStack) {
 					layer->onUpdate(deltaTime);
 				}
-				//Renderer::update();
+
+				_imGuiLayer->begin();
+				for (Layer* layer : _layerStack) {
+					layer->onImGuiRender();
+				}
+				_imGuiLayer->end();
 			}
 
 			_window->onUpdate();
@@ -72,6 +78,5 @@ namespace Tusk {
 	}
 
 	Application::~Application() {
-
 	}
 }

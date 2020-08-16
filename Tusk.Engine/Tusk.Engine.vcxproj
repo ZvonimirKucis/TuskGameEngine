@@ -49,7 +49,7 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(ProjectName)\</IntDir>
-    <IncludePath>$(SolutionDir)\Tusk.Engine;$(SolutionDir)\External\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Tusk.Engine;$(SolutionDir)\External\Include;$(IncludePath);;$(SolutionDir)\External\Include\ImGui</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
@@ -57,7 +57,7 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(ProjectName)\</IntDir>
-    <IncludePath>$(SolutionDir)\Tusk.Engine;$(SolutionDir)\External\Include;$(IncludePath);C:\VulkanSDK\1.2.141.2\Include</IncludePath>
+    <IncludePath>$(SolutionDir)\Tusk.Engine;$(SolutionDir)\External\Include;$(IncludePath);C:\VulkanSDK\1.2.141.2\Include;$(SolutionDir)\External\Include\ImGui</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
@@ -115,6 +115,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Tusk\Application.cpp" />
+    <ClCompile Include="Tusk\GUI\ImGuiBuild.cpp" />
     <ClCompile Include="Tusk\GUI\ImGuiLayer.cpp" />
     <ClCompile Include="Tusk\Layers\Layer.cpp" />
     <ClCompile Include="Tusk\Layers\LayerStack.cpp" />

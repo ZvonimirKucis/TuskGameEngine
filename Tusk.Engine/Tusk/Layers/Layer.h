@@ -13,7 +13,7 @@ namespace Tusk {
 		virtual void onAttach() {}
 		virtual void onDetach() {}
 		virtual void onUpdate(float deltaTime) {}
-		//virtual void OnImGuiRender() {}
+		virtual void onImGuiRender() {}
 		virtual void onEvent(Event& event) {}
 
 		const std::string& getName() const { return _debugName; }
