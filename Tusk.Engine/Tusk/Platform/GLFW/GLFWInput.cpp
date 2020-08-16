@@ -1,7 +1,8 @@
 #include "tuskpch.h"
-#include "GLFWInput.h"
 
-#include "../../Application.h"
+#include "GLFWInput.h"
+#include "Tusk/Application.h"
+
 #include <GLFW/glfw3.h>
 
 namespace Tusk {

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -9,34 +9,39 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Dist|x64">
+      <Configuration>Dist</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{90000018-FCB5-780D-85AA-72E4F15E6F11}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{2be5b7a9-4bf7-4459-af6c-1b428b3909e4}</ProjectGuid>
-    <RootNamespace>TuskEngine</RootNamespace>
+    <RootNamespace>Tusk.Engine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
-  <ImportGroup Label="Shared">
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -44,113 +49,100 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)build\$(ProjectName)\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(ProjectName)\</IntDir>
-    <IncludePath>$(SolutionDir)\Tusk.Engine;$(SolutionDir)\External\Include;$(IncludePath);;$(SolutionDir)\External\Include\ImGui</IncludePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <OutDir>..\build\Debug-windows-x86_64\Tusk.Engine\</OutDir>
+    <IntDir>..\obj\Debug-windows-x86_64\Tusk.Engine\</IntDir>
+    <TargetName>Tusk.Engine</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)build\$(ProjectName)\</OutDir>
-    <IntDir>$(SolutionDir)obj\$(ProjectName)\</IntDir>
-    <IncludePath>$(SolutionDir)\Tusk.Engine;$(SolutionDir)\External\Include;$(IncludePath);C:\VulkanSDK\1.2.141.2\Include;$(SolutionDir)\External\Include\ImGui</IncludePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <OutDir>..\build\Release-windows-x86_64\Tusk.Engine\</OutDir>
+    <IntDir>..\obj\Release-windows-x86_64\Tusk.Engine\</IntDir>
+    <TargetName>Tusk.Engine</TargetName>
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <OutDir>..\build\Dist-windows-x86_64\Tusk.Engine\</OutDir>
+    <IntDir>..\obj\Dist-windows-x86_64\Tusk.Engine\</IntDir>
+    <TargetName>Tusk.Engine</TargetName>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>TUSK_BUILD_LIB;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>tuskpch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\External\GLFW\include;..\External\Glad\include;..\External\ImGui;..\External\glm;..\External\stb;..\External\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)External\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib</AdditionalDependencies>
-    </Lib>
-    <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)External\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>TUSK_BUILD_LIB;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>tuskpch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\External\GLFW\include;..\External\Glad\include;..\External\ImGui;..\External\glm;..\External\stb;..\External\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)External\Lib;C:\VulkanSDK\1.2.141.2\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>glfw3.lib</AdditionalDependencies>
-    </Lib>
-    <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)External\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Tusk\Application.cpp" />
-    <ClCompile Include="Tusk\GUI\ImGuiBuild.cpp" />
-    <ClCompile Include="Tusk\GUI\ImGuiLayer.cpp" />
-    <ClCompile Include="Tusk\Layers\Layer.cpp" />
-    <ClCompile Include="Tusk\Layers\LayerStack.cpp" />
-    <ClCompile Include="Tusk\Model\Material.cpp" />
-    <ClCompile Include="Tusk\Model\Mesh.cpp" />
-    <ClCompile Include="Tusk\Model\Source.cpp" />
-    <ClCompile Include="Tusk\Platform\Window.cpp" />
-    <ClCompile Include="Tusk\Platform\GLFW\GLFWInput.cpp" />
-    <ClCompile Include="Tusk\Platform\GLFW\GLFWWindow.cpp" />
-    <ClCompile Include="Tusk\Renderer\Buffer.cpp" />
-    <ClCompile Include="Tusk\Renderer\Framebuffer.cpp" />
-    <ClCompile Include="Tusk\Renderer\GraphicsContext.cpp" />
-    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLBuffer.cpp" />
-    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLContext.cpp" />
-    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLFramebuffer.cpp" />
-    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLRendererAPI.cpp" />
-    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLShader.cpp" />
-    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLTexture.cpp" />
-    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLVertexArray.cpp" />
-    <ClCompile Include="Tusk\Renderer\OrthographicCamera.cpp" />
-    <ClCompile Include="Tusk\Renderer\OrthographicCameraController.cpp" />
-    <ClCompile Include="Tusk\Renderer\RenderCommand.cpp" />
-    <ClCompile Include="Tusk\Renderer\Renderer.cpp" />
-    <ClCompile Include="Tusk\Renderer\RendererAPI.cpp" />
-    <ClCompile Include="Tusk\Renderer\Shader.cpp" />
-    <ClCompile Include="Tusk\Renderer\Texture.cpp" />
-    <ClCompile Include="tuskpch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>tuskpch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\External\GLFW\include;..\External\Glad\include;..\External\ImGui;..\External\glm;..\External\stb;..\External\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
-    <ClCompile Include="Tusk\Renderer\VertexArray.cpp" />
-    <ClCompile Include="Tusk\Scene\Entity.cpp" />
-    <ClCompile Include="Tusk\Scene\Scene.cpp" />
-    <ClCompile Include="Tusk\Utils\Logger.cpp" />
-  </ItemGroup>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Tusk.h" />
     <ClInclude Include="Tusk\Application.h" />
@@ -165,12 +157,12 @@
     <ClInclude Include="Tusk\Model\Material.h" />
     <ClInclude Include="Tusk\Model\Mesh.h" />
     <ClInclude Include="Tusk\Model\Model.h" />
+    <ClInclude Include="Tusk\Platform\GLFW\GLFWInput.h" />
+    <ClInclude Include="Tusk\Platform\GLFW\GLFWWindow.h" />
     <ClInclude Include="Tusk\Platform\Input.h" />
     <ClInclude Include="Tusk\Platform\KeyCodes.h" />
     <ClInclude Include="Tusk\Platform\MouseButtonCodes.h" />
     <ClInclude Include="Tusk\Platform\Window.h" />
-    <ClInclude Include="Tusk\Platform\GLFW\GLFWInput.h" />
-    <ClInclude Include="Tusk\Platform\GLFW\GLFWWindow.h" />
     <ClInclude Include="Tusk\Renderer\Buffer.h" />
     <ClInclude Include="Tusk\Renderer\Camera.h" />
     <ClInclude Include="Tusk\Renderer\Framebuffer.h" />
@@ -189,7 +181,6 @@
     <ClInclude Include="Tusk\Renderer\RendererAPI.h" />
     <ClInclude Include="Tusk\Renderer\Shader.h" />
     <ClInclude Include="Tusk\Renderer\Texture.h" />
-    <ClInclude Include="tuskpch.h" />
     <ClInclude Include="Tusk\Renderer\VertexArray.h" />
     <ClInclude Include="Tusk\Scene\Components.h" />
     <ClInclude Include="Tusk\Scene\Entity.h" />
@@ -198,6 +189,55 @@
     <ClInclude Include="Tusk\Scene\Transform.h" />
     <ClInclude Include="Tusk\Utils\Defines.h" />
     <ClInclude Include="Tusk\Utils\Logger.h" />
+    <ClInclude Include="tuskpch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Tusk\Application.cpp" />
+    <ClCompile Include="Tusk\GUI\ImGuiBuild.cpp" />
+    <ClCompile Include="Tusk\GUI\ImGuiLayer.cpp" />
+    <ClCompile Include="Tusk\Layers\Layer.cpp" />
+    <ClCompile Include="Tusk\Layers\LayerStack.cpp" />
+    <ClCompile Include="Tusk\Model\Material.cpp" />
+    <ClCompile Include="Tusk\Model\Mesh.cpp" />
+    <ClCompile Include="Tusk\Model\Source.cpp" />
+    <ClCompile Include="Tusk\Platform\GLFW\GLFWInput.cpp" />
+    <ClCompile Include="Tusk\Platform\GLFW\GLFWWindow.cpp" />
+    <ClCompile Include="Tusk\Platform\Window.cpp" />
+    <ClCompile Include="Tusk\Renderer\Buffer.cpp" />
+    <ClCompile Include="Tusk\Renderer\Framebuffer.cpp" />
+    <ClCompile Include="Tusk\Renderer\GraphicsContext.cpp" />
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLFramebuffer.cpp" />
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLTexture.cpp" />
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="Tusk\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="Tusk\Renderer\OrthographicCameraController.cpp" />
+    <ClCompile Include="Tusk\Renderer\RenderCommand.cpp" />
+    <ClCompile Include="Tusk\Renderer\Renderer.cpp" />
+    <ClCompile Include="Tusk\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="Tusk\Renderer\Shader.cpp" />
+    <ClCompile Include="Tusk\Renderer\Texture.cpp" />
+    <ClCompile Include="Tusk\Renderer\VertexArray.cpp" />
+    <ClCompile Include="Tusk\Scene\Entity.cpp" />
+    <ClCompile Include="Tusk\Scene\Scene.cpp" />
+    <ClCompile Include="Tusk\Utils\Logger.cpp" />
+    <ClCompile Include="tuskpch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\External\GLFW\GLFW.vcxproj">
+      <Project>{154B857C-0182-860D-AA6E-6C109684020F}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\External\Glad\Glad.vcxproj">
+      <Project>{BDD6857C-A90D-870D-52FA-6C103E10030F}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\External\imgui\ImGui.vcxproj">
+      <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

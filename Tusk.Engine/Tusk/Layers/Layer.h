@@ -1,11 +1,9 @@
 #pragma once
-#include "../Utils/Defines.h"
-#include "../Events/Event.h"
+#include "Tusk/Events/Event.h"
 
 namespace Tusk {
 
-	class Layer
-	{
+	class Layer {
 	public:
 		Layer(const std::string& name = "Layer");
 		virtual ~Layer() = default;

@@ -4,9 +4,7 @@
 #include "GLFW/GLFWWindow.h"
 
 namespace Tusk {
-
-	Ref<Window> Window::create(const WindowCreateInfo& props)
-	{
+	Ref<Window> Window::create(const WindowCreateInfo& props) {
 		return CreateRef<GLFWWindow>(props);
 	}
 }

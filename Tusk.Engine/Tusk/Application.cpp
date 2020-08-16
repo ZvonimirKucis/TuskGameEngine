@@ -11,6 +11,7 @@ namespace Tusk {
 
 		_window = Window::create();
 		_window->setEventCallback(std::bind(&Application::onEvent, this, std::placeholders::_1));
+		_window->setVSync(true);
 
 		_imGuiLayer = new ImGuiLayer();
 		pushOverlay(_imGuiLayer);

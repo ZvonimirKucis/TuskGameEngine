@@ -1,258 +1,273 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Tusk">
+      <UniqueIdentifier>{4C208D7C-3857-8E0D-E143-7410CD590A0F}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="Tusk\Events">
+      <UniqueIdentifier>{B0FE8965-1CB4-025B-A5A8-FC31115DF95E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Tusk\GUI">
+      <UniqueIdentifier>{60659743-4C32-F24E-754B-E0F6617727DD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tusk\Layers">
+      <UniqueIdentifier>{8BE96C74-F79E-E569-8093-DF40EC47DC6D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tusk\Model">
+      <UniqueIdentifier>{8C928187-784A-C3D4-E151-9C30CD285EC5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tusk\Platform">
+      <UniqueIdentifier>{2072220C-8C32-9E42-556D-E7BFC1ECE21E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tusk\Platform\GLFW">
+      <UniqueIdentifier>{5F81992B-4B65-5A81-B4C5-54D4A0C84403}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tusk\Renderer">
+      <UniqueIdentifier>{7279FFE6-DE39-7B1D-A774-C49A13F4BFF9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tusk\Renderer\OpenGL">
+      <UniqueIdentifier>{66CE6A67-525D-F430-FB7B-082CE7E904D7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tusk\Scene">
+      <UniqueIdentifier>{6996E787-554E-29D5-BE55-0231AA2CC4C5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tusk\Utils">
+      <UniqueIdentifier>{AC2A1588-98E2-56D5-01EA-2F31EDC0F1C5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Tusk\Utils\Logger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Application.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tuskpch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Layers\Layer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Layers\LayerStack.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\GUI\ImGuiLayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Renderer\Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Renderer\Buffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Renderer\Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Renderer\RendererAPI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Platform\Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Platform\GLFW\GLFWWindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Platform\GLFW\GLFWInput.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Renderer\Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Scene\Scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Scene\Entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Model\Mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Model\Material.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Model\Source.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLContext.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLFramebuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLRendererAPI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLShader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLTexture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLVertexArray.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Renderer\Framebuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Renderer\GraphicsContext.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Renderer\OrthographicCamera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Renderer\OrthographicCameraController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Renderer\RenderCommand.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Renderer\VertexArray.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\GUI\ImGuiBuild.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Tusk\Utils\Defines.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Utils\Logger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="Tusk.h" />
     <ClInclude Include="Tusk\Application.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk.h">
-      <Filter>Header Files</Filter>
+      <Filter>Tusk</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\EntryPoint.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Events\Event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Events\KeyEvent.h">
-      <Filter>Header Files</Filter>
+      <Filter>Tusk</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Events\ApplicationEvent.h">
-      <Filter>Header Files</Filter>
+      <Filter>Tusk\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Events\Event.h">
+      <Filter>Tusk\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Events\KeyEvent.h">
+      <Filter>Tusk\Events</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Events\MouseEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="tuskpch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Platform\Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Layers\Layer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Layers\LayerStack.h">
-      <Filter>Header Files</Filter>
+      <Filter>Tusk\Events</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\GUI\ImGuiLayer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Tusk\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="Tusk\Platform\Input.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Tusk\Layers\Layer.h">
+      <Filter>Tusk\Layers</Filter>
     </ClInclude>
-    <ClInclude Include="Tusk\Platform\KeyCodes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Platform\MouseButtonCodes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Renderer\Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Renderer\Buffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Renderer\Renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Renderer\RendererAPI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Platform\GLFW\GLFWWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Platform\GLFW\GLFWInput.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Renderer\Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Scene\Components.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Scene\Scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Scene\Entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Model\Mesh.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Tusk\Layers\LayerStack.h">
+      <Filter>Tusk\Layers</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Model\Material.h">
-      <Filter>Header Files</Filter>
+      <Filter>Tusk\Model</Filter>
     </ClInclude>
-    <ClInclude Include="Tusk\Scene\ScriptableEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Scene\Transform.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Tusk\Model\Mesh.h">
+      <Filter>Tusk\Model</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Model\Model.h">
-      <Filter>Header Files</Filter>
+      <Filter>Tusk\Model</Filter>
     </ClInclude>
-    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLBuffer.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Tusk\Platform\GLFW\GLFWInput.h">
+      <Filter>Tusk\Platform\GLFW</Filter>
     </ClInclude>
-    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLContext.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Tusk\Platform\GLFW\GLFWWindow.h">
+      <Filter>Tusk\Platform\GLFW</Filter>
     </ClInclude>
-    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLFramebuffer.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Tusk\Platform\Input.h">
+      <Filter>Tusk\Platform</Filter>
     </ClInclude>
-    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLRendererAPI.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Tusk\Platform\KeyCodes.h">
+      <Filter>Tusk\Platform</Filter>
     </ClInclude>
-    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLShader.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Tusk\Platform\MouseButtonCodes.h">
+      <Filter>Tusk\Platform</Filter>
     </ClInclude>
-    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLTexture.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Tusk\Platform\Window.h">
+      <Filter>Tusk\Platform</Filter>
     </ClInclude>
-    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLVertexArray.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Tusk\Renderer\Buffer.h">
+      <Filter>Tusk\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Renderer\Camera.h">
-      <Filter>Header Files</Filter>
+      <Filter>Tusk\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Renderer\Framebuffer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Tusk\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Renderer\GraphicsContext.h">
-      <Filter>Header Files</Filter>
+      <Filter>Tusk\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLBuffer.h">
+      <Filter>Tusk\Renderer\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLContext.h">
+      <Filter>Tusk\Renderer\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLFramebuffer.h">
+      <Filter>Tusk\Renderer\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLRendererAPI.h">
+      <Filter>Tusk\Renderer\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLShader.h">
+      <Filter>Tusk\Renderer\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLTexture.h">
+      <Filter>Tusk\Renderer\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLVertexArray.h">
+      <Filter>Tusk\Renderer\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Renderer\OrthographicCamera.h">
-      <Filter>Header Files</Filter>
+      <Filter>Tusk\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Renderer\OrthographicCameraController.h">
-      <Filter>Header Files</Filter>
+      <Filter>Tusk\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Renderer\RenderCommand.h">
-      <Filter>Header Files</Filter>
+      <Filter>Tusk\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Renderer\Renderer.h">
+      <Filter>Tusk\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Renderer\RendererAPI.h">
+      <Filter>Tusk\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Renderer\Shader.h">
+      <Filter>Tusk\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Renderer\Texture.h">
+      <Filter>Tusk\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Renderer\VertexArray.h">
-      <Filter>Header Files</Filter>
+      <Filter>Tusk\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Tusk\Scene\Components.h">
+      <Filter>Tusk\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Scene\Entity.h">
+      <Filter>Tusk\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Scene\Scene.h">
+      <Filter>Tusk\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Scene\ScriptableEntity.h">
+      <Filter>Tusk\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Scene\Transform.h">
+      <Filter>Tusk\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Utils\Defines.h">
+      <Filter>Tusk\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Utils\Logger.h">
+      <Filter>Tusk\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="tuskpch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Tusk\Application.cpp">
+      <Filter>Tusk</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\GUI\ImGuiBuild.cpp">
+      <Filter>Tusk\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\GUI\ImGuiLayer.cpp">
+      <Filter>Tusk\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Layers\Layer.cpp">
+      <Filter>Tusk\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Layers\LayerStack.cpp">
+      <Filter>Tusk\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Model\Material.cpp">
+      <Filter>Tusk\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Model\Mesh.cpp">
+      <Filter>Tusk\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Model\Source.cpp">
+      <Filter>Tusk\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Platform\GLFW\GLFWInput.cpp">
+      <Filter>Tusk\Platform\GLFW</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Platform\GLFW\GLFWWindow.cpp">
+      <Filter>Tusk\Platform\GLFW</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Platform\Window.cpp">
+      <Filter>Tusk\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\Buffer.cpp">
+      <Filter>Tusk\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\Framebuffer.cpp">
+      <Filter>Tusk\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\GraphicsContext.cpp">
+      <Filter>Tusk\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLBuffer.cpp">
+      <Filter>Tusk\Renderer\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLContext.cpp">
+      <Filter>Tusk\Renderer\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLFramebuffer.cpp">
+      <Filter>Tusk\Renderer\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLRendererAPI.cpp">
+      <Filter>Tusk\Renderer\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLShader.cpp">
+      <Filter>Tusk\Renderer\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLTexture.cpp">
+      <Filter>Tusk\Renderer\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLVertexArray.cpp">
+      <Filter>Tusk\Renderer\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\OrthographicCamera.cpp">
+      <Filter>Tusk\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\OrthographicCameraController.cpp">
+      <Filter>Tusk\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\RenderCommand.cpp">
+      <Filter>Tusk\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\Renderer.cpp">
+      <Filter>Tusk\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\RendererAPI.cpp">
+      <Filter>Tusk\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\Shader.cpp">
+      <Filter>Tusk\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\Texture.cpp">
+      <Filter>Tusk\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Renderer\VertexArray.cpp">
+      <Filter>Tusk\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Scene\Entity.cpp">
+      <Filter>Tusk\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Scene\Scene.cpp">
+      <Filter>Tusk\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Utils\Logger.cpp">
+      <Filter>Tusk\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="tuskpch.cpp" />
   </ItemGroup>
 </Project>

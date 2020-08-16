@@ -1,7 +1,5 @@
 #pragma once
 
-#include "../Utils/Defines.h"
-
 namespace Tusk {
 
 	class Input {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Layers/Layer.h"
+#include "Tusk/Layers/Layer.h"
 
 namespace Tusk {
 	class ImGuiLayer : public Layer {

@@ -3,7 +3,7 @@
 #include "../Renderer/Shader.h"
 #include "../Renderer/Texture.h"
 
-#include <entt/entt.hpp>
+#include <entt.hpp>
 
 namespace Tusk {
 	class Entity;

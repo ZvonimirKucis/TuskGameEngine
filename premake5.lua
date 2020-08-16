@@ -57,6 +57,7 @@ project "Tusk.Engine"
 
 	includedirs
 	{
+		"%{prj.name}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",

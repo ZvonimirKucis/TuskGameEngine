@@ -4,9 +4,9 @@
 
 #include "GLFWWindow.h"
 
-#include "../../Events/ApplicationEvent.h"
-#include "../../Events/KeyEvent.h"
-#include "../../Events/MouseEvent.h"
+#include "Tusk/Events/ApplicationEvent.h"
+#include "Tusk/Events/KeyEvent.h"
+#include "Tusk/Events/MouseEvent.h"
 
 namespace Tusk {
 	
@@ -26,12 +26,19 @@ namespace Tusk {
 		_data.height = props.height;		
 
 		glfwInit();
-		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-
 		glfwSetErrorCallback(GLFWErrorCallback);
 
+#if _DEBUG
+		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+#endif
+
 		_window = glfwCreateWindow(props.width, props.height, props.title.c_str(), nullptr, nullptr);
+
+		_context = GraphicsContext::create(_window);
+		_context->init();
+
 		glfwSetWindowUserPointer(_window, &_data);
+		setVSync(true);
 
 		glfwSetWindowSizeCallback(_window, [](GLFWwindow* window, int width, int height){
 			WindowData& data = *(WindowData*) glfwGetWindowUserPointer(window);
@@ -118,8 +125,22 @@ namespace Tusk {
 		});
 	}
 
+	void GLFWWindow::setVSync(bool enabled) {
+		if (enabled)
+			glfwSwapInterval(1);
+		else
+			glfwSwapInterval(0);
+
+		_data.VSync = enabled;
+	}
+
+	bool GLFWWindow::isVSync() const {
+		return _data.VSync;
+	}
+
 	void GLFWWindow::onUpdate() {
 		glfwPollEvents();
+		_context->swapBuffers();
 	}
 
 	GLFWWindow::~GLFWWindow() {
