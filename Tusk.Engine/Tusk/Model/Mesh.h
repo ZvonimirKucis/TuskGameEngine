@@ -1,28 +1,26 @@
 #pragma once
 
-//#include "../Renderer/Vulkan/VulkanVertex.h"
-#include "../Renderer/Buffer.h"
+#include "Tusk/Renderer/Buffer.h"
+#include "Tusk/Renderer/VertexArray.h"
+#include "Tusk/Renderer/Shader.h"
+#include "Tusk/Renderer/Texture.h"
+#include "Tusk/Renderer/RenderCommand.h"
 
 namespace Tusk {
 
 	class Mesh {
 	public:
-		Mesh(std::string modelPath);
+		Mesh(std::vector<Vertex> vertices, std::vector<uint32_t> indices, std::vector<Ref<Texture2D>> textures);
 		~Mesh();
 
-		VertexBuffer* getVertexBuffer() { return _vertexBuffer; }
-		IndexBuffer* getIndexBuffer() { return _indexBuffer; }
+		void draw(Ref<Shader> shader);
+	private:
+		void setupMesh(std::vector<Vertex> vertices, std::vector<uint32_t> indices);
 
 	private:
-		void loadModel(std::string modelPath);
-		void createBuffers();
+		Ref<VertexArray> _vertexArray;
 
-	private:
-		//std::vector<Vertex> _vertices;
-		std::vector<uint32_t> _indices;
-
-		VertexBuffer* _vertexBuffer;
-		IndexBuffer* _indexBuffer;
+		std::vector<Ref<Texture2D>> _textures;
 	};
 
 }

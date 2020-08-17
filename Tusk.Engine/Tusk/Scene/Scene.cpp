@@ -1,6 +1,6 @@
 #include "tuskpch.h"
 
-#include "../Renderer/Renderer.h"
+#include "Tusk/Renderer/Renderer.h"
 
 #include "Scene.h"
 #include "Entity.h"
@@ -8,10 +8,7 @@
 
 namespace Tusk {
 
-	Scene::Scene() {
-		//_shader = Tusk::Shader::create("assets/shaders/main.vert.spv", "assets/shaders/main.frag.spv");
-		//_texture = Tusk::Texture::create("assets/textures/viking_room.png");
-	}
+	Scene::Scene() {}
 
 	Entity Scene::createEntity(const std::string& name) {
 		Entity entity =  {_registry.create(), this};
@@ -27,7 +24,29 @@ namespace Tusk {
 
 		// Scripts
 		{
-			_registry.view<ScriptComponent>().each([=](auto entity, auto& nsc)
+			auto view = _registry.view<ScriptComponent>();
+			for (auto entity : view) {
+				auto& script = view.get<ScriptComponent>(entity);
+				if (script.Instance == nullptr) {
+
+					std::cout << "Created" << std::endl;
+					std::cout << script.Instance << std::endl;
+
+					script.instantiateFunction();
+					std::cout << "Created 2" << std::endl;
+					std::cout << script.Instance << std::endl;
+					script.Instance->setEntity(Entity{ entity, this });
+					std::cout << "Created 3" << std::endl;
+
+					if (script.onCreateFunction)
+						script.onCreateFunction(script.Instance);
+				}
+
+				if (script.onUpdateFunction)
+					script.onUpdateFunction(script.Instance, deltaTime);
+				
+			}
+			/*_registry.view<ScriptComponent>().each([=](auto entity, auto& nsc)
 				{
 					if (!nsc.instance)
 					{
@@ -40,31 +59,47 @@ namespace Tusk {
 
 					if (nsc.onUpdateFunction)
 						nsc.onUpdateFunction(nsc.instance, deltaTime);
-				});
+				});*/
 		}
 
 		// Render
+		Camera* mainCamera = nullptr;
+		glm::mat4* cameraTransform = nullptr;
 		{
-			//auto view = _registry.view<TransformComponent, CameraComponent>();
-
-			/*for (auto entity : view) {
+			auto view = _registry.view<TransformComponent, CameraComponent>();
+			for (auto entity : view)
+			{
 				auto& [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
 
-				if (camera.primary) {
-
+				if (camera.primary)
+				{
+					mainCamera = &camera.Camera;
+					cameraTransform = &transform.transform;
+					break;
 				}
-			}*/
+			}
+		}
 
-			/*Renderer::beginScene();
-			Renderer::clear();
+		if(mainCamera)
+		{
+			Renderer::beginScene(*mainCamera, *cameraTransform);
 			auto view = _registry.view<TransformComponent, MeshComponent>();
 			for (auto entity : view) {
 				auto [transform, mesh] = view.get<TransformComponent, MeshComponent>(entity);
 				
-				Renderer::submit(_shader, mesh.mesh->getVertexBuffer(), mesh.mesh->getIndexBuffer(), _texture);
+				Renderer::submit(mesh.shader, mesh.model, transform.transform);
 			}
-			Renderer::endScene();*/
+			Renderer::endScene();
 		}
+	}
+
+	void Scene::onViewportResize(uint32_t width, uint32_t height) {
+		auto view = _registry.view<CameraComponent>();
+		for (auto entity : view) {
+			auto& cameraComponent = view.get<CameraComponent>(entity);
+			cameraComponent.Camera.setViewportSize(width, height);
+		}
+
 	}
 
 	Scene::~Scene() {

@@ -3,6 +3,11 @@
 #include "Application.h"
 #include "Renderer/Renderer.h"
 
+#include <glad/glad.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 namespace Tusk {
 	Application* Application::_instance = nullptr;
 
@@ -16,7 +21,7 @@ namespace Tusk {
 		_imGuiLayer = new ImGuiLayer();
 		pushOverlay(_imGuiLayer);
 
-		//Renderer::init(_window);
+		Renderer::init();
 	}
 
 	void Application::pushLayer(Layer* layer) {
@@ -74,7 +79,7 @@ namespace Tusk {
 			return false;
 		}
 		_minimized = false;
-		//Renderer::onWindowResize();
+		Renderer::onWindowResize(e.getWidth(), e.getHeight());
 		return false;
 	}
 

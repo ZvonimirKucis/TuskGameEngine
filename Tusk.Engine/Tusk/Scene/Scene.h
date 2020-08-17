@@ -22,10 +22,6 @@ namespace Tusk {
 		entt::registry _registry;
 		uint32_t _viewportWidth = 0, _viewportHeight = 0;
 
-
-		Ref<Shader> _shader;
-		Ref<Texture> _texture;
-
 		friend class Entity;
 	};
 }

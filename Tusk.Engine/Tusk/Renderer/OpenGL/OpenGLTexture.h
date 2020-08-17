@@ -10,26 +10,23 @@ namespace Tusk {
 	{
 	public:
 		OpenGLTexture2D(uint32_t width, uint32_t height);
-		OpenGLTexture2D(const std::string& path);
+		OpenGLTexture2D(const std::string& path, TextureType type);
 		virtual ~OpenGLTexture2D();
 
-		virtual uint32_t GetWidth() const override { return m_Width;  }
-		virtual uint32_t GetHeight() const override { return m_Height; }
-		virtual uint32_t GetRendererID() const override { return m_RendererID; }
-		
-		virtual void SetData(void* data, uint32_t size) override;
+		virtual uint32_t getWidth() const override { return _width;  }
+		virtual uint32_t getHeight() const override { return _height; }
+		virtual uint32_t getRendererID() const override { return _rendererID; }
 
-		virtual void Bind(uint32_t slot = 0) const override;
+		virtual void bind(uint32_t slot = 0) const override;
 
-		virtual bool operator==(const Texture& other) const override
-		{
-			return m_RendererID == ((OpenGLTexture2D&)other).m_RendererID;
-		}
+		virtual TextureType getType() const override { return _type; }
+		virtual std::string getPath() const override { return _path; }
+
 	private:
-		std::string m_Path;
-		uint32_t m_Width, m_Height;
-		uint32_t m_RendererID;
-		GLenum m_InternalFormat, m_DataFormat;
+		uint32_t _width, _height;
+		uint32_t _rendererID;
+		std::string _path;
+		TextureType _type;
 	};
 
 }

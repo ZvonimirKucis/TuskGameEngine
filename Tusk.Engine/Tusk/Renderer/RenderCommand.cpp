@@ -2,5 +2,5 @@
 #include "RenderCommand.h"
 
 namespace Tusk {
-	Scope<RendererAPI> RenderCommand::s_RendererAPI = RendererAPI::Create();
+	Scope<RendererAPI> RenderCommand::_rendererAPI = RendererAPI::create();
 }

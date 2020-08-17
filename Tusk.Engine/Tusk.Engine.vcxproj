@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClInclude Include="Tusk.h" />
     <ClInclude Include="Tusk\Application.h" />
+    <ClInclude Include="Tusk\Camera\SceneCamera.h" />
     <ClInclude Include="Tusk\EntryPoint.h" />
     <ClInclude Include="Tusk\Events\ApplicationEvent.h" />
     <ClInclude Include="Tusk\Events\Event.h" />
@@ -154,7 +155,6 @@
     <ClInclude Include="Tusk\GUI\ImGuiLayer.h" />
     <ClInclude Include="Tusk\Layers\Layer.h" />
     <ClInclude Include="Tusk\Layers\LayerStack.h" />
-    <ClInclude Include="Tusk\Model\Material.h" />
     <ClInclude Include="Tusk\Model\Mesh.h" />
     <ClInclude Include="Tusk\Model\Model.h" />
     <ClInclude Include="Tusk\Platform\GLFW\GLFWInput.h" />
@@ -164,7 +164,7 @@
     <ClInclude Include="Tusk\Platform\MouseButtonCodes.h" />
     <ClInclude Include="Tusk\Platform\Window.h" />
     <ClInclude Include="Tusk\Renderer\Buffer.h" />
-    <ClInclude Include="Tusk\Renderer\Camera.h" />
+    <ClInclude Include="Tusk\Camera\Camera.h" />
     <ClInclude Include="Tusk\Renderer\Framebuffer.h" />
     <ClInclude Include="Tusk\Renderer\GraphicsContext.h" />
     <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLBuffer.h" />
@@ -174,8 +174,6 @@
     <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLShader.h" />
     <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLVertexArray.h" />
-    <ClInclude Include="Tusk\Renderer\OrthographicCamera.h" />
-    <ClInclude Include="Tusk\Renderer\OrthographicCameraController.h" />
     <ClInclude Include="Tusk\Renderer\RenderCommand.h" />
     <ClInclude Include="Tusk\Renderer\Renderer.h" />
     <ClInclude Include="Tusk\Renderer\RendererAPI.h" />
@@ -193,13 +191,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tusk\Application.cpp" />
+    <ClCompile Include="Tusk\Camera\SceneCamera.cpp" />
     <ClCompile Include="Tusk\GUI\ImGuiBuild.cpp" />
     <ClCompile Include="Tusk\GUI\ImGuiLayer.cpp" />
     <ClCompile Include="Tusk\Layers\Layer.cpp" />
     <ClCompile Include="Tusk\Layers\LayerStack.cpp" />
-    <ClCompile Include="Tusk\Model\Material.cpp" />
     <ClCompile Include="Tusk\Model\Mesh.cpp" />
-    <ClCompile Include="Tusk\Model\Source.cpp" />
+    <ClCompile Include="Tusk\Model\Model.cpp" />
     <ClCompile Include="Tusk\Platform\GLFW\GLFWInput.cpp" />
     <ClCompile Include="Tusk\Platform\GLFW\GLFWWindow.cpp" />
     <ClCompile Include="Tusk\Platform\Window.cpp" />
@@ -213,8 +211,6 @@
     <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLTexture.cpp" />
     <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLVertexArray.cpp" />
-    <ClCompile Include="Tusk\Renderer\OrthographicCamera.cpp" />
-    <ClCompile Include="Tusk\Renderer\OrthographicCameraController.cpp" />
     <ClCompile Include="Tusk\Renderer\RenderCommand.cpp" />
     <ClCompile Include="Tusk\Renderer\Renderer.cpp" />
     <ClCompile Include="Tusk\Renderer\RendererAPI.cpp" />

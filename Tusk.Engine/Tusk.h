@@ -17,12 +17,13 @@
 #include "Tusk/Scene/Scene.h"
 #include "Tusk/Scene/Entity.h"
 #include "Tusk/Scene/Components.h"
+#include "Tusk/Scene/ScriptableEntity.h"
 
 #include "Tusk/Renderer/Renderer.h"
 #include "Tusk/Renderer/Shader.h"
 #include "Tusk/Renderer/Buffer.h"
 #include "Tusk/Renderer/Texture.h"
 
-#include "Tusk/Model/Mesh.h"
+#include "Tusk/Model/Model.h"
 
 #include "Tusk/EntryPoint.h"

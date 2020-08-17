@@ -1,31 +1,30 @@
 #pragma once
 
 #include "RenderCommand.h"
-
-#include "OrthographicCamera.h"
 #include "Shader.h"
+#include "Tusk/Model/Model.h"
+#include "Tusk/Camera/Camera.h"
 
 namespace Tusk {
 
-	class Renderer
-	{
+	class Renderer {
 	public:
-		static void Init();
-		static void Shutdown();
+		static void init();
+		static void shutdown();
 		
-		static void OnWindowResize(uint32_t width, uint32_t height);
+		static void onWindowResize(uint32_t width, uint32_t height);
 
-		static void BeginScene(OrthographicCamera& camera);
-		static void EndScene();
+		static void beginScene();
+		static void beginScene(const Camera& camera, const glm::mat4& transform);
+		static void endScene();
 
-		static void Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform = glm::mat4(1.0f));
-
+		static void submit(const Ref<Shader>& shader, const Ref<Model>& model, const glm::mat4& transform = glm::mat4(1.0f));
 	private:
-		struct SceneData
-		{
-			glm::mat4 ViewProjectionMatrix;
+		struct SceneData {
+			glm::mat4 projection;
+			glm::mat4 view;
 		};
 
-		static Scope<SceneData> s_SceneData;
+		static Scope<SceneData> _sceneData;
 	};
 }

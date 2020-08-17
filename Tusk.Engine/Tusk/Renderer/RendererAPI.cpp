@@ -4,7 +4,7 @@
 #include "OpenGL/OpenGLRendererAPI.h"
 
 namespace Tusk {
-	Scope<RendererAPI> RendererAPI::Create() {
+	Scope<RendererAPI> RendererAPI::create() {
 		return CreateScope<OpenGLRendererAPI>();
 	}
 }

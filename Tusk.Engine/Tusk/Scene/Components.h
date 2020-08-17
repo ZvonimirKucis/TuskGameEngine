@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../Model/Mesh.h"
-#include "../Model/Material.h"
+#include "Tusk/Model/Model.h"
+#include "Tusk/Camera/SceneCamera.h"
+#include "Tusk/Renderer/Shader.h"
 
 #include "ScriptableEntity.h"
 #include "Transform.h"
@@ -20,30 +21,27 @@ namespace Tusk {
 	};
 
 	struct TransformComponent {
-		Transform transform;
+		glm::mat4 transform{1.0f};
 
 		TransformComponent() = default;
 		TransformComponent(const TransformComponent&) = default;
-		TransformComponent(const Transform& transform)
+		TransformComponent(const glm::mat4& transform)
 			: transform(transform) {}
 
 	};
 
 	struct MeshComponent {
-		Mesh* mesh;
-		Material* material;
+		Ref<Model> model;
+		Ref<Shader> shader;
 
 		MeshComponent() = default;
 		MeshComponent(const MeshComponent&) = default;
-		MeshComponent(Mesh* mesh)
-			: mesh(mesh) {}
-		MeshComponent(Mesh* mesh, Material* material)
-			: mesh(mesh), material(material) {}
+		MeshComponent(const Ref<Model> model, const Ref<Shader> shader)
+			: model(model), shader(shader) {}
 	};
 
-	struct ScriptComponent
-	{
-		ScriptableEntity* instance = nullptr;
+	struct ScriptComponent {
+		ScriptableEntity* Instance = nullptr;
 
 		std::function<void()> instantiateFunction;
 		std::function<void()> destroyInstanceFunction;
@@ -53,10 +51,10 @@ namespace Tusk {
 		std::function<void(ScriptableEntity*, float)> onUpdateFunction;
 
 		template<typename T>
-		void Bind()
+		void bind()
 		{
-			instantiateFunction = [&]() { instance = new T(); };
-			destroyInstanceFunction = [&]() { delete (T*)instance; instance = nullptr; };
+			instantiateFunction = [&]() { Instance = new T(); };
+			destroyInstanceFunction = [&]() { delete (T*)Instance; Instance = nullptr; };
 
 			onCreateFunction = [](ScriptableEntity* instance) { ((T*)instance)->onCreate(); };
 			onDestroyFunction = [](ScriptableEntity* instance) { ((T*)instance)->onDestroy(); };
@@ -64,7 +62,11 @@ namespace Tusk {
 		}	
 	};
 
-	/*struct CameraComponent {
+	struct CameraComponent {
+		SceneCamera Camera;
 		bool primary = true;
-	};*/
+
+		CameraComponent() = default;
+		CameraComponent(const CameraComponent&) = default;
+	};
 }

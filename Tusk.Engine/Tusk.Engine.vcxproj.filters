@@ -64,9 +64,6 @@
     <ClInclude Include="Tusk\Layers\LayerStack.h">
       <Filter>Tusk\Layers</Filter>
     </ClInclude>
-    <ClInclude Include="Tusk\Model\Material.h">
-      <Filter>Tusk\Model</Filter>
-    </ClInclude>
     <ClInclude Include="Tusk\Model\Mesh.h">
       <Filter>Tusk\Model</Filter>
     </ClInclude>
@@ -92,9 +89,6 @@
       <Filter>Tusk\Platform</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Renderer\Buffer.h">
-      <Filter>Tusk\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Renderer\Camera.h">
       <Filter>Tusk\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Renderer\Framebuffer.h">
@@ -123,12 +117,6 @@
     </ClInclude>
     <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLVertexArray.h">
       <Filter>Tusk\Renderer\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Renderer\OrthographicCamera.h">
-      <Filter>Tusk\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Renderer\OrthographicCameraController.h">
-      <Filter>Tusk\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Renderer\RenderCommand.h">
       <Filter>Tusk\Renderer</Filter>
@@ -170,6 +158,10 @@
       <Filter>Tusk\Utils</Filter>
     </ClInclude>
     <ClInclude Include="tuskpch.h" />
+    <ClInclude Include="Tusk\Camera\Camera.h">
+      <Filter>Tusk\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Camera\SceneCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tusk\Application.cpp">
@@ -187,13 +179,7 @@
     <ClCompile Include="Tusk\Layers\LayerStack.cpp">
       <Filter>Tusk\Layers</Filter>
     </ClCompile>
-    <ClCompile Include="Tusk\Model\Material.cpp">
-      <Filter>Tusk\Model</Filter>
-    </ClCompile>
     <ClCompile Include="Tusk\Model\Mesh.cpp">
-      <Filter>Tusk\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Model\Source.cpp">
       <Filter>Tusk\Model</Filter>
     </ClCompile>
     <ClCompile Include="Tusk\Platform\GLFW\GLFWInput.cpp">
@@ -235,12 +221,6 @@
     <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLVertexArray.cpp">
       <Filter>Tusk\Renderer\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="Tusk\Renderer\OrthographicCamera.cpp">
-      <Filter>Tusk\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Renderer\OrthographicCameraController.cpp">
-      <Filter>Tusk\Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="Tusk\Renderer\RenderCommand.cpp">
       <Filter>Tusk\Renderer</Filter>
     </ClCompile>
@@ -269,5 +249,7 @@
       <Filter>Tusk\Utils</Filter>
     </ClCompile>
     <ClCompile Include="tuskpch.cpp" />
+    <ClCompile Include="Tusk\Model\Model.cpp" />
+    <ClCompile Include="Tusk\Camera\SceneCamera.cpp" />
   </ItemGroup>
 </Project>

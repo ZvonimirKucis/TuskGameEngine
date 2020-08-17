@@ -7,6 +7,7 @@
 #include "Layers/LayerStack.h"
 #include "Renderer/Shader.h"
 #include "GUI/ImGuiLayer.h"
+#include "Model/Model.h"
 
 namespace Tusk {
 	class Application {
@@ -29,6 +30,10 @@ namespace Tusk {
 		bool onWindowResize(WindowResizeEvent& e);
 
 	private:
+
+		Scope<Model> _model;
+		Ref<Shader> _shader;
+
 		static Application* _instance;
 
 		Ref<Window> _window;

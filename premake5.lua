@@ -63,7 +63,7 @@ project "Tusk.Engine"
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
-		"%{IncludeDir.entt}"
+		"%{IncludeDir.entt}",
 	}
 
 	links 
@@ -113,7 +113,8 @@ project "Tusk.Sandbox"
 	{
 		"Tusk.Engine/",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.entt}"
+		"%{IncludeDir.entt}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links
