@@ -8,10 +8,16 @@
 
 namespace Tusk {
 
-	OpenGLShader::OpenGLShader(const std::string& vertexPath, const std::string& fragmentPath) {
+	void OpenGLShader::loadCode(const std::string& vertexPath, const std::string& fragmentPath) {
+		Logger::Log("File constructor");
 		std::string vertexCode = readFile(vertexPath);
 		std::string fragmentCode = readFile(fragmentPath);
 
+		compile(vertexCode, fragmentCode);
+	}
+
+	void OpenGLShader::compileCode(const std::string& vertexCode, const std::string& fragmentCode) {
+		Logger::Log("Compile constructor");
 		compile(vertexCode, fragmentCode);
 	}
 

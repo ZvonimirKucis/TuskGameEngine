@@ -35,13 +35,17 @@ namespace Tusk {
 	void Renderer::endScene() {
 	}
 
+	void Renderer::submit(LightObject* lightObject, const glm::mat4& transform) {
+		lightObject->draw(_sceneData->projection, _sceneData->view, transform);
+	}
+
 	void Renderer::submit(const Ref<Shader>& shader, const Ref<Model>& model, const glm::mat4& transform) {
 		shader->bind();
 		
 		shader->setMat4("projection", _sceneData->projection);
 		shader->setMat4("view", _sceneData->view);
-		
 		shader->setMat4("model", transform);
+
 		model->draw(shader);
 	}
 

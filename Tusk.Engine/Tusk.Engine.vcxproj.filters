@@ -162,6 +162,8 @@
       <Filter>Tusk\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Camera\SceneCamera.h" />
+    <ClInclude Include="Tusk\Light\LightObject.h" />
+    <ClInclude Include="Tusk\Light\LightShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tusk\Application.cpp">
@@ -251,5 +253,7 @@
     <ClCompile Include="tuskpch.cpp" />
     <ClCompile Include="Tusk\Model\Model.cpp" />
     <ClCompile Include="Tusk\Camera\SceneCamera.cpp" />
+    <ClCompile Include="Tusk\Light\LightObjcet.cpp" />
+    <ClCompile Include="Tusk\Light\LightShader.cpp" />
   </ItemGroup>
 </Project>

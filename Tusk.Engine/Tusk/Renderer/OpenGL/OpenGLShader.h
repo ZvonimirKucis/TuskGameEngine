@@ -7,11 +7,14 @@ namespace Tusk {
 
 	class OpenGLShader : public Shader {
 	public:
-		OpenGLShader(const std::string& vertexPath, const std::string& fragmentPath);
+		OpenGLShader() {};
 		virtual ~OpenGLShader();
 
 		virtual void bind() const override;
 		virtual void unbind() const override;
+
+		virtual void loadCode(const std::string& vertexPath, const std::string& fragmentPath)  override;
+		virtual void compileCode(const std::string& vertexCode, const std::string& fragmentCode)  override;
 
 		virtual void setInt(const std::string& name, int value) override;
 		virtual void setIntArray(const std::string& name, int* values, uint32_t count) override;

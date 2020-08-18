@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Tusk/Model/Model.h"
+#include "Tusk/Light/LightObject.h"
 #include "Tusk/Camera/SceneCamera.h"
 #include "Tusk/Renderer/Shader.h"
 
@@ -50,10 +51,19 @@ namespace Tusk {
 	};
 
 	struct CameraComponent {
-		SceneCamera Camera;
+		SceneCamera camera;
 		bool primary = true;
 
 		CameraComponent() = default;
 		CameraComponent(const CameraComponent&) = default;
+	};
+
+	struct LightComponent {
+		LightObject* lightObject;
+
+		LightComponent() {
+			lightObject = new LightObject();
+		}
+		LightComponent(const LightComponent&) = default;
 	};
 }

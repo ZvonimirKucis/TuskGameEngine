@@ -36,7 +36,7 @@ namespace Tusk {
 			}
 		}
 
-		// Render
+		// Find primary camera
 		Camera* mainCamera = nullptr;
 		glm::mat4* cameraTransform = nullptr;
 		{
@@ -47,22 +47,35 @@ namespace Tusk {
 
 				if (camera.primary)
 				{
-					mainCamera = &camera.Camera;
+					mainCamera = &camera.camera;
 					cameraTransform = &transform.transform;
 					break;
 				}
 			}
 		}
 
-		if(mainCamera)
-		{
+		// Render
+		if(mainCamera) {
 			Renderer::beginScene(*mainCamera, *cameraTransform);
-			auto view = _registry.view<TransformComponent, MeshComponent>();
-			for (auto entity : view) {
-				auto [transform, mesh] = view.get<TransformComponent, MeshComponent>(entity);
-				
-				Renderer::submit(mesh.shader, mesh.model, transform.transform);
+
+			// Lights
+			if(_renderLights) {
+				auto view = _registry.view<TransformComponent, LightComponent>();
+				for (auto entity : view) {
+					auto [transform, light] = view.get<TransformComponent, LightComponent>(entity);
+					Renderer::submit(light.lightObject, transform.transform);
+				}
 			}
+
+			// Objects
+			{
+				auto view = _registry.view<TransformComponent, MeshComponent>();
+				for (auto entity : view) {
+					auto [transform, mesh] = view.get<TransformComponent, MeshComponent>(entity);
+					Renderer::submit(mesh.shader, mesh.model, transform.transform);
+				}
+			}
+
 			Renderer::endScene();
 		}
 	}
@@ -71,7 +84,7 @@ namespace Tusk {
 		auto view = _registry.view<CameraComponent>();
 		for (auto entity : view) {
 			auto& cameraComponent = view.get<CameraComponent>(entity);
-			cameraComponent.Camera.setViewportSize(width, height);
+			cameraComponent.camera.setViewportSize(width, height);
 		}
 
 	}

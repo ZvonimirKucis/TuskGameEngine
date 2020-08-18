@@ -155,6 +155,8 @@
     <ClInclude Include="Tusk\GUI\ImGuiLayer.h" />
     <ClInclude Include="Tusk\Layers\Layer.h" />
     <ClInclude Include="Tusk\Layers\LayerStack.h" />
+    <ClInclude Include="Tusk\Light\LightObject.h" />
+    <ClInclude Include="Tusk\Light\LightShader.h" />
     <ClInclude Include="Tusk\Model\Mesh.h" />
     <ClInclude Include="Tusk\Model\Model.h" />
     <ClInclude Include="Tusk\Platform\GLFW\GLFWInput.h" />
@@ -196,6 +198,8 @@
     <ClCompile Include="Tusk\GUI\ImGuiLayer.cpp" />
     <ClCompile Include="Tusk\Layers\Layer.cpp" />
     <ClCompile Include="Tusk\Layers\LayerStack.cpp" />
+    <ClCompile Include="Tusk\Light\LightObjcet.cpp" />
+    <ClCompile Include="Tusk\Light\LightShader.cpp" />
     <ClCompile Include="Tusk\Model\Mesh.cpp" />
     <ClCompile Include="Tusk\Model\Model.cpp" />
     <ClCompile Include="Tusk\Platform\GLFW\GLFWInput.cpp" />

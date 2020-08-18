@@ -4,6 +4,7 @@
 #include "Shader.h"
 #include "Tusk/Model/Model.h"
 #include "Tusk/Camera/Camera.h"
+#include "Tusk/Light/LightObject.h"
 
 namespace Tusk {
 
@@ -18,6 +19,7 @@ namespace Tusk {
 		static void beginScene(const Camera& camera, const glm::mat4& transform);
 		static void endScene();
 
+		static void submit(LightObject* lightObject, const glm::mat4& transform = glm::mat4(1.0f));
 		static void submit(const Ref<Shader>& shader, const Ref<Model>& model, const glm::mat4& transform = glm::mat4(1.0f));
 	private:
 		struct SceneData {

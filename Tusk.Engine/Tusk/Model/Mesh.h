@@ -4,7 +4,6 @@
 #include "Tusk/Renderer/VertexArray.h"
 #include "Tusk/Renderer/Shader.h"
 #include "Tusk/Renderer/Texture.h"
-#include "Tusk/Renderer/RenderCommand.h"
 
 namespace Tusk {
 
