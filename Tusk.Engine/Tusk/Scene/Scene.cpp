@@ -27,39 +27,13 @@ namespace Tusk {
 			auto view = _registry.view<ScriptComponent>();
 			for (auto entity : view) {
 				auto& script = view.get<ScriptComponent>(entity);
-				if (script.Instance == nullptr) {
-
-					std::cout << "Created" << std::endl;
-					std::cout << script.Instance << std::endl;
-
-					script.instantiateFunction();
-					std::cout << "Created 2" << std::endl;
-					std::cout << script.Instance << std::endl;
-					script.Instance->setEntity(Entity{ entity, this });
-					std::cout << "Created 3" << std::endl;
-
-					if (script.onCreateFunction)
-						script.onCreateFunction(script.Instance);
+				if (script.instance->_entity == nullptr) {
+					script.instance->_entity = new Entity(entity, this);
+					script.instance->onCreate();
 				}
-
-				if (script.onUpdateFunction)
-					script.onUpdateFunction(script.Instance, deltaTime);
+				script.instance->onUpdate(deltaTime);
 				
 			}
-			/*_registry.view<ScriptComponent>().each([=](auto entity, auto& nsc)
-				{
-					if (!nsc.instance)
-					{
-						nsc.instantiateFunction();
-						nsc.instance->_entity = Entity{ entity, this };
-
-						if (nsc.onCreateFunction)
-							nsc.onCreateFunction(nsc.instance);
-					}
-
-					if (nsc.onUpdateFunction)
-						nsc.onUpdateFunction(nsc.instance, deltaTime);
-				});*/
 		}
 
 		// Render

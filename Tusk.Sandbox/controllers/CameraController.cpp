@@ -15,7 +15,7 @@ namespace Tusk {
 
 	void CameraController::onUpdate(float deltaTime) {
 		auto& transform = getComponent<TransformComponent>().transform;
-		float speed = 5.0f;
+		float speed = 15.0f;
 
 		if (Input::isKeyPressed(TUSK_KEY_A))
 			transform[3][0] -= speed * deltaTime;

@@ -4,8 +4,8 @@
 namespace Tusk {
 	class ModelController : public ScriptableEntity {
 	public:
-		void onCreate();
-		void onDestroy();
-		void onUpdate(float deltaTime);
+		virtual void onCreate() override;
+		virtual void onDestroy() override;
+		virtual void onUpdate(float deltaTime) override;
 	};
 }

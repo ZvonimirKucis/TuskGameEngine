@@ -7,7 +7,7 @@ namespace Tusk {
 
 	void ModelController::onCreate() {
 		auto& transform = getComponent<Tusk::TransformComponent>().transform;
-		transform[3][2] = -10.0f;
+		transform[3][2] = -30.0f;
 	}
 
 	void ModelController::onDestroy() {

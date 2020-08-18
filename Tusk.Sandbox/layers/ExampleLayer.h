@@ -19,15 +19,14 @@ public:
 
 		_camera = _activeScene->createEntity("camera");
 		_camera.addComponent<Tusk::CameraComponent>();
-		//_camera.addComponent<Tusk::ScriptComponent>().bind<Tusk::CameraController>();
+		_camera.addComponent<Tusk::ScriptComponent>().bind<Tusk::CameraController>();
 		_activeScene->onViewportResize(Tusk::Application::get().getWindow().getWidth(), Tusk::Application::get().getWindow().getHeight());
 
 		_modelEntity = _activeScene->createEntity("backpack");
 		_modelEntity.addComponent<Tusk::MeshComponent>(_backpackModel, _modelShader);
-		//_modelEntityTest.addComponent<Tusk::ScriptComponent>().bind<Tusk::ModelController>();
+		_modelEntity.addComponent<Tusk::ScriptComponent>().bind<Tusk::ModelController>();
 		auto& transform = _modelEntity.getComponent<Tusk::TransformComponent>().transform;
 		transform[3][0] = 5.0f;
-		transform[3][2] = -10.0f;
 
 		_modelEntityTest = _activeScene->createEntity("backpack_test");
 		_modelEntityTest.addComponent<Tusk::MeshComponent>(_backpackModel, _modelShader);

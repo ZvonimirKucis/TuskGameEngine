@@ -41,25 +41,12 @@ namespace Tusk {
 	};
 
 	struct ScriptComponent {
-		ScriptableEntity* Instance = nullptr;
-
-		std::function<void()> instantiateFunction;
-		std::function<void()> destroyInstanceFunction;
-
-		std::function<void(ScriptableEntity*)> onCreateFunction;
-		std::function<void(ScriptableEntity*)> onDestroyFunction;
-		std::function<void(ScriptableEntity*, float)> onUpdateFunction;
+		ScriptableEntity* instance = nullptr;
 
 		template<typename T>
-		void bind()
-		{
-			instantiateFunction = [&]() { Instance = new T(); };
-			destroyInstanceFunction = [&]() { delete (T*)Instance; Instance = nullptr; };
-
-			onCreateFunction = [](ScriptableEntity* instance) { ((T*)instance)->onCreate(); };
-			onDestroyFunction = [](ScriptableEntity* instance) { ((T*)instance)->onDestroy(); };
-			onUpdateFunction = [](ScriptableEntity* instance, float deltaTime) { ((T*)instance)->onUpdate(deltaTime); };
-		}	
+		void bind() {
+			instance = new T();
+		}
 	};
 
 	struct CameraComponent {
