@@ -6,7 +6,7 @@ namespace Tusk {
 
 	class OpenGLVertexBuffer : public VertexBuffer {
 	public:
-		OpenGLVertexBuffer(std::vector<Vertex> vertices);
+		OpenGLVertexBuffer(const std::vector<Vertex>& vertices);
 		virtual ~OpenGLVertexBuffer();
 
 		virtual void bind() const override;
@@ -18,7 +18,7 @@ namespace Tusk {
 
 	class OpenGLIndexBuffer : public IndexBuffer {
 	public:
-		OpenGLIndexBuffer(std::vector <uint32_t> indices);
+		OpenGLIndexBuffer(const std::vector<uint32_t>& indices);
 		virtual ~OpenGLIndexBuffer();
 
 		virtual void bind() const override;

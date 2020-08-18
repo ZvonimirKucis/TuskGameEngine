@@ -3,18 +3,14 @@
 #include "Application.h"
 #include "Renderer/Renderer.h"
 
-#include <glad/glad.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 
 namespace Tusk {
 	Application* Application::_instance = nullptr;
 
-	Application::Application() {
+	Application::Application(const std::string& name, uint32_t width, uint32_t height) {
 		_instance = this;
 
-		_window = Window::create();
+		_window = Window::create(WindowCreateInfo(name, width, height));
 		_window->setEventCallback(std::bind(&Application::onEvent, this, std::placeholders::_1));
 		_window->setVSync(true);
 
@@ -59,7 +55,7 @@ namespace Tusk {
 
 				_imGuiLayer->begin();
 				for (Layer* layer : _layerStack) {
-					layer->onImGuiRender();
+					layer->onImGuiRender(deltaTime);
 				}
 				_imGuiLayer->end();
 			}

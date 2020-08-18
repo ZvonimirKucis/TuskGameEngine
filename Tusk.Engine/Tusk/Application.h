@@ -5,14 +5,14 @@
 #include "Events/ApplicationEvent.h"
 #include "Platform/Window.h"
 #include "Layers/LayerStack.h"
-#include "Renderer/Shader.h"
 #include "GUI/ImGuiLayer.h"
-#include "Model/Model.h"
+
+int main(int argc, char** argv);
 
 namespace Tusk {
 	class Application {
 	public:
-		Application();
+		Application(const std::string& name = "Tusk Demo", uint32_t width = 1280, uint32_t height = 720);
 		virtual ~Application();
 
 		void run();
@@ -30,12 +30,6 @@ namespace Tusk {
 		bool onWindowResize(WindowResizeEvent& e);
 
 	private:
-
-		Scope<Model> _model;
-		Ref<Shader> _shader;
-
-		static Application* _instance;
-
 		Ref<Window> _window;
 		ImGuiLayer* _imGuiLayer;
 		bool _running = true;
@@ -44,6 +38,10 @@ namespace Tusk {
 		std::chrono::system_clock::time_point _lastFrameTime = std::chrono::system_clock::now();
 
 		LayerStack _layerStack;
+
+	private:
+		friend int ::main(int argc, char** argv);
+		static Application* _instance;
 	};
 
 	Application* createApplication();

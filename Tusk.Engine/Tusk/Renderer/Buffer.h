@@ -20,7 +20,7 @@ namespace Tusk {
 		virtual void bind() const = 0;
 		virtual void unbind() const = 0;
 
-		static Ref<VertexBuffer> create(std::vector<Vertex> vertices);
+		static Ref<VertexBuffer> create(const std::vector<Vertex>& vertices);
 	};
 
 	class IndexBuffer {
@@ -32,7 +32,7 @@ namespace Tusk {
 
 		virtual uint32_t getCount() const = 0;
 
-		static Ref<IndexBuffer> create(std::vector<uint32_t> indices);
+		static Ref<IndexBuffer> create(const std::vector<uint32_t>& indices);
 	};
 
 }

@@ -25,5 +25,3 @@
 #include "Tusk/Renderer/Texture.h"
 
 #include "Tusk/Model/Model.h"
-
-#include "Tusk/EntryPoint.h"

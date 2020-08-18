@@ -132,12 +132,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="controllers\CameraController.cpp" />
+    <ClCompile Include="controllers\ModelController.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tusk.Engine\Tusk.Engine.vcxproj">
       <Project>{90000018-FCB5-780D-85AA-72E4F15E6F11}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="controllers\CameraController.h" />
+    <ClInclude Include="controllers\ModelController.h" />
+    <ClInclude Include="layers\ExampleLayer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

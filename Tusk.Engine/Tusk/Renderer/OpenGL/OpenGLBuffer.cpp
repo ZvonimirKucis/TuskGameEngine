@@ -5,7 +5,7 @@
 
 namespace Tusk {
 
-	OpenGLVertexBuffer::OpenGLVertexBuffer(std::vector<Vertex> vertices) {
+	OpenGLVertexBuffer::OpenGLVertexBuffer(const std::vector<Vertex>& vertices) {
 		glCreateBuffers(1, &_rendererID);
 		glBindBuffer(GL_ARRAY_BUFFER, _rendererID);
 		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
@@ -25,7 +25,7 @@ namespace Tusk {
 
 
 
-	OpenGLIndexBuffer::OpenGLIndexBuffer(std::vector <uint32_t> indices) {
+	OpenGLIndexBuffer::OpenGLIndexBuffer(const std::vector<uint32_t>& indices) {
 		_count = (uint32_t) indices.size();
 		glCreateBuffers(1, &_rendererID); 
 		glBindBuffer(GL_ARRAY_BUFFER, _rendererID);
