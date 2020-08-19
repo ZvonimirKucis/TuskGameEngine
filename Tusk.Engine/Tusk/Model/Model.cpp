@@ -1,5 +1,7 @@
 #include "tuskpch.h"
 
+#include <glm/glm.hpp>
+
 #include "Model.h"
 
 namespace Tusk {
@@ -15,6 +17,8 @@ namespace Tusk {
 
 	void Model::loadModel(const std::string& path) {
         Assimp::Importer importer;
+        importer.SetPropertyInteger(AI_CONFIG_PP_PTV_NORMALIZE, 1);
+       
         const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals | aiProcess_CalcTangentSpace);
         
         if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)

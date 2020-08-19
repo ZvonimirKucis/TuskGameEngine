@@ -18,7 +18,10 @@ namespace Tusk {
 
 		void renderLightObjects(bool value) { _renderLights = value; };
 
+		void startScene();
 		void onUpdate(float deltaTime);
+		void endScene();
+
 		void onViewportResize(uint32_t width, uint32_t height);
 	private:
 		entt::registry _registry;

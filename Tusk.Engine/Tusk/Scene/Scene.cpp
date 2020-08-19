@@ -20,17 +20,25 @@ namespace Tusk {
 		return entity;
 	}
 
-	void Scene::onUpdate(float deltaTime) {
-
-		// Scripts
+	void Scene::startScene() {
+		// Create scripts
 		{
 			auto view = _registry.view<ScriptComponent>();
 			for (auto entity : view) {
 				auto& script = view.get<ScriptComponent>(entity);
-				if (script.instance->_entity == nullptr) {
-					script.instance->_entity = new Entity(entity, this);
-					script.instance->onCreate();
-				}
+				script.instance = script.instantiateScript();
+				script.instance->_entity = Entity(entity, this);
+				script.instance->onCreate();
+			}
+		}
+	}
+
+	void Scene::onUpdate(float deltaTime) {
+		// Update scripts
+		{
+			auto view = _registry.view<ScriptComponent>();
+			for (auto entity : view) {
+				auto& script = view.get<ScriptComponent>(entity);
 				script.instance->onUpdate(deltaTime);
 				
 			}
@@ -43,12 +51,12 @@ namespace Tusk {
 			auto view = _registry.view<TransformComponent, CameraComponent>();
 			for (auto entity : view)
 			{
-				auto& [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
+				auto [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
 
 				if (camera.primary)
 				{
 					mainCamera = &camera.camera;
-					cameraTransform = &transform.transform;
+					cameraTransform = &transform.transform.getModelMatrix();
 					break;
 				}
 			}
@@ -63,7 +71,7 @@ namespace Tusk {
 				auto view = _registry.view<TransformComponent, LightComponent>();
 				for (auto entity : view) {
 					auto [transform, light] = view.get<TransformComponent, LightComponent>(entity);
-					Renderer::submit(light.lightObject, transform.transform);
+					Renderer::submit(light.lightObject, transform.transform.getModelMatrix());
 				}
 			}
 
@@ -72,13 +80,26 @@ namespace Tusk {
 				auto view = _registry.view<TransformComponent, MeshComponent>();
 				for (auto entity : view) {
 					auto [transform, mesh] = view.get<TransformComponent, MeshComponent>(entity);
-					Renderer::submit(mesh.shader, mesh.model, transform.transform);
+					Renderer::submit(mesh.shader, mesh.model, transform.transform.getModelMatrix());
 				}
 			}
 
 			Renderer::endScene();
 		}
 	}
+
+	void Scene::endScene() {
+		// Destroy scripts
+		{
+			auto view = _registry.view<ScriptComponent>();
+			for (auto entity : view) {
+				auto& script = view.get<ScriptComponent>(entity);
+				script.instance->onDestroy();
+				script.destroyScript(&script);
+			}
+		}
+	}
+
 
 	void Scene::onViewportResize(uint32_t width, uint32_t height) {
 		auto view = _registry.view<CameraComponent>();

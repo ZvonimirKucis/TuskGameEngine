@@ -5,17 +5,18 @@
 namespace Tusk {
 	class ScriptableEntity {
 	public:
-		virtual void onCreate() = 0;;
-		virtual void onDestroy() = 0;
-		virtual void onUpdate(float deltaTime) = 0;
-
 		template<typename T>
 		T& getComponent() {
-			return _entity->getComponent<T>();
+			return _entity.getComponent<T>();
 		}
 
+	protected:
+		virtual void onCreate() {}
+		virtual void onDestroy() {}
+		virtual void onUpdate(float deltaTime) {}
+
 	private:
-		Entity* _entity = nullptr;
+		Entity _entity;
 		friend class Scene;
 	};
 }

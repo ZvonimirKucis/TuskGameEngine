@@ -22,31 +22,22 @@ namespace Tusk {
 		_vertexArray = VertexArray::create();
 
 		std::vector<Vertex> vertices = {
-			Vertex{glm::vec3{0.0f, 0.0f, 0.0f}},
-			Vertex{glm::vec3{0.0f, 0.0f, 1.0f}},
-			Vertex{glm::vec3{1.0f, 0.0f, 0.0f}},
-			Vertex{glm::vec3{1.0f, 0.0f, 1.0f}},
-			Vertex{glm::vec3{1.0f, 1.0f, 0.0f}},
-			Vertex{glm::vec3{1.0f, 1.0f, 1.0f}},
-			Vertex{glm::vec3{0.0f, 1.0f, 0.0f}},
-			Vertex{glm::vec3{0.0f, 1.0f, 1.0f}},
+			Vertex{glm::vec3{0.1f, -0.1f, -0.1f}},
+			Vertex{glm::vec3{0.1f, -0.1f, 0.1f}},
+			Vertex{glm::vec3{-0.1f, -0.1f, 0.1f}},
+			Vertex{glm::vec3{-0.1f, -0.1f, -0.1f}},
+			Vertex{glm::vec3{0.1f, 0.1f, -0.1f}},
+			Vertex{glm::vec3{0.1f, 0.1f, 0.1f}},
+			Vertex{glm::vec3{-0.1f, 0.1f, 0.1f}},
+			Vertex{glm::vec3{-0.1f, 0.1f, -0.1f}},
 		};
 
 		std::vector<uint32_t> indices = {
-			1, 3, 2,
-			3, 4, 2,
-			3, 5, 4,
-			5, 6, 4,
-			5, 7, 6,
-			7, 8, 6,
-			7, 1, 8,
-			1, 2, 8,
-			1, 5, 3,
-			1, 7, 5,
-			2, 4, 6,
-			2, 6, 8
+			1, 2, 3, 7, 6, 5, 4, 5, 1,
+			5, 6, 2, 2, 6, 7, 0, 3, 7,
+			0, 1, 3, 4, 7, 5, 0, 4, 1,
+			1, 5, 2, 3, 2, 7, 4, 0, 7
 		};
-
 
 		Ref<VertexBuffer> vertexBuffer = VertexBuffer::create(vertices);
 		Ref<IndexBuffer> indexBuffer = IndexBuffer::create(indices);

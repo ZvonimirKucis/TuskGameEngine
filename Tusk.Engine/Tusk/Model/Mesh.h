@@ -13,13 +13,17 @@ namespace Tusk {
 		~Mesh();
 
 		void draw(Ref<Shader> shader);
+
 	private:
 		void setupMesh(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices);
 
 	private:
+		std::vector<Vertex> _vertices;
 		Ref<VertexArray> _vertexArray;
 
 		std::vector<Ref<Texture2D>> _textures;
+
+		friend class Model;
 	};
 
 }

@@ -22,11 +22,11 @@ namespace Tusk {
 	};
 
 	struct TransformComponent {
-		glm::mat4 transform{1.0f};
+		Transform transform;
 
 		TransformComponent() = default;
 		TransformComponent(const TransformComponent&) = default;
-		TransformComponent(const glm::mat4& transform)
+		TransformComponent(const Transform& transform)
 			: transform(transform) {}
 
 	};
@@ -44,9 +44,13 @@ namespace Tusk {
 	struct ScriptComponent {
 		ScriptableEntity* instance = nullptr;
 
+		ScriptableEntity* (*instantiateScript)();
+		void (*destroyScript)(ScriptComponent*);
+
 		template<typename T>
 		void bind() {
-			instance = new T();
+			instantiateScript = []() {return static_cast<ScriptableEntity*> (new T()); };
+			destroyScript = [](ScriptComponent* sc) {delete sc->instance; };
 		}
 	};
 

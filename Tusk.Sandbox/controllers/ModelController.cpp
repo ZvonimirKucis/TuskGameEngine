@@ -6,8 +6,6 @@
 namespace Tusk {
 
 	void ModelController::onCreate() {
-		auto& transform = getComponent<Tusk::TransformComponent>().transform;
-		transform[3][2] = -30.0f;
 	}
 
 	void ModelController::onDestroy() {
@@ -15,6 +13,8 @@ namespace Tusk {
 
 	void ModelController::onUpdate(float deltaTime) {
 		auto& transform = getComponent<Tusk::TransformComponent>().transform;
-		transform = glm::rotate(transform, deltaTime * glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		auto rot = transform.getRotation();
+		rot.y -= deltaTime * 90.0f;
+		transform.setRotation(rot);
 	}
 }

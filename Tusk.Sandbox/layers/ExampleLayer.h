@@ -6,9 +6,6 @@
 #include "../controllers/ModelController.h"
 #include "../controllers/CameraController.h"
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-
 
 class ExampleLayer : public Tusk::Layer {
 public:
@@ -23,11 +20,8 @@ public:
 
 		_lightEntity = _activeScene->createEntity("point light");
 		_lightEntity.addComponent<Tusk::LightComponent>();
-		_lightEntity.addComponent<Tusk::ScriptComponent>().bind<Tusk::ModelController>();
 		auto& lightTransform = _lightEntity.getComponent<Tusk::TransformComponent>().transform;
-		lightTransform[3][0] = -10.0f;
-		lightTransform[3][2] = -15.0f;
-		lightTransform = glm::rotate(lightTransform, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 1.0f));
+		lightTransform.setPosition(glm::vec3(0.0f, 0.0f, -10.0f));
 
 		_cameraEntity = _activeScene->createEntity("camera");
 		_cameraEntity.addComponent<Tusk::CameraComponent>();
@@ -38,13 +32,17 @@ public:
 		_modelEntity.addComponent<Tusk::MeshComponent>(_backpackModel, _modelShader);
 		_modelEntity.addComponent<Tusk::ScriptComponent>().bind<Tusk::ModelController>();
 		auto& transform = _modelEntity.getComponent<Tusk::TransformComponent>().transform;
-		transform[3][0] = 5.0f;
+		transform.setPosition(glm::vec3(-5.0f, 0.0f, -20.0f));
+		transform.setScale(1.0f);
 
 		_modelEntityTest = _activeScene->createEntity("backpack_test");
 		_modelEntityTest.addComponent<Tusk::MeshComponent>(_backpackModel, _modelShader);
 		_modelEntityTest.addComponent<Tusk::ScriptComponent>().bind<Tusk::ModelController>();
-		auto& transform2 = _modelEntityTest.getComponent<Tusk::TransformComponent>().transform;
-		transform2[3][0] = -5.0f;
+		auto& transformTest = _modelEntityTest.getComponent<Tusk::TransformComponent>().transform;
+		transformTest.setPosition(glm::vec3(5.0f, 0.0f, -20.0f));
+		transformTest.setScale(0.8f);
+
+		_activeScene->startScene();
 	}
 
 	void onUpdate(float deltaTime) override {
@@ -65,6 +63,7 @@ public:
 	}
 
 	void onDetach() override {
+		_activeScene->endScene();
 	}
 
 private:
