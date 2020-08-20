@@ -18,10 +18,14 @@ public:
 		_activeScene = Tusk::CreateScope<Tusk::Scene>();
 		_activeScene->renderLightObjects(true);
 
-		_lightEntity = _activeScene->createEntity("point light");
-		_lightEntity.addComponent<Tusk::LightComponent>();
-		auto& lightTransform = _lightEntity.getComponent<Tusk::TransformComponent>().transform;
-		lightTransform.setPosition(glm::vec3(0.0f, 0.0f, -10.0f));
+		Tusk::DirectionalLight lightData = {};
+		lightData.direction = glm::vec3(-2.0f, -3.0f, -4.0f);
+		lightData.ambient = glm::vec3(0.2f, 0.2f, 0.2f);
+		lightData.diffuse = glm::vec3(0.5f, 0.5f, 0.5f);
+		lightData.specular = glm::vec3(1.0f, 1.0f, 1.0f);
+
+		_lightEntity = _activeScene->createEntity("directional light");
+		_lightEntity.addComponent<Tusk::DirectionalLightComponent>(lightData);
 
 		_cameraEntity = _activeScene->createEntity("camera");
 		_cameraEntity.addComponent<Tusk::CameraComponent>();

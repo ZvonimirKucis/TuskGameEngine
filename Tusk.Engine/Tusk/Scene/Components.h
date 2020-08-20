@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Tusk/Model/Model.h"
+#include "Tusk/Light/DirectionalLight.h"
 #include "Tusk/Light/LightObject.h"
 #include "Tusk/Camera/SceneCamera.h"
 #include "Tusk/Renderer/Shader.h"
@@ -62,12 +63,24 @@ namespace Tusk {
 		CameraComponent(const CameraComponent&) = default;
 	};
 
-	struct LightComponent {
-		LightObject* lightObject;
+	struct PointLightComponent {
+		LightObject lightObject;
 
-		LightComponent() {
-			lightObject = new LightObject();
+		PointLightComponent() = default;
+		PointLightComponent(const PointLightComponent&) = default;
+
+		LightObject* getRef() {
+			return &lightObject;
 		}
-		LightComponent(const LightComponent&) = default;
+	};
+
+	struct DirectionalLightComponent {
+		DirectionalLight lightData;
+
+		DirectionalLightComponent() = default;
+		DirectionalLightComponent(const DirectionalLightComponent&) = default;
+		DirectionalLightComponent(const DirectionalLight& lightData)
+			:lightData(lightData) {}
+		
 	};
 }

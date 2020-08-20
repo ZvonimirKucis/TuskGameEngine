@@ -1,7 +1,9 @@
 #pragma once
 
-#include "../Renderer/Shader.h"
-#include "../Renderer/Texture.h"
+#include "Tusk/Renderer/Shader.h"
+#include "Tusk/Renderer/Texture.h"
+
+#include "Tusk/Light/DirectionalLight.h"
 
 #include <entt.hpp>
 
@@ -27,6 +29,8 @@ namespace Tusk {
 		entt::registry _registry;
 		uint32_t _viewportWidth = 0, _viewportHeight = 0;
 		bool _renderLights = true;
+
+		DirectionalLight _lightData;
 
 		friend class Entity;
 	};

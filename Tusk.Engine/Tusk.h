@@ -24,4 +24,6 @@
 #include "Tusk/Renderer/Buffer.h"
 #include "Tusk/Renderer/Texture.h"
 
+#include "Tusk/Light/DirectionalLight.h"
+
 #include "Tusk/Model/Model.h"

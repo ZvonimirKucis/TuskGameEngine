@@ -155,6 +155,7 @@
     <ClInclude Include="Tusk\GUI\ImGuiLayer.h" />
     <ClInclude Include="Tusk\Layers\Layer.h" />
     <ClInclude Include="Tusk\Layers\LayerStack.h" />
+    <ClInclude Include="Tusk\Light\DirectionalLight.h" />
     <ClInclude Include="Tusk\Light\LightObject.h" />
     <ClInclude Include="Tusk\Light\LightShader.h" />
     <ClInclude Include="Tusk\Model\Mesh.h" />

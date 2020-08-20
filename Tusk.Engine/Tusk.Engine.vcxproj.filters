@@ -164,6 +164,7 @@
     <ClInclude Include="Tusk\Camera\SceneCamera.h" />
     <ClInclude Include="Tusk\Light\LightObject.h" />
     <ClInclude Include="Tusk\Light\LightShader.h" />
+    <ClInclude Include="Tusk\Light\DirectionalLight.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tusk\Application.cpp">

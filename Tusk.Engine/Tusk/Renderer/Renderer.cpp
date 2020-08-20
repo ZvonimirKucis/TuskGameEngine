@@ -24,12 +24,13 @@ namespace Tusk {
 		RenderCommand::clear();
 	}
 
-	void Renderer::beginScene(const Camera& camera, const glm::mat4& transform) {
+	void Renderer::beginScene(const Camera& camera, const glm::mat4& transform, const DirectionalLight& lighData) {
 		RenderCommand::setClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		RenderCommand::clear();
 
 		_sceneData->projection = camera.getProjection();
 		_sceneData->view = glm::inverse(transform);
+		_sceneData->lightData = lighData;
 	}
 
 	void Renderer::endScene() {
@@ -45,8 +46,12 @@ namespace Tusk {
 		shader->setMat4("projection", _sceneData->projection);
 		shader->setMat4("view", _sceneData->view);
 		shader->setMat4("model", transform);
-		shader->setFloat3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
-		shader->setFloat3("lightPos", glm::vec3(0.0f, 0.0f, -10.0f));
+
+
+		shader->setFloat3("dirLight.direction",_sceneData->lightData.direction);
+		shader->setFloat3("dirLight.ambient", _sceneData->lightData.ambient);
+		shader->setFloat3("dirLight.diffuse", _sceneData->lightData.diffuse);
+		shader->setFloat3("dirLight.specular", _sceneData->lightData.specular);
 
 		model->draw(shader);
 	}

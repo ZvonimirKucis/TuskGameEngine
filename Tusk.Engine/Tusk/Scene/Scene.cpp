@@ -31,6 +31,16 @@ namespace Tusk {
 				script.instance->onCreate();
 			}
 		}
+
+		// Get directional light data
+		{
+			auto view = _registry.view<DirectionalLightComponent>();
+			for (auto entity : view) {
+				auto& light = view.get<DirectionalLightComponent>(entity);
+				_lightData = light.lightData;
+				break;
+			}
+		}
 	}
 
 	void Scene::onUpdate(float deltaTime) {
@@ -64,14 +74,14 @@ namespace Tusk {
 
 		// Render
 		if(mainCamera) {
-			Renderer::beginScene(*mainCamera, *cameraTransform);
+			Renderer::beginScene(*mainCamera, *cameraTransform, _lightData);
 
 			// Lights
 			if(_renderLights) {
-				auto view = _registry.view<TransformComponent, LightComponent>();
+				auto view = _registry.view<TransformComponent, PointLightComponent>();
 				for (auto entity : view) {
-					auto [transform, light] = view.get<TransformComponent, LightComponent>(entity);
-					Renderer::submit(light.lightObject, transform.transform.getModelMatrix());
+					auto [transform, light] = view.get<TransformComponent, PointLightComponent>(entity);
+					Renderer::submit(light.getRef(), transform.transform.getModelMatrix());
 				}
 			}
 
