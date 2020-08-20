@@ -198,7 +198,7 @@
     <ClCompile Include="Tusk\GUI\ImGuiLayer.cpp" />
     <ClCompile Include="Tusk\Layers\Layer.cpp" />
     <ClCompile Include="Tusk\Layers\LayerStack.cpp" />
-    <ClCompile Include="Tusk\Light\LightObjcet.cpp" />
+    <ClCompile Include="Tusk\Light\LightObject.cpp" />
     <ClCompile Include="Tusk\Light\LightShader.cpp" />
     <ClCompile Include="Tusk\Model\Mesh.cpp" />
     <ClCompile Include="Tusk\Model\Model.cpp" />

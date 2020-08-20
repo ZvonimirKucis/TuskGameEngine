@@ -45,6 +45,8 @@ namespace Tusk {
 		shader->setMat4("projection", _sceneData->projection);
 		shader->setMat4("view", _sceneData->view);
 		shader->setMat4("model", transform);
+		shader->setFloat3("lightColor", glm::vec3(1.0f, 1.0f, 1.0f));
+		shader->setFloat3("lightPos", glm::vec3(0.0f, 0.0f, -10.0f));
 
 		model->draw(shader);
 	}

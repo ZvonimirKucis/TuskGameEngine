@@ -51,14 +51,14 @@ namespace Tusk {
 			if (!_minimized) {
 				for (Layer* layer : _layerStack) {
 					layer->onUpdate(deltaTime);
-				}
-
-				_imGuiLayer->begin();
-				for (Layer* layer : _layerStack) {
-					layer->onImGuiRender(deltaTime);
-				}
-				_imGuiLayer->end();
+				} 
 			}
+
+			_imGuiLayer->begin();
+			for (Layer* layer : _layerStack) {
+				layer->onImGuiRender(deltaTime);
+			}
+			_imGuiLayer->end();
 
 			_window->onUpdate();
 		}

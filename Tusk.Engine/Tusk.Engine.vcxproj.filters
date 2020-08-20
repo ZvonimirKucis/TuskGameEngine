@@ -253,7 +253,7 @@
     <ClCompile Include="tuskpch.cpp" />
     <ClCompile Include="Tusk\Model\Model.cpp" />
     <ClCompile Include="Tusk\Camera\SceneCamera.cpp" />
-    <ClCompile Include="Tusk\Light\LightObjcet.cpp" />
     <ClCompile Include="Tusk\Light\LightShader.cpp" />
+    <ClCompile Include="Tusk\Light\LightObject.cpp" />
   </ItemGroup>
 </Project>

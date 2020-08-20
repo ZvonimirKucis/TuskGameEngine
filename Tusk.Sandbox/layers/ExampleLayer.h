@@ -13,7 +13,7 @@ public:
 
 	void onAttach() override {
 		_backpackModel = Tusk::CreateRef<Tusk::Model>("assets/objects/backpack/backpack.obj");
-		_modelShader = Tusk::Shader::load("assets/shaders/model_loading.vs", "assets/shaders/model_loading.fs");
+		_modelShader = Tusk::Shader::load("assets/shaders/default.vs", "assets/shaders/default.fs");
 		
 		_activeScene = Tusk::CreateScope<Tusk::Scene>();
 		_activeScene->renderLightObjects(true);
@@ -32,14 +32,14 @@ public:
 		_modelEntity.addComponent<Tusk::MeshComponent>(_backpackModel, _modelShader);
 		_modelEntity.addComponent<Tusk::ScriptComponent>().bind<Tusk::ModelController>();
 		auto& transform = _modelEntity.getComponent<Tusk::TransformComponent>().transform;
-		transform.setPosition(glm::vec3(-5.0f, 0.0f, -20.0f));
+		transform.setPosition(glm::vec3(-5.0f, 0.0f, -10.0f));
 		transform.setScale(1.0f);
 
 		_modelEntityTest = _activeScene->createEntity("backpack_test");
 		_modelEntityTest.addComponent<Tusk::MeshComponent>(_backpackModel, _modelShader);
 		_modelEntityTest.addComponent<Tusk::ScriptComponent>().bind<Tusk::ModelController>();
 		auto& transformTest = _modelEntityTest.getComponent<Tusk::TransformComponent>().transform;
-		transformTest.setPosition(glm::vec3(5.0f, 0.0f, -20.0f));
+		transformTest.setPosition(glm::vec3(5.0f, 0.0f, -10.0f));
 		transformTest.setScale(0.8f);
 
 		_activeScene->startScene();
@@ -58,6 +58,8 @@ public:
 	void onEvent(Tusk::Event& event) override {
 		if (event.getEventType() == Tusk::EventType::WindowResize) {
 			Tusk::WindowResizeEvent& e = (Tusk::WindowResizeEvent&)event;
+			if (e.getWidth() == 0 || e.getHeight() == 0)
+				return;
 			_activeScene->onViewportResize(e.getWidth(), e.getHeight());
 		}
 	}
