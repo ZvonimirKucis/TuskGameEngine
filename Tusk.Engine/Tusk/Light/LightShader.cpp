@@ -4,7 +4,7 @@
 
 namespace Tusk {
 
-	char* vertexSrc = R"(
+	char* lightVertexSrc = R"(
 			#version 330 core
 			layout (location = 0) in vec3 aPos;
 			
@@ -18,13 +18,13 @@ namespace Tusk {
 			}
 		)";
 
-	char* fragmentSrc = R"(
+	char* lightFragmentSrc = R"(
 			#version 330 core
 			out vec4 FragColor;
 			
 			void main()
 			{
-			    FragColor = vec4(1.0); // set all 4 vector values to 1.0
+			    FragColor = vec4(1.0);
 			}
 		)";
 
@@ -33,7 +33,7 @@ namespace Tusk {
 	}
 
 	void LightShader::compileShader() {
-		_shader = Shader::compile(vertexSrc, fragmentSrc);
+		_shader = Shader::compile(lightVertexSrc, lightFragmentSrc);
 	}
 
 	void LightShader::setShaderUniforms(const glm::mat4& projection, const glm::mat4& view, const glm::mat4& transform) {

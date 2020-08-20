@@ -14,9 +14,22 @@ public:
 	void onAttach() override {
 		_backpackModel = Tusk::CreateRef<Tusk::Model>("assets/objects/backpack/backpack.obj");
 		_modelShader = Tusk::Shader::load("assets/shaders/default.vs", "assets/shaders/default.fs");
+		_envMappingShader = Tusk::Shader::load("assets/shaders/default_env_mapping.vs", "assets/shaders/default_env_mapping.fs");
 		
+		std::vector<std::string> faces = {
+			"assets/skybox/right.jpg",
+			"assets/skybox/left.jpg",
+			"assets/skybox/top.jpg",
+			"assets/skybox/bottom.jpg",
+			"assets/skybox/front.jpg",
+			"assets/skybox/back.jpg"
+		};
+		
+		_skybox = Tusk::CreateRef<Tusk::Skybox>(faces);
+
 		_activeScene = Tusk::CreateScope<Tusk::Scene>();
-		_activeScene->renderLightObjects(true);
+		_activeScene->renderLightObjects(false);
+		_activeScene->setSkybox(_skybox);
 
 		Tusk::DirectionalLight lightData = {};
 		lightData.direction = glm::vec3(-2.0f, -3.0f, -4.0f);
@@ -33,7 +46,7 @@ public:
 		_activeScene->onViewportResize(Tusk::Application::get().getWindow().getWidth(), Tusk::Application::get().getWindow().getHeight());
 
 		_modelEntity = _activeScene->createEntity("backpack");
-		_modelEntity.addComponent<Tusk::MeshComponent>(_backpackModel, _modelShader);
+		_modelEntity.addComponent<Tusk::MeshComponent>(_backpackModel, _envMappingShader);
 		_modelEntity.addComponent<Tusk::ScriptComponent>().bind<Tusk::ModelController>();
 		auto& transform = _modelEntity.getComponent<Tusk::TransformComponent>().transform;
 		transform.setPosition(glm::vec3(-5.0f, 0.0f, -10.0f));
@@ -75,6 +88,8 @@ public:
 private:
 	Tusk::Ref<Tusk::Model> _backpackModel;
 	Tusk::Ref<Tusk::Shader> _modelShader;
+	Tusk::Ref<Tusk::Shader> _envMappingShader;
+	Tusk::Ref<Tusk::Skybox> _skybox;
 
 	Tusk::Scope<Tusk::Scene> _activeScene;
 

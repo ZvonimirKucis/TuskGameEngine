@@ -1,9 +1,7 @@
 #pragma once
 
-#include "Tusk/Renderer/Shader.h"
-#include "Tusk/Renderer/Texture.h"
-
 #include "Tusk/Light/DirectionalLight.h"
+#include "Tusk/Skybox/Skybox.h"
 
 #include <entt.hpp>
 
@@ -19,6 +17,7 @@ namespace Tusk {
 		Entity createEntity(const std::string& name = std::string());
 
 		void renderLightObjects(bool value) { _renderLights = value; };
+		void setSkybox(const Ref<Skybox>& skybox) { _skybox = skybox; }
 
 		void startScene();
 		void onUpdate(float deltaTime);
@@ -31,6 +30,7 @@ namespace Tusk {
 		bool _renderLights = true;
 
 		DirectionalLight _lightData;
+		Ref<Skybox> _skybox;
 
 		friend class Entity;
 	};

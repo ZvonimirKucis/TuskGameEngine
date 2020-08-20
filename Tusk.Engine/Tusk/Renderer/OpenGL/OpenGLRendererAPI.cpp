@@ -38,10 +38,23 @@ namespace Tusk {
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		glEnable(GL_DEPTH_TEST);
+		//glDepthFunc(GL_LEQUAL);
+
 		glEnable(GL_MULTISAMPLE);
 
 		/*glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);*/
+	}
+
+	void OpenGLRendererAPI::setDepthFunc(DepthFunc func) {
+		switch (func) {
+			case DepthFunc::LEQUAL:
+				glDepthFunc(GL_LEQUAL);
+				break;
+			case DepthFunc::LESS:
+				glDepthFunc(GL_LESS);
+				break;
+		}
 	}
 
 	void OpenGLRendererAPI::setViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) {

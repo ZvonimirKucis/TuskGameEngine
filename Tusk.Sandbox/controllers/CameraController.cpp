@@ -4,9 +4,15 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace Tusk {
-	float speed = 15.0f;
+	const float SENSITIVITY = 0.1f;
+	const float SPEED = 15.0f;
+
+	float lastX;
+	float lastY;
 
 	void CameraController::onCreate() {
+		lastX = Input::getMouseX();
+		lastY = Input::getMouseY();
 	}
 
 	void CameraController::onDestroy() {
@@ -17,14 +23,27 @@ namespace Tusk {
 		auto pos = transform.getPositon();
 		
 		if (Input::isKeyPressed(TUSK_KEY_A))
-			pos.x -= speed * deltaTime;
+			pos.x -= SPEED * deltaTime;
 		if (Input::isKeyPressed(TUSK_KEY_D))
-			pos.x += speed * deltaTime;
+			pos.x += SPEED * deltaTime;
 		if (Input::isKeyPressed(TUSK_KEY_W))
-			pos.y += speed * deltaTime;
+			pos.z -= SPEED * deltaTime;
 		if (Input::isKeyPressed(TUSK_KEY_S))
-			pos.y -= speed * deltaTime;
+			pos.z += SPEED * deltaTime;
 
 		transform.setPosition(pos);
+
+		float yaw = Input::getMouseX() - lastX;
+		float pitch = lastY - Input::getMouseY();
+
+		lastX = Input::getMouseX();
+		lastY = Input::getMouseY();
+
+		auto rot = transform.getRotation();
+		
+		rot.y -= yaw * SENSITIVITY;
+		rot.x += pitch * SENSITIVITY;
+
+		transform.setRotation(rot);
 	}
 }

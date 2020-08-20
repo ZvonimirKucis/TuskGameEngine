@@ -165,6 +165,9 @@
     <ClInclude Include="Tusk\Light\LightObject.h" />
     <ClInclude Include="Tusk\Light\LightShader.h" />
     <ClInclude Include="Tusk\Light\DirectionalLight.h" />
+    <ClInclude Include="Tusk\Skybox\Skybox.h" />
+    <ClInclude Include="Tusk\Renderer\Cubemap.h" />
+    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLCubemap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tusk\Application.cpp">
@@ -256,5 +259,8 @@
     <ClCompile Include="Tusk\Camera\SceneCamera.cpp" />
     <ClCompile Include="Tusk\Light\LightShader.cpp" />
     <ClCompile Include="Tusk\Light\LightObject.cpp" />
+    <ClCompile Include="Tusk\Skybox\Skybox.cpp" />
+    <ClCompile Include="Tusk\Renderer\Cubemap.cpp" />
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLCubemap.cpp" />
   </ItemGroup>
 </Project>

@@ -36,6 +36,13 @@ namespace Tusk {
 	void Renderer::endScene() {
 	}
 
+	void Renderer::submit(const Ref<Skybox>& skybox) {
+		RenderCommand::setDepthFunction(DepthFunc::LEQUAL);
+		glm::mat4 view = glm::mat4(glm::mat3(_sceneData->view));
+		skybox->draw(_sceneData->projection, view);
+		RenderCommand::setDepthFunction(DepthFunc::LESS);
+	}
+
 	void Renderer::submit(LightObject* lightObject, const glm::mat4& transform) {
 		lightObject->draw(_sceneData->projection, _sceneData->view, transform);
 	}

@@ -168,10 +168,12 @@
     <ClInclude Include="Tusk\Platform\Window.h" />
     <ClInclude Include="Tusk\Renderer\Buffer.h" />
     <ClInclude Include="Tusk\Camera\Camera.h" />
+    <ClInclude Include="Tusk\Renderer\Cubemap.h" />
     <ClInclude Include="Tusk\Renderer\Framebuffer.h" />
     <ClInclude Include="Tusk\Renderer\GraphicsContext.h" />
     <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLCubemap.h" />
     <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLFramebuffer.h" />
     <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLShader.h" />
@@ -188,6 +190,7 @@
     <ClInclude Include="Tusk\Scene\Scene.h" />
     <ClInclude Include="Tusk\Scene\ScriptableEntity.h" />
     <ClInclude Include="Tusk\Scene\Transform.h" />
+    <ClInclude Include="Tusk\Skybox\Skybox.h" />
     <ClInclude Include="Tusk\Utils\Defines.h" />
     <ClInclude Include="Tusk\Utils\Logger.h" />
     <ClInclude Include="tuskpch.h" />
@@ -207,10 +210,12 @@
     <ClCompile Include="Tusk\Platform\GLFW\GLFWWindow.cpp" />
     <ClCompile Include="Tusk\Platform\Window.cpp" />
     <ClCompile Include="Tusk\Renderer\Buffer.cpp" />
+    <ClCompile Include="Tusk\Renderer\Cubemap.cpp" />
     <ClCompile Include="Tusk\Renderer\Framebuffer.cpp" />
     <ClCompile Include="Tusk\Renderer\GraphicsContext.cpp" />
     <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLCubemap.cpp" />
     <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLFramebuffer.cpp" />
     <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLShader.cpp" />
@@ -224,6 +229,7 @@
     <ClCompile Include="Tusk\Renderer\VertexArray.cpp" />
     <ClCompile Include="Tusk\Scene\Entity.cpp" />
     <ClCompile Include="Tusk\Scene\Scene.cpp" />
+    <ClCompile Include="Tusk\Skybox\Skybox.cpp" />
     <ClCompile Include="Tusk\Utils\Logger.cpp" />
     <ClCompile Include="tuskpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

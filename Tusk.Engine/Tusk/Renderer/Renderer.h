@@ -6,6 +6,7 @@
 #include "Tusk/Camera/Camera.h"
 #include "Tusk/Light/LightObject.h"
 #include "Tusk/Light/DirectionalLight.h"
+#include "Tusk/Skybox/Skybox.h"
 
 namespace Tusk {
 
@@ -20,6 +21,7 @@ namespace Tusk {
 		static void beginScene(const Camera& camera, const glm::mat4& transform, const DirectionalLight& lighData);
 		static void endScene();
 
+		static void submit(const Ref<Skybox>& skybox);
 		static void submit(LightObject* lightObject, const glm::mat4& transform = glm::mat4(1.0f));
 		static void submit(const Ref<Shader>& shader, const Ref<Model>& model, const glm::mat4& transform = glm::mat4(1.0f));
 	private:

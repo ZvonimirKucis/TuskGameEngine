@@ -75,7 +75,6 @@ namespace Tusk {
 		// Render
 		if(mainCamera) {
 			Renderer::beginScene(*mainCamera, *cameraTransform, _lightData);
-
 			// Lights
 			if(_renderLights) {
 				auto view = _registry.view<TransformComponent, PointLightComponent>();
@@ -93,6 +92,11 @@ namespace Tusk {
 					Renderer::submit(mesh.shader, mesh.model, transform.transform.getModelMatrix());
 				}
 			}
+
+			if (_skybox) {
+				Renderer::submit(_skybox);
+			}
+
 
 			Renderer::endScene();
 		}

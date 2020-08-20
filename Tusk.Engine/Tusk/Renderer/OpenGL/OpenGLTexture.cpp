@@ -4,10 +4,12 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
+#include <glad/glad.h>
+
 namespace Tusk {
 
 	OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
-		: _width(width), _height(height) {
+		: _width(width), _height(height), _type(TextureType::Empty) {
 
 		glCreateTextures(GL_TEXTURE_2D, 1, &_rendererID);
 		glTextureStorage2D(_rendererID, 1, GL_RGBA, _width, _height);
@@ -51,13 +53,11 @@ namespace Tusk {
 		stbi_image_free(data);
 	}
 
-	OpenGLTexture2D::~OpenGLTexture2D() {
-		glDeleteTextures(1, &_rendererID);
+	void OpenGLTexture2D::bind(uint32_t slot) const {
+		glBindTextureUnit(slot, _rendererID);
 	}
 
-	void OpenGLTexture2D::bind(uint32_t slot) const {
-		//glActiveTexture(GL_TEXTURE0 + slot);
-		//glBindTexture(GL_TEXTURE_2D, _rendererID);
-		glBindTextureUnit(slot, _rendererID);
+	OpenGLTexture2D::~OpenGLTexture2D() {
+		glDeleteTextures(1, &_rendererID);
 	}
 }

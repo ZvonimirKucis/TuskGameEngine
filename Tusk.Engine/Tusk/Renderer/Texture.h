@@ -5,7 +5,7 @@
 namespace Tusk {
 
 	enum class TextureType {
-		Diffuse = 0, Specular, Normal, Height
+		Empty = 0, Diffuse, Specular, Normal, Height
 	};
 
 	class Texture {

@@ -19,6 +19,10 @@ namespace Tusk {
 			_rendererAPI->setClearColor(color);
 		}
 
+		static void setDepthFunction(DepthFunc func) {
+			_rendererAPI->setDepthFunc(func);
+		}
+
 		static void clear() {
 			_rendererAPI->clear();
 		}

@@ -25,5 +25,5 @@
 #include "Tusk/Renderer/Texture.h"
 
 #include "Tusk/Light/DirectionalLight.h"
-
+#include "Tusk/Skybox/Skybox.h"
 #include "Tusk/Model/Model.h"
