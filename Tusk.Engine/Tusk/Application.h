@@ -6,6 +6,7 @@
 #include "Platform/Window.h"
 #include "Layers/LayerStack.h"
 #include "GUI/ImGuiLayer.h"
+#include "Audio/AudioEngine.h"
 
 int main(int argc, char** argv);
 

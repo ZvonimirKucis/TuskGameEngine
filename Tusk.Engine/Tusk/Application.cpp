@@ -18,6 +18,7 @@ namespace Tusk {
 		pushOverlay(_imGuiLayer);
 
 		Renderer::init();
+		AudioEngine::init();
 	}
 
 	void Application::pushLayer(Layer* layer) {

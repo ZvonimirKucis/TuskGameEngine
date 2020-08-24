@@ -146,6 +146,12 @@
   <ItemGroup>
     <ClInclude Include="Tusk.h" />
     <ClInclude Include="Tusk\Application.h" />
+    <ClInclude Include="Tusk\Audio\AudioClip.h" />
+    <ClInclude Include="Tusk\Audio\AudioEngine.h" />
+    <ClInclude Include="Tusk\Audio\AudioEngineAPI.h" />
+    <ClInclude Include="Tusk\Audio\OpenAL\OpenALAudioEngineAPI.h" />
+    <ClInclude Include="Tusk\Audio\OpenAL\OpenALAudioClip.h" />
+    <ClInclude Include="Tusk\Audio\WAVLoader.h" />
     <ClInclude Include="Tusk\Camera\SceneCamera.h" />
     <ClInclude Include="Tusk\EntryPoint.h" />
     <ClInclude Include="Tusk\Events\ApplicationEvent.h" />
@@ -197,6 +203,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tusk\Application.cpp" />
+    <ClCompile Include="Tusk\Audio\AudioClip.cpp" />
+    <ClCompile Include="Tusk\Audio\AudioEngine.cpp" />
+    <ClCompile Include="Tusk\Audio\AudioEngineAPI.cpp" />
+    <ClCompile Include="Tusk\Audio\OpenAL\OpenALAudioClip.cpp" />
+    <ClCompile Include="Tusk\Audio\OpenAL\OpenALAudioEngineAPI.cpp" />
+    <ClCompile Include="Tusk\Audio\WAVLoader.cpp" />
     <ClCompile Include="Tusk\Camera\SceneCamera.cpp" />
     <ClCompile Include="Tusk\GUI\ImGuiBuild.cpp" />
     <ClCompile Include="Tusk\GUI\ImGuiLayer.cpp" />

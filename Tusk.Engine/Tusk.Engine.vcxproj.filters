@@ -168,6 +168,12 @@
     <ClInclude Include="Tusk\Skybox\Skybox.h" />
     <ClInclude Include="Tusk\Renderer\Cubemap.h" />
     <ClInclude Include="Tusk\Renderer\OpenGL\OpenGLCubemap.h" />
+    <ClInclude Include="Tusk\Audio\AudioEngine.h" />
+    <ClInclude Include="Tusk\Audio\AudioEngineAPI.h" />
+    <ClInclude Include="Tusk\Audio\OpenAL\OpenALAudioEngineAPI.h" />
+    <ClInclude Include="Tusk\Audio\WAVLoader.h" />
+    <ClInclude Include="Tusk\Audio\AudioClip.h" />
+    <ClInclude Include="Tusk\Audio\OpenAL\OpenALAudioClip.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tusk\Application.cpp">
@@ -262,5 +268,11 @@
     <ClCompile Include="Tusk\Skybox\Skybox.cpp" />
     <ClCompile Include="Tusk\Renderer\Cubemap.cpp" />
     <ClCompile Include="Tusk\Renderer\OpenGL\OpenGLCubemap.cpp" />
+    <ClCompile Include="Tusk\Audio\AudioEngine.cpp" />
+    <ClCompile Include="Tusk\Audio\AudioEngineAPI.cpp" />
+    <ClCompile Include="Tusk\Audio\OpenAL\OpenALAudioEngineAPI.cpp" />
+    <ClCompile Include="Tusk\Audio\WAVLoader.cpp" />
+    <ClCompile Include="Tusk\Audio\AudioClip.cpp" />
+    <ClCompile Include="Tusk\Audio\OpenAL\OpenALAudioClip.cpp" />
   </ItemGroup>
 </Project>

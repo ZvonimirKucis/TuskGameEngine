@@ -12,6 +12,9 @@ public:
 	ExampleLayer() : Layer("example") {}
 
 	void onAttach() override {
+		_audioClip = Tusk::AudioClip::load("assets/sound/africa-toto.wav");
+		_audioClip->play();
+
 		_backpackModel = Tusk::CreateRef<Tusk::Model>("assets/objects/backpack/backpack.obj");
 		_modelShader = Tusk::Shader::load("assets/shaders/default.vs", "assets/shaders/default.fs");
 		_envMappingShader = Tusk::Shader::load("assets/shaders/default_env_mapping.vs", "assets/shaders/default_env_mapping.fs");
@@ -90,6 +93,8 @@ private:
 	Tusk::Ref<Tusk::Shader> _modelShader;
 	Tusk::Ref<Tusk::Shader> _envMappingShader;
 	Tusk::Ref<Tusk::Skybox> _skybox;
+
+	Tusk::Ref<Tusk::AudioClip> _audioClip;
 
 	Tusk::Scope<Tusk::Scene> _activeScene;
 

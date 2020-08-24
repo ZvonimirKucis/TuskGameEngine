@@ -27,3 +27,5 @@
 #include "Tusk/Light/DirectionalLight.h"
 #include "Tusk/Skybox/Skybox.h"
 #include "Tusk/Model/Model.h"
+
+#include "Tusk/Audio/AudioClip.h"
