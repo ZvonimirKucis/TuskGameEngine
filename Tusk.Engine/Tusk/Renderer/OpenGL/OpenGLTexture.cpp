@@ -21,13 +21,14 @@ namespace Tusk {
 		glTextureParameteri(_rendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	}
 
-	OpenGLTexture2D::OpenGLTexture2D(const std::string& path, TextureType type)
+	OpenGLTexture2D::OpenGLTexture2D(const std::string& path, TextureType type, bool flip)
 		: _path(path), _type(type){
 		int width, height, channels;
-		stbi_set_flip_vertically_on_load(true);
+		stbi_set_flip_vertically_on_load(flip);
 		stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 0);
-		ASSERT_MSG(data, "Failed to load image!");
-	
+		//ASSERT_MSG(data, "Failed to load image ");
+		if (!data)
+			Logger::Fatal("Failed to load image : %s", path.c_str());
 		_width = width;
 		_height = height;
 

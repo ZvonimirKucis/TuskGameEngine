@@ -4,7 +4,7 @@
 #include "Tusk/Light/DirectionalLight.h"
 #include "Tusk/Light/LightObject.h"
 #include "Tusk/Camera/SceneCamera.h"
-#include "Tusk/Renderer/Shader.h"
+#include "Tusk/Model/Material.h"
 
 #include "ScriptableEntity.h"
 #include "Transform.h"
@@ -34,12 +34,12 @@ namespace Tusk {
 
 	struct MeshComponent {
 		Ref<Model> model;
-		Ref<Shader> shader;
+		Ref<Material> material;
 
 		MeshComponent() = default;
 		MeshComponent(const MeshComponent&) = default;
-		MeshComponent(const Ref<Model> model, const Ref<Shader> shader)
-			: model(model), shader(shader) {}
+		MeshComponent(const Ref<Model> model, const Ref<Material> material)
+			: model(model), material(material) {}
 	};
 
 	struct ScriptComponent {

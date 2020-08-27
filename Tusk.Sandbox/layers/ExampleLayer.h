@@ -13,12 +13,21 @@ public:
 
 	void onAttach() override {
 		_audioClip = Tusk::AudioClip::load("assets/sound/africa-toto.wav");
-		_audioClip->play();
+		//_audioClip->play();
 
-		_backpackModel = Tusk::CreateRef<Tusk::Model>("assets/objects/backpack/backpack.obj");
-		_modelShader = Tusk::Shader::load("assets/shaders/default.vs", "assets/shaders/default.fs");
-		_envMappingShader = Tusk::Shader::load("assets/shaders/default_env_mapping.vs", "assets/shaders/default_env_mapping.fs");
-		
+		_playerModel = Tusk::CreateRef<Tusk::Model>("assets/objects/model.dae");
+		_playerShader = Tusk::Shader::load("assets/shaders/player.vs", "assets/shaders/player.fs");
+		_playerMaterial = Tusk::CreateRef<Tusk::Material>(_playerShader);
+		_playerMaterial->set2DTexture(Tusk::Texture2D::create("assets/objects/diffuse.png", Tusk::TextureType::Diffuse, true));
+
+		/*_backpackModel = Tusk::CreateRef<Tusk::Model>("assets/objects/backpack/backpack.obj");
+		_backpackShader = Tusk::Shader::load("assets/shaders/default.vs", "assets/shaders/default.fs");
+		_backpackMaterial = Tusk::CreateRef<Tusk::Material>(_backpackShader);
+		_backpackMaterial->set2DTexture(Tusk::Texture2D::create("assets/objects/backpack/diffuse.jpg", Tusk::TextureType::Diffuse, true));
+		_backpackMaterial->set2DTexture(Tusk::Texture2D::create("assets/objects/backpack/normal.png", Tusk::TextureType::Normal, true));
+		_backpackMaterial->set2DTexture(Tusk::Texture2D::create("assets/objects/backpack/specular.jpg", Tusk::TextureType::Specular, true));
+		*/
+
 		std::vector<std::string> faces = {
 			"assets/skybox/right.jpg",
 			"assets/skybox/left.jpg",
@@ -29,6 +38,7 @@ public:
 		};
 		
 		_skybox = Tusk::CreateRef<Tusk::Skybox>(faces);
+		_envMappingShader = Tusk::Shader::load("assets/shaders/default_env_mapping.vs", "assets/shaders/default_env_mapping.fs");
 
 		_activeScene = Tusk::CreateScope<Tusk::Scene>();
 		_activeScene->renderLightObjects(false);
@@ -48,19 +58,19 @@ public:
 		_cameraEntity.addComponent<Tusk::ScriptComponent>().bind<Tusk::CameraController>();
 		_activeScene->onViewportResize(Tusk::Application::get().getWindow().getWidth(), Tusk::Application::get().getWindow().getHeight());
 
-		_modelEntity = _activeScene->createEntity("backpack");
-		_modelEntity.addComponent<Tusk::MeshComponent>(_backpackModel, _envMappingShader);
-		_modelEntity.addComponent<Tusk::ScriptComponent>().bind<Tusk::ModelController>();
-		auto& transform = _modelEntity.getComponent<Tusk::TransformComponent>().transform;
+		_playerEntity = _activeScene->createEntity("player");
+		_playerEntity.addComponent<Tusk::MeshComponent>(_playerModel, _playerMaterial);
+		_playerEntity.addComponent<Tusk::ScriptComponent>().bind<Tusk::ModelController>();
+		auto& transform = _playerEntity.getComponent<Tusk::TransformComponent>().transform;
 		transform.setPosition(glm::vec3(-5.0f, 0.0f, -10.0f));
-		transform.setScale(1.0f);
+		transform.setScale(0.2f);
 
-		_modelEntityTest = _activeScene->createEntity("backpack_test");
-		_modelEntityTest.addComponent<Tusk::MeshComponent>(_backpackModel, _modelShader);
-		_modelEntityTest.addComponent<Tusk::ScriptComponent>().bind<Tusk::ModelController>();
-		auto& transformTest = _modelEntityTest.getComponent<Tusk::TransformComponent>().transform;
+		/*_backpackEntity = _activeScene->createEntity("backpack");
+		_backpackEntity.addComponent<Tusk::MeshComponent>(_backpackModel, _backpackMaterial);
+		_backpackEntity.addComponent<Tusk::ScriptComponent>().bind<Tusk::ModelController>();
+		auto& transformTest = _backpackEntity.getComponent<Tusk::TransformComponent>().transform;
 		transformTest.setPosition(glm::vec3(5.0f, 0.0f, -10.0f));
-		transformTest.setScale(0.8f);
+		transformTest.setScale(0.5f);*/
 
 		_activeScene->startScene();
 	}
@@ -89,17 +99,23 @@ public:
 	}
 
 private:
+	Tusk::Scope<Tusk::Scene> _activeScene;
+
+	Tusk::Ref<Tusk::Model> _playerModel;
+	Tusk::Ref<Tusk::Shader> _playerShader;
+	Tusk::Ref<Tusk::Material> _playerMaterial;
+
 	Tusk::Ref<Tusk::Model> _backpackModel;
-	Tusk::Ref<Tusk::Shader> _modelShader;
+	Tusk::Ref<Tusk::Shader> _backpackShader;
+	Tusk::Ref<Tusk::Material> _backpackMaterial;
+
 	Tusk::Ref<Tusk::Shader> _envMappingShader;
 	Tusk::Ref<Tusk::Skybox> _skybox;
 
 	Tusk::Ref<Tusk::AudioClip> _audioClip;
 
-	Tusk::Scope<Tusk::Scene> _activeScene;
-
 	Tusk::Entity _cameraEntity;
 	Tusk::Entity _lightEntity;
-	Tusk::Entity _modelEntity;
-	Tusk::Entity _modelEntityTest;
+	Tusk::Entity _playerEntity;
+	Tusk::Entity _backpackEntity;
 };

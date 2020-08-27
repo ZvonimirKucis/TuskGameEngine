@@ -44,7 +44,7 @@ namespace Tusk {
 		Texture2D() = default;
 
 		static Ref<Texture2D> create(uint32_t width, uint32_t height);
-		static Ref<Texture2D> create(const std::string& path, TextureType type);
+		static Ref<Texture2D> create(const std::string& path, TextureType type, bool flip = false);
 	};
 
 }

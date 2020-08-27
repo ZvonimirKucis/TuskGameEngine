@@ -89,7 +89,7 @@ namespace Tusk {
 				auto view = _registry.view<TransformComponent, MeshComponent>();
 				for (auto entity : view) {
 					auto [transform, mesh] = view.get<TransformComponent, MeshComponent>(entity);
-					Renderer::submit(mesh.shader, mesh.model, transform.transform.getModelMatrix());
+					Renderer::submit(mesh.material, mesh.model, transform.transform.getModelMatrix());
 				}
 			}
 

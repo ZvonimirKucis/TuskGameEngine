@@ -23,11 +23,13 @@ IncludeDir["ImGui"] = "External/ImGui"
 IncludeDir["glm"] = "External/glm"
 IncludeDir["stb_image"] = "External/stb"
 IncludeDir["entt"] = "External/entt/include"
+IncludeDir["xml"] = "External/pugixml"
 
 group "Dependencies"
 	include "External/GLFW"
 	include "External/Glad"
 	include "External/imgui"
+	include "External/pugixml"
 group ""
 
 project "Tusk.Engine"
@@ -64,6 +66,7 @@ project "Tusk.Engine"
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.entt}",
+		"%{IncludeDir.xml}"
 	}
 
 	links 
@@ -71,7 +74,8 @@ project "Tusk.Engine"
 		"GLFW",
 		"Glad",
 		"ImGui",
-		"opengl32.lib"
+		"opengl32.lib",
+		"pugiXML"
 	}
 
 	filter "system:windows"

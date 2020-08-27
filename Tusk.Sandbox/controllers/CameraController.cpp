@@ -45,5 +45,11 @@ namespace Tusk {
 		rot.x += pitch * SENSITIVITY;
 
 		transform.setRotation(rot);
+
+		/*auto rot = transform.getRotation();
+
+		rot.y -= SPEED * deltaTime;
+
+		transform.setRotation(rot);*/
 	}
 }

@@ -47,7 +47,9 @@ namespace Tusk {
 		lightObject->draw(_sceneData->projection, _sceneData->view, transform);
 	}
 
-	void Renderer::submit(const Ref<Shader>& shader, const Ref<Model>& model, const glm::mat4& transform) {
+	void Renderer::submit(const Ref<Material>& material, const Ref<Model>& model, const glm::mat4& transform) {
+		Ref<Shader> shader = material->getShader();
+
 		shader->bind();
 		
 		shader->setMat4("projection", _sceneData->projection);
@@ -60,7 +62,9 @@ namespace Tusk {
 		shader->setFloat3("dirLight.diffuse", _sceneData->lightData.diffuse);
 		shader->setFloat3("dirLight.specular", _sceneData->lightData.specular);
 
-		model->draw(shader);
+		material->bindTextures();
+
+		model->draw();
 	}
 
 }

@@ -10,8 +10,8 @@ namespace Tusk {
 		return CreateRef<OpenGLTexture2D>(width, height);
 	}
 
-	Ref<Texture2D> Texture2D::create(const std::string& path, TextureType type) {
-		return CreateRef<OpenGLTexture2D>(path, type);
+	Ref<Texture2D> Texture2D::create(const std::string& path, TextureType type, bool flip) {
+		return CreateRef<OpenGLTexture2D>(path, type, flip);
 	}
 
 }

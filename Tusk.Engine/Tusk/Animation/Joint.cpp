@@ -1,0 +1,25 @@
+#include "tuskpch.h"
+#include <glm/glm.hpp>
+
+#include "Joint.h"
+
+namespace Tusk {
+
+	Joint::Joint(uint32_t index, std::string name, glm::mat4 localBindTransform)
+		: _index(index), _name(name), _localBindTransform(localBindTransform){}
+
+	void Joint::addChild(Joint child) {
+		_children.push_back(child);
+	}
+
+	void Joint::setAnimationTransform(glm::mat4 transform) {
+		_transform = transform;
+	}
+
+	void Joint::calculateInverseBindTransform(glm::mat4 parentBindTransform) {
+		glm::mat4 bindTransform = parentBindTransform * _localBindTransform;
+		_invertedBindTransform = glm::inverse(bindTransform);
+		for (Joint child : _children)
+			child.calculateInverseBindTransform(bindTransform);
+	}
+}

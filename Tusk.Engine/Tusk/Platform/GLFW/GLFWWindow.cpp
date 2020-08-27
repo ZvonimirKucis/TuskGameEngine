@@ -31,7 +31,6 @@ namespace Tusk {
 #if _DEBUG
 		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 #endif
-
 		glfwWindowHint(GLFW_SAMPLES, 4);
 
 		_window = glfwCreateWindow(props.width, props.height, props.title.c_str(), nullptr, nullptr);

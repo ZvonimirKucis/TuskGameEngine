@@ -77,7 +77,7 @@
       <PrecompiledHeaderFile>tuskpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\External\GLFW\include;..\External\Glad\include;..\External\ImGui;..\External\glm;..\External\stb;..\External\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\External\GLFW\include;..\External\Glad\include;..\External\ImGui;..\External\glm;..\External\stb;..\External\entt\include;..\External\pugixml;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -99,7 +99,7 @@
       <PrecompiledHeaderFile>tuskpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\External\GLFW\include;..\External\Glad\include;..\External\ImGui;..\External\glm;..\External\stb;..\External\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\External\GLFW\include;..\External\Glad\include;..\External\ImGui;..\External\glm;..\External\stb;..\External\entt\include;..\External\pugixml;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -124,7 +124,7 @@
       <PrecompiledHeaderFile>tuskpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;GLFW_INCLUDE_NONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.;..\External\GLFW\include;..\External\Glad\include;..\External\ImGui;..\External\glm;..\External\stb;..\External\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\External\GLFW\include;..\External\Glad\include;..\External\ImGui;..\External\glm;..\External\stb;..\External\entt\include;..\External\pugixml;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -145,13 +145,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Tusk.h" />
+    <ClInclude Include="Tusk\Animation\Animation.h" />
+    <ClInclude Include="Tusk\Animation\Animator.h" />
+    <ClInclude Include="Tusk\Animation\Joint.h" />
+    <ClInclude Include="Tusk\Animation\JointTransform.h" />
+    <ClInclude Include="Tusk\Animation\KeyFrame.h" />
     <ClInclude Include="Tusk\Application.h" />
     <ClInclude Include="Tusk\Audio\AudioClip.h" />
     <ClInclude Include="Tusk\Audio\AudioEngine.h" />
     <ClInclude Include="Tusk\Audio\AudioEngineAPI.h" />
-    <ClInclude Include="Tusk\Audio\OpenAL\OpenALAudioEngineAPI.h" />
     <ClInclude Include="Tusk\Audio\OpenAL\OpenALAudioClip.h" />
+    <ClInclude Include="Tusk\Audio\OpenAL\OpenALAudioEngineAPI.h" />
     <ClInclude Include="Tusk\Audio\WAVLoader.h" />
+    <ClInclude Include="Tusk\Camera\Camera.h" />
     <ClInclude Include="Tusk\Camera\SceneCamera.h" />
     <ClInclude Include="Tusk\EntryPoint.h" />
     <ClInclude Include="Tusk\Events\ApplicationEvent.h" />
@@ -164,6 +170,11 @@
     <ClInclude Include="Tusk\Light\DirectionalLight.h" />
     <ClInclude Include="Tusk\Light\LightObject.h" />
     <ClInclude Include="Tusk\Light\LightShader.h" />
+    <ClInclude Include="Tusk\Model\AnimationModel.h" />
+    <ClInclude Include="Tusk\Model\Collada\ColladaLoader.h" />
+    <ClInclude Include="Tusk\Model\Collada\GeometryLoader.h" />
+    <ClInclude Include="Tusk\Model\Loader.h" />
+    <ClInclude Include="Tusk\Model\Material.h" />
     <ClInclude Include="Tusk\Model\Mesh.h" />
     <ClInclude Include="Tusk\Model\Model.h" />
     <ClInclude Include="Tusk\Platform\GLFW\GLFWInput.h" />
@@ -173,7 +184,6 @@
     <ClInclude Include="Tusk\Platform\MouseButtonCodes.h" />
     <ClInclude Include="Tusk\Platform\Window.h" />
     <ClInclude Include="Tusk\Renderer\Buffer.h" />
-    <ClInclude Include="Tusk\Camera\Camera.h" />
     <ClInclude Include="Tusk\Renderer\Cubemap.h" />
     <ClInclude Include="Tusk\Renderer\Framebuffer.h" />
     <ClInclude Include="Tusk\Renderer\GraphicsContext.h" />
@@ -202,6 +212,11 @@
     <ClInclude Include="tuskpch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Tusk\Animation\Animation.cpp" />
+    <ClCompile Include="Tusk\Animation\Animator.cpp" />
+    <ClCompile Include="Tusk\Animation\Joint.cpp" />
+    <ClCompile Include="Tusk\Animation\JointTransform.cpp" />
+    <ClCompile Include="Tusk\Animation\KeyFrame.cpp" />
     <ClCompile Include="Tusk\Application.cpp" />
     <ClCompile Include="Tusk\Audio\AudioClip.cpp" />
     <ClCompile Include="Tusk\Audio\AudioEngine.cpp" />
@@ -216,6 +231,10 @@
     <ClCompile Include="Tusk\Layers\LayerStack.cpp" />
     <ClCompile Include="Tusk\Light\LightObject.cpp" />
     <ClCompile Include="Tusk\Light\LightShader.cpp" />
+    <ClCompile Include="Tusk\Model\Collada\ColladaLoader.cpp" />
+    <ClCompile Include="Tusk\Model\Collada\GeometryLoader.cpp" />
+    <ClCompile Include="Tusk\Model\Loader.cpp" />
+    <ClCompile Include="Tusk\Model\Material.cpp" />
     <ClCompile Include="Tusk\Model\Mesh.cpp" />
     <ClCompile Include="Tusk\Model\Model.cpp" />
     <ClCompile Include="Tusk\Platform\GLFW\GLFWInput.cpp" />
@@ -256,6 +275,9 @@
     </ProjectReference>
     <ProjectReference Include="..\External\imgui\ImGui.vcxproj">
       <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\External\pugixml\pugiXML.vcxproj">
+      <Project>{ABB3A8C9-1793-2765-20AB-B23B8C098EC6}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
