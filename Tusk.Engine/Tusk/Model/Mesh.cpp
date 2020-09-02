@@ -6,8 +6,10 @@
 
 namespace Tusk {
 
-	Mesh::Mesh(std::vector<Vertex> vertices, std::vector<uint32_t> indices) {
+	Mesh::Mesh(std::vector<Vertex>& vertices, std::vector<uint32_t>& indices) {
 		setupMesh(vertices, indices);
+		vertices.clear();
+		indices.clear();
 	}
 
 	void Mesh::setupMesh(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices) {

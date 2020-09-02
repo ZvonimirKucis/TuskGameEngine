@@ -284,6 +284,8 @@
       <Filter>Tusk\Utils</Filter>
     </ClInclude>
     <ClInclude Include="tuskpch.h" />
+    <ClInclude Include="Tusk\Audio\AudioSource.h" />
+    <ClInclude Include="Tusk\Audio\OpenAL\OpenALSource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tusk\Animation\Animation.cpp">
@@ -464,5 +466,7 @@
       <Filter>Tusk\Utils</Filter>
     </ClCompile>
     <ClCompile Include="tuskpch.cpp" />
+    <ClCompile Include="Tusk\Audio\AudioSource.cpp" />
+    <ClCompile Include="Tusk\Audio\OpenAL\OpenALSource.cpp" />
   </ItemGroup>
 </Project>

@@ -2,11 +2,14 @@
 
 #include "Tusk/Model/Model.h"
 #include "Tusk/Model/AnimationModel.h"
+#include "Tusk/Model/Material.h"
 
 #include "Tusk/Light/DirectionalLight.h"
 #include "Tusk/Light/LightObject.h"
+
 #include "Tusk/Camera/SceneCamera.h"
-#include "Tusk/Model/Material.h"
+
+#include "Tusk/Audio/AudioSource.h"
 
 #include "ScriptableEntity.h"
 #include "Transform.h"
@@ -94,5 +97,15 @@ namespace Tusk {
 		DirectionalLightComponent(const DirectionalLight& lightData)
 			:lightData(lightData) {}
 		
+	};
+
+	struct AudioSourceComponent {
+		Ref<AudioSource> source;
+
+		AudioSourceComponent() = default;
+		AudioSourceComponent(const AudioSourceComponent&) = default;
+		AudioSourceComponent(const Ref<AudioSource>& source)
+			:source(source) {}
+
 	};
 }

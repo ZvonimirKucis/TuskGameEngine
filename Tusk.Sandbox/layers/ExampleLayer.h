@@ -12,9 +12,6 @@ public:
 	ExampleLayer() : Layer("example") {}
 
 	void onAttach() override {
-		_audioClip = Tusk::AudioClip::load("assets/sound/africa-toto.wav");
-		//_audioClip->play();
-
 		//_animatedPlayerModel = Tusk::CreateRef<Tusk::AnimationModel>("assets/objects/model.dae");
 		_runAnimation = Tusk::Loader::loadAnimation("assets/objects/model.dae");
 
@@ -63,14 +60,14 @@ public:
 
 		_cameraEntity = _activeScene->createEntity("camera");
 		_cameraEntity.addComponent<Tusk::CameraComponent>();
-		//_cameraEntity.addComponent<Tusk::ScriptComponent>().bind<Tusk::CameraController>();
+		_cameraEntity.addComponent<Tusk::ScriptComponent>().bind<Tusk::CameraController>();
 		auto& cameraTransform = _cameraEntity.getComponent<Tusk::TransformComponent>().transform;
 		cameraTransform.setPosition(glm::vec3(0.0f, 10.0f, 20.0f));
 		_activeScene->onViewportResize(Tusk::Application::get().getWindow().getWidth(), Tusk::Application::get().getWindow().getHeight());
 
 		_playerEntity = _activeScene->createEntity("player");
 		_playerEntity.addComponent<Tusk::AnimatedMeshComponent>(_playerModel, _playerMaterial);
-		_playerEntity.addComponent<Tusk::ScriptComponent>().bind<Tusk::ModelController>();
+		//_playerEntity.addComponent<Tusk::ScriptComponent>().bind<Tusk::ModelController>();
 		auto& playerTransform = _playerEntity.getComponent<Tusk::TransformComponent>().transform;
 		playerTransform.setPosition(glm::vec3(-5.0f, 0.0f, -10.0f));
 		playerTransform.setScale(1.5f);
@@ -78,6 +75,7 @@ public:
 		_backpackEntity = _activeScene->createEntity("backpack");
 		_backpackEntity.addComponent<Tusk::MeshComponent>(_backpackModel, _backpackMaterial);
 		_backpackEntity.addComponent<Tusk::ScriptComponent>().bind<Tusk::ModelController>();
+		_backpackEntity.addComponent<Tusk::AudioSourceComponent>(Tusk::AudioSource::create());
 		auto& transformTest = _backpackEntity.getComponent<Tusk::TransformComponent>().transform;
 		transformTest.setPosition(glm::vec3(5.0f, 10.0f, -10.0f));
 		transformTest.setScale(1.5f);
@@ -133,8 +131,6 @@ private:
 
 	//Tusk::Ref<Tusk::Shader> _envMappingShader;
 	Tusk::Ref<Tusk::Skybox> _skybox;
-
-	Tusk::Ref<Tusk::AudioClip> _audioClip;
 
 	Tusk::Entity _cameraEntity;
 	Tusk::Entity _lightEntity;

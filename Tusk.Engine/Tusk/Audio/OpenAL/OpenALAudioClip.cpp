@@ -6,7 +6,6 @@
 namespace Tusk {
 	OpenALAudioClip::OpenALAudioClip(const std::string& path) {
 		loadData(path);
-		createSource();
 	}
 
 	void OpenALAudioClip::loadData(const std::string& path) {
@@ -33,27 +32,7 @@ namespace Tusk {
 		delete soundData;
 	}
 
-	void OpenALAudioClip::createSource() {
-		alGenSources( 1, &_source);
-		alSourcef( _source, AL_PITCH, 1);
-		alSourcef( _source, AL_GAIN, 1.0f);
-		alSource3f( _source, AL_POSITION, 0, 0, 0);
-		alSource3f( _source, AL_VELOCITY, 0, 0, 0);
-		alSourcei( _source, AL_LOOPING, AL_FALSE);
-		alSourcei( _source, AL_BUFFER, _buffer);
-	}
-
-	void OpenALAudioClip::play() {
-		ALint state;
-		alGetSourcei(_source, AL_SOURCE_STATE, &state);
-		if (state == AL_PLAYING)
-			return;
-		alSourcePlay(_source);
-	}
-
-
 	OpenALAudioClip::~OpenALAudioClip() {
-		alDeleteSources(1, &_source);
 		alDeleteBuffers(1, &_buffer);
 	}
 }

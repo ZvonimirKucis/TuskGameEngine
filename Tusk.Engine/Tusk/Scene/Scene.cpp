@@ -56,7 +56,7 @@ namespace Tusk {
 
 		// Find primary camera
 		Camera* mainCamera = nullptr;
-		glm::mat4* cameraTransform = nullptr;
+		glm::mat4 viewMatrix = glm::mat4(1.0f);
 		{
 			auto view = _registry.view<TransformComponent, CameraComponent>();
 			for (auto entity : view)
@@ -66,15 +66,27 @@ namespace Tusk {
 				if (camera.primary)
 				{
 					mainCamera = &camera.camera;
-					cameraTransform = &transform.transform.getModelMatrix();
+					viewMatrix = glm::inverse(transform.transform.getModelMatrix());
 					break;
 				}
 			}
 		}
 
+		// Adjust sound position
+		if (mainCamera) {
+			auto view = _registry.view<TransformComponent, AudioSourceComponent>();
+			for (auto entity : view) {
+				auto [transform, audioSource] = view.get<TransformComponent, AudioSourceComponent>(entity);
+				glm::mat4 applyTransform = viewMatrix * transform.transform.getModelMatrix();
+				glm::vec4 pos = applyTransform[3];
+				audioSource.source->setPosition(pos.x, pos.y, pos.z);
+			}
+		}
+
+
 		// Render
 		if(mainCamera) {
-			Renderer::beginScene(*mainCamera, *cameraTransform, _lightData);
+			Renderer::beginScene(*mainCamera, viewMatrix, _lightData);
 			// Lights
 			if(_renderLights) {
 				auto view = _registry.view<TransformComponent, PointLightComponent>();

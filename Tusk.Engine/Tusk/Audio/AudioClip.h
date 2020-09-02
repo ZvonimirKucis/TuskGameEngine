@@ -5,7 +5,7 @@ namespace Tusk {
 	public:
 		virtual ~AudioClip() = default;
 
-		virtual void play() = 0;
+		virtual uint32_t getBuffer() = 0;
 
 		static Ref<AudioClip> load(const std::string& path);
 	};

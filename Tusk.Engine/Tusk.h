@@ -36,3 +36,4 @@
 #include  "Tusk/Animation/Animation.h"
 
 #include "Tusk/Audio/AudioClip.h"
+#include "Tusk/Audio/AudioSource.h"

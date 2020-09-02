@@ -24,12 +24,12 @@ namespace Tusk {
 		RenderCommand::clear();
 	}
 
-	void Renderer::beginScene(const Camera& camera, const glm::mat4& transform, const DirectionalLight& lighData) {
+	void Renderer::beginScene(const Camera& camera, const glm::mat4& view, const DirectionalLight& lighData) {
 		RenderCommand::setClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		RenderCommand::clear();
 
 		_sceneData->projection = camera.getProjection();
-		_sceneData->view = glm::inverse(transform);
+		_sceneData->view = view;
 		_sceneData->lightData = lighData;
 	}
 

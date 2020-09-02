@@ -110,8 +110,10 @@
     <ClInclude Include="Tusk\Audio\AudioClip.h" />
     <ClInclude Include="Tusk\Audio\AudioEngine.h" />
     <ClInclude Include="Tusk\Audio\AudioEngineAPI.h" />
+    <ClInclude Include="Tusk\Audio\AudioSource.h" />
     <ClInclude Include="Tusk\Audio\OpenAL\OpenALAudioClip.h" />
     <ClInclude Include="Tusk\Audio\OpenAL\OpenALAudioEngineAPI.h" />
+    <ClInclude Include="Tusk\Audio\OpenAL\OpenALSource.h" />
     <ClInclude Include="Tusk\Audio\WAVLoader.h" />
     <ClInclude Include="Tusk\Camera\Camera.h" />
     <ClInclude Include="Tusk\Camera\SceneCamera.h" />
@@ -185,8 +187,10 @@
     <ClCompile Include="Tusk\Audio\AudioClip.cpp" />
     <ClCompile Include="Tusk\Audio\AudioEngine.cpp" />
     <ClCompile Include="Tusk\Audio\AudioEngineAPI.cpp" />
+    <ClCompile Include="Tusk\Audio\AudioSource.cpp" />
     <ClCompile Include="Tusk\Audio\OpenAL\OpenALAudioClip.cpp" />
     <ClCompile Include="Tusk\Audio\OpenAL\OpenALAudioEngineAPI.cpp" />
+    <ClCompile Include="Tusk\Audio\OpenAL\OpenALSource.cpp" />
     <ClCompile Include="Tusk\Audio\WAVLoader.cpp" />
     <ClCompile Include="Tusk\Camera\SceneCamera.cpp" />
     <ClCompile Include="Tusk\GUI\ImGuiBuild.cpp" />

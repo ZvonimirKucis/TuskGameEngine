@@ -67,7 +67,7 @@ project "Tusk.Engine"
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.entt}",
 		"%{IncludeDir.xml}",
-		"%{IncludeDir.obj}"
+		"%{IncludeDir.obj}",
 	}
 
 	links 
@@ -76,7 +76,7 @@ project "Tusk.Engine"
 		"Glad",
 		"ImGui",
 		"opengl32.lib",
-		"pugiXML"
+		"pugiXML",
 	}
 
 	filter "system:windows"

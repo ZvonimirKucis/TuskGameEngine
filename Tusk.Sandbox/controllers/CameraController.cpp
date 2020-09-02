@@ -20,7 +20,7 @@ namespace Tusk {
 
 	void CameraController::onUpdate(float deltaTime) {
 		auto& transform = getComponent<TransformComponent>().transform;
-		auto pos = transform.getPositon();
+		auto pos = transform.getPosition();
 		
 		if (Input::isKeyPressed(TUSK_KEY_A))
 			pos.x -= SPEED * deltaTime;

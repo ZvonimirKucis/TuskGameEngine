@@ -7,17 +7,14 @@ namespace Tusk {
 	class OpenALAudioClip : public AudioClip {
 	public:
 		OpenALAudioClip(const std::string& path);
-
 		virtual ~OpenALAudioClip() override;
 
-		virtual void play() override;
+		virtual uint32_t getBuffer() override { return _buffer; };
 
 	private:
 		void loadData(const std::string& path);
-		void createSource();
 
 	private:
 		ALuint _buffer;
-		ALuint _source;
 	};
 }

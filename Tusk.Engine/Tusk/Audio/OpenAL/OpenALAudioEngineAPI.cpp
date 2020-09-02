@@ -1,6 +1,7 @@
 #include "tuskpch.h"
 
 #include "OpenALAudioEngineAPI.h"
+#include <AL/al.h>
 
 namespace Tusk{
 
@@ -11,6 +12,8 @@ namespace Tusk{
 		}
 		_openALContext = alcCreateContext(_openALDevice, nullptr);
 		alcMakeContextCurrent(_openALContext);
+
+		alDistanceModel(AL_LINEAR_DISTANCE_CLAMPED);
 	}
 
 	OpenALAudioEngineAPI::~OpenALAudioEngineAPI() {
