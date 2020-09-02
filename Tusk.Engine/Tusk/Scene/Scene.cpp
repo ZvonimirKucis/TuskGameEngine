@@ -84,6 +84,16 @@ namespace Tusk {
 				}
 			}
 
+			// Animated objects
+			{
+				auto view = _registry.view<TransformComponent, AnimatedMeshComponent>();
+				for (auto entity : view) {
+					auto [transform, animatedMesh] = view.get<TransformComponent, AnimatedMeshComponent>(entity);
+					animatedMesh.model->update(deltaTime);
+					Renderer::submit(animatedMesh.material, animatedMesh.model, transform.transform.getModelMatrix());
+				}
+			}
+
 			// Objects
 			{
 				auto view = _registry.view<TransformComponent, MeshComponent>();
@@ -93,10 +103,10 @@ namespace Tusk {
 				}
 			}
 
+			// Skybox
 			if (_skybox) {
 				Renderer::submit(_skybox);
 			}
-
 
 			Renderer::endScene();
 		}

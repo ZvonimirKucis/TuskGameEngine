@@ -10,7 +10,8 @@ namespace Tusk {
 		glm::vec3 normal;
 		glm::vec2 texCoords;
 		glm::vec3 tangent;
-		glm::vec3 bitangent;
+		glm::ivec3 jointIndices;
+		glm::vec3 weights;
 	};
 
 	class VertexBuffer {

@@ -5,8 +5,7 @@ workspace "Tusk"
 	configurations
 	{
 		"Debug",
-		"Release",
-		"Dist"
+		"Release"
 	}
 	
 	flags
@@ -24,6 +23,7 @@ IncludeDir["glm"] = "External/glm"
 IncludeDir["stb_image"] = "External/stb"
 IncludeDir["entt"] = "External/entt/include"
 IncludeDir["xml"] = "External/pugixml"
+IncludeDir["obj"] = "External/tiny"
 
 group "Dependencies"
 	include "External/GLFW"
@@ -66,7 +66,8 @@ project "Tusk.Engine"
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.entt}",
-		"%{IncludeDir.xml}"
+		"%{IncludeDir.xml}",
+		"%{IncludeDir.obj}"
 	}
 
 	links 
@@ -90,10 +91,6 @@ project "Tusk.Engine"
 		symbols "on"
 
 	filter "configurations:Release"
-		runtime "Release"
-		optimize "on"
-
-	filter "configurations:Dist"
 		runtime "Release"
 		optimize "on"
 
@@ -134,10 +131,6 @@ project "Tusk.Sandbox"
 		symbols "on"
 
 	filter "configurations:Release"
-		runtime "Release"
-		optimize "on"
-
-	filter "configurations:Dist"
 		runtime "Release"
 		optimize "on"
 

@@ -3,6 +3,6 @@
 #include "Animation.h"
 
 namespace Tusk {
-	Animation::Animation(float lengthInSeconds, const std::vector<KeyFrame>& keyFrames) 
+	Animation::Animation(float lengthInSeconds, const std::vector<Ref<KeyFrame>>& keyFrames) 
 		: _length(lengthInSeconds), _keyFrames(keyFrames){}
 }

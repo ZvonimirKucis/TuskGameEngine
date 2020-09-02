@@ -11,6 +11,10 @@ namespace Tusk {
 		_mesh = Loader::loadModel(path);
 	}
 
+	Model::Model(const Ref<Primitive>& primitive) {
+		_mesh = CreateRef<Mesh>(primitive->getVertices(), primitive->getIndices());
+	}
+
     void Model::draw() {
 		_mesh->draw();
     }

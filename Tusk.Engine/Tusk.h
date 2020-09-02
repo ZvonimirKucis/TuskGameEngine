@@ -28,6 +28,11 @@
 #include "Tusk/Skybox/Skybox.h"
 
 #include "Tusk/Model/Model.h"
+#include "Tusk/Model/AnimationModel.h"
 #include "Tusk/Model/Material.h"
+#include "Tusk/Model/Primitives/Primitive.h"
+
+#include "Tusk/Model/Loader.h"
+#include  "Tusk/Animation/Animation.h"
 
 #include "Tusk/Audio/AudioClip.h"

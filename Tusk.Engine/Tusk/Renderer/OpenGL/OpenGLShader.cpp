@@ -103,4 +103,12 @@ namespace Tusk {
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
 	}
 
+	void OpenGLShader::setMat4Array(const std::string& name, const std::vector<glm::mat4> values) {
+		for (int i = 0; i < values.size(); i++) {
+			std::string locationName = name + "[" + std::to_string(i) + "]";
+			GLint location = glGetUniformLocation(_rendererID, locationName.c_str());
+			glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(values[i]));
+		}
+	}
+
 }

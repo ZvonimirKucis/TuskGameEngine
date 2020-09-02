@@ -8,6 +8,7 @@
 #include "Tusk/Light/DirectionalLight.h"
 #include "Tusk/Skybox/Skybox.h"
 #include "Tusk/Model/Material.h"
+#include "Tusk/Model/AnimationModel.h"
 
 namespace Tusk {
 
@@ -23,6 +24,7 @@ namespace Tusk {
 		static void endScene();
 
 		static void submit(const Ref<Skybox>& skybox);
+		static void submit(const Ref<Material>& material, const Ref<AnimationModel>& animatedModel, const glm::mat4& transform = glm::mat4(1.0f));
 		static void submit(LightObject* lightObject, const glm::mat4& transform = glm::mat4(1.0f));
 		static void submit(const Ref<Material>& material, const Ref<Model>& model, const glm::mat4& transform = glm::mat4(1.0f));
 	private:

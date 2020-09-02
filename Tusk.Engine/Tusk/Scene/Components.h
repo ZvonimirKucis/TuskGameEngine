@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Tusk/Model/Model.h"
+#include "Tusk/Model/AnimationModel.h"
+
 #include "Tusk/Light/DirectionalLight.h"
 #include "Tusk/Light/LightObject.h"
 #include "Tusk/Camera/SceneCamera.h"
@@ -39,6 +41,16 @@ namespace Tusk {
 		MeshComponent() = default;
 		MeshComponent(const MeshComponent&) = default;
 		MeshComponent(const Ref<Model> model, const Ref<Material> material)
+			: model(model), material(material) {}
+	};
+
+	struct AnimatedMeshComponent {
+		Ref<AnimationModel> model;
+		Ref<Material> material;
+
+		AnimatedMeshComponent() = default;
+		AnimatedMeshComponent(const AnimatedMeshComponent&) = default;
+		AnimatedMeshComponent(const Ref<AnimationModel> model, const Ref<Material> material)
 			: model(model), material(material) {}
 	};
 

@@ -43,4 +43,8 @@ namespace Tusk {
 		_shader->setMat4("model", transform);
 	}
 
+	void LightShader::unbind() {
+		_shader->unbind();
+	}
+
 }

@@ -34,6 +34,15 @@
     <Filter Include="Tusk\Model\Collada">
       <UniqueIdentifier>{6B3161B5-5715-220B-C075-1C5EAC780C8D}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tusk\Model\OBJ">
+      <UniqueIdentifier>{3617FBBB-22E5-EEC1-0B79-5FE8F7E5CA26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tusk\Model\Primitives">
+      <UniqueIdentifier>{E7E0DE0E-534D-9A09-1C41-3267886CBC71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tusk\Model\Utils">
+      <UniqueIdentifier>{EC4CA6A7-D845-C5F9-0178-AA7EEDCFA405}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Tusk\Platform">
       <UniqueIdentifier>{2072220C-8C32-9E42-556D-E7BFC1ECE21E}</UniqueIdentifier>
     </Filter>
@@ -136,10 +145,22 @@
     <ClInclude Include="Tusk\Model\AnimationModel.h">
       <Filter>Tusk\Model</Filter>
     </ClInclude>
+    <ClInclude Include="Tusk\Model\Collada\AnimationLoader.h">
+      <Filter>Tusk\Model\Collada</Filter>
+    </ClInclude>
     <ClInclude Include="Tusk\Model\Collada\ColladaLoader.h">
       <Filter>Tusk\Model\Collada</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Model\Collada\GeometryLoader.h">
+      <Filter>Tusk\Model\Collada</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Model\Collada\SkeletonLoader.h">
+      <Filter>Tusk\Model\Collada</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Model\Collada\SkinLoader.h">
+      <Filter>Tusk\Model\Collada</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Model\Collada\VertexSkinData.h">
       <Filter>Tusk\Model\Collada</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Model\Loader.h">
@@ -153,6 +174,18 @@
     </ClInclude>
     <ClInclude Include="Tusk\Model\Model.h">
       <Filter>Tusk\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Model\OBJ\OBJLoader.h">
+      <Filter>Tusk\Model\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Model\Primitives\Cube.h">
+      <Filter>Tusk\Model\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Model\Primitives\Primitive.h">
+      <Filter>Tusk\Model\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Model\Utils\Utils.h">
+      <Filter>Tusk\Model\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Platform\GLFW\GLFWInput.h">
       <Filter>Tusk\Platform\GLFW</Filter>
@@ -310,10 +343,25 @@
     <ClCompile Include="Tusk\Light\LightShader.cpp">
       <Filter>Tusk\Light</Filter>
     </ClCompile>
+    <ClCompile Include="Tusk\Model\AnimationModel.cpp">
+      <Filter>Tusk\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Model\Collada\AnimationLoader.cpp">
+      <Filter>Tusk\Model\Collada</Filter>
+    </ClCompile>
     <ClCompile Include="Tusk\Model\Collada\ColladaLoader.cpp">
       <Filter>Tusk\Model\Collada</Filter>
     </ClCompile>
     <ClCompile Include="Tusk\Model\Collada\GeometryLoader.cpp">
+      <Filter>Tusk\Model\Collada</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Model\Collada\SkeletonLoader.cpp">
+      <Filter>Tusk\Model\Collada</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Model\Collada\SkinLoader.cpp">
+      <Filter>Tusk\Model\Collada</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Model\Collada\VertexSkinData.cpp">
       <Filter>Tusk\Model\Collada</Filter>
     </ClCompile>
     <ClCompile Include="Tusk\Model\Loader.cpp">
@@ -327,6 +375,18 @@
     </ClCompile>
     <ClCompile Include="Tusk\Model\Model.cpp">
       <Filter>Tusk\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Model\OBJ\OBJLoader.cpp">
+      <Filter>Tusk\Model\OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Model\Primitives\Cube.cpp">
+      <Filter>Tusk\Model\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Model\Primitives\Primitive.cpp">
+      <Filter>Tusk\Model\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Model\Utils\Utils.cpp">
+      <Filter>Tusk\Model\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Tusk\Platform\GLFW\GLFWInput.cpp">
       <Filter>Tusk\Platform\GLFW</Filter>

@@ -2,7 +2,7 @@
 out vec4 FragColor;
 
 in vec3 FragPos;
-in vec3 LightPos;
+//in vec3 LightPos;
 in vec2 TexCoords;
 
 //in vec3 TangentLightPos;
@@ -21,7 +21,7 @@ uniform sampler2D texture_diffuse;
 uniform sampler2D texture_normal;
 uniform sampler2D texture_specular;
 
-uniform vec3 lightColor;
+//uniform vec3 lightColor;
 
 void main() {
     vec3 normal = texture(texture_normal, TexCoords).rgb;

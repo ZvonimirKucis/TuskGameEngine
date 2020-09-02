@@ -1,35 +1,35 @@
 #version 330 core
-layout (location = 0) in vec3 aPos;
-layout (location = 1) in vec3 aNormal;
-layout (location = 2) in vec2 aTexCoords;
-layout (location = 3) in vec3 aTangent;
-layout (location = 4) in vec3 aBitangent;
+const int MAX_JOINTS = 50;
+const int MAX_WEIGHTS = 3;
 
-out vec3 FragPos;
-out vec2 TexCoords;
+layout (location = 0) in vec3 in_position;
+layout (location = 1) in vec3 in_normal;
+layout (location = 2) in vec2 in_texCoords;
+layout (location = 4) in ivec3 in_jointIndices;
+layout (location = 5) in vec3 in_weights;
 
-//out vec3 TangentLightPos;
-out vec3 TangentFragPos;
+out vec2 texCoords;
+out vec3 normal;
+out vec3 fragPos;
 
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
-uniform vec3 lightPos;
+uniform mat4 jointTransforms[MAX_JOINTS];
 
-void main() {   
-    FragPos = vec3(view * model * vec4(aPos, 1.0));
-    TexCoords = aTexCoords; 
-
-    mat3 normalMatrix = transpose(inverse(mat3(model)));
-    vec3 T = normalize(normalMatrix * aTangent);
-    vec3 N = normalize(normalMatrix * aNormal);
-    T = normalize(T - dot(T, N) * N);
-    vec3 B = cross(N, T);
+void main() {
+    vec4 totalLocalPos = vec4(0.0);
     
-    mat3 TBN = transpose(mat3(T, B, N));
-    //TangentLightPos = TBN * vec3(view * vec4(lightPos, 1.0));;
-    TangentFragPos  = TBN * FragPos;
+    for(int i = 0; i < MAX_WEIGHTS; i++) {
+        mat4 jointTransform = jointTransforms[in_jointIndices[i]];
+        vec4 posePosition = jointTransform * vec4(in_position, 1.0);
+        totalLocalPos += posePosition * in_weights[i];
+    }
 
-    gl_Position = projection * view * model * vec4(aPos, 1.0);
+    texCoords = in_texCoords;
+    normal = normalize(mat3(transpose(inverse(view * model))) * in_normal);
+    fragPos = vec3(view * model * totalLocalPos);
+
+    gl_Position = projection * view * model * totalLocalPos;
 }

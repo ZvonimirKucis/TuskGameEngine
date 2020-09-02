@@ -16,7 +16,6 @@ namespace Tusk {
 	}
 
 	GLFWWindow::GLFWWindow(const WindowCreateInfo& props) {
-		Logger::Trace("Creating GLFW window.");
 		init(props);
 	}
 

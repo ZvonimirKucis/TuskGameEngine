@@ -9,7 +9,7 @@ namespace Tusk {
 		LightShader();
 
 		void setShaderUniforms(const glm::mat4& projection, const glm::mat4& view, const glm::mat4& transform);
-
+		void unbind();
 	private:
 		void compileShader();
 

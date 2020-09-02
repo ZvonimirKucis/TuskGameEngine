@@ -10,7 +10,7 @@ namespace Tusk {
 		JointTransform(glm::vec3 position, glm::quat rotation);
 		glm::mat4 getLocalTransform();
 
-		static JointTransform* interpolate(JointTransform beginFrame, JointTransform endFramme, float progression);
+		static Ref<JointTransform> interpolate(const Ref<JointTransform>& beginFrame, const Ref<JointTransform>& endFramme, float progression);
 
 	private:
 		glm::vec3 _position;

@@ -21,6 +21,7 @@ namespace Tusk {
 		virtual void setFloat3(const std::string& name, const glm::vec3& value) = 0;
 		virtual void setFloat4(const std::string& name, const glm::vec4& value) = 0;
 		virtual void setMat4(const std::string& name, const glm::mat4& value) = 0;
+		virtual void setMat4Array(const std::string& name, const std::vector<glm::mat4> values) = 0;
 
 		static Ref<Shader> load(const std::string& vertexPath, const std::string& fragmentPath);
 		static Ref<Shader> compile(const std::string& vertexCode, const std::string& fragmentCode);

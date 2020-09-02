@@ -47,6 +47,30 @@ namespace Tusk {
 		lightObject->draw(_sceneData->projection, _sceneData->view, transform);
 	}
 
+	void Renderer::submit(const Ref<Material>& material, const Ref<AnimationModel>& animatedModel, const glm::mat4& transform) {
+		Ref<Shader> shader = material->getShader();
+
+		shader->bind();
+
+		shader->setMat4("projection", _sceneData->projection);
+		shader->setMat4("view", _sceneData->view);
+		shader->setMat4("model", transform);
+
+
+		shader->setFloat3("dirLight.direction", _sceneData->lightData.direction);
+		shader->setFloat3("dirLight.ambient", _sceneData->lightData.ambient);
+		shader->setFloat3("dirLight.diffuse", _sceneData->lightData.diffuse);
+		shader->setFloat3("dirLight.specular", _sceneData->lightData.specular);
+
+		shader->setMat4Array("jointTransforms", animatedModel->getJoinTransforms());
+
+		material->bindTextures();
+
+		animatedModel->draw();
+
+		shader->unbind();
+	}
+
 	void Renderer::submit(const Ref<Material>& material, const Ref<Model>& model, const glm::mat4& transform) {
 		Ref<Shader> shader = material->getShader();
 
@@ -65,6 +89,7 @@ namespace Tusk {
 		material->bindTextures();
 
 		model->draw();
+		shader->unbind();
 	}
 
 }

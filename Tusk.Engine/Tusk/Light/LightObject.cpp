@@ -16,6 +16,7 @@ namespace Tusk {
 		_vertexArray->bind();
 		RenderCommand::drawIndexed(_vertexArray);
 		_vertexArray->unbind();
+		_shader->unbind();
 	}
 
 	void LightObject::generateLightCubeBuffers() {
