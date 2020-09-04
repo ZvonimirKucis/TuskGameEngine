@@ -5,11 +5,11 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace Tusk {
-	glm::mat4 Utils::correction = glm::rotate(glm::mat4(1.0f), glm::radians(0.0f), glm::vec3(1, 0, 0));
+	glm::mat4 Utils::correction = glm::rotate(glm::mat4(1.0f), glm::radians(-90.0f), glm::vec3(1, 0, 0));
 
-	std::vector<std::string> Utils::split(const std::string& s, const char delim) {
+	std::vector<std::string> Utils::split(const std::string& str, const char delim) {
 		std::vector<std::string> result;
-		std::stringstream ss(s);
+		std::stringstream ss(str);
 		std::string item;
 
 		while (getline(ss, item, delim)) {
@@ -17,6 +17,17 @@ namespace Tusk {
 		}
 
 		return result;
+	}
+
+	std::string Utils::trim(const std::string& str)
+	{
+		size_t first = str.find_first_not_of(' ');
+		if (std::string::npos == first)
+		{
+			return str;
+		}
+		size_t last = str.find_last_not_of(' ');
+		return str.substr(first, (last - first + 1));
 	}
 
 	glm::quat Utils::quaternionFromMatrix(const glm::mat4& matrix) {

@@ -11,6 +11,7 @@ namespace Tusk {
 		_animator = CreateRef<Animator>(_rootJoint);
 		_rootJoint->calculateInverseBindTransform(glm::mat4(1.0f));
 		_transforms = std::vector<glm::mat4>(_jointCount);
+		Logger::Log("Root joint: %s", _rootJoint->getName().c_str());
 	}
 
 	void AnimationModel::update(float deltaTime) {

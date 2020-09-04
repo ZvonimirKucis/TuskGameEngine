@@ -50,8 +50,8 @@ namespace Tusk {
 		pugi::xml_node rootNode = doc.child("COLLADA");
 
 		pugi::xml_node animNode = rootNode.child("library_animations");
-		pugi::xml_node jointsNode = rootNode.child("library_visual_scenes");
-		Scope<AnimationLoader> animationLoader = CreateScope<AnimationLoader>(animNode, jointsNode);
+		//pugi::xml_node jointsNode = rootNode.child("library_visual_scenes");
+		Scope<AnimationLoader> animationLoader = CreateScope<AnimationLoader>(animNode);
 
 		return animationLoader->extractAnimation();
 	}

@@ -16,7 +16,7 @@ namespace Tusk {
 		_transform = transform;
 	}
 
-	void Joint::calculateInverseBindTransform(glm::mat4 parentBindTransform) {
+	void Joint::calculateInverseBindTransform(const glm::mat4& parentBindTransform) {
 		glm::mat4 bindTransform = parentBindTransform * _localBindTransform;
 		_invertedBindTransform = glm::inverse(bindTransform);
 		for (Ref<Joint> child : _children)

@@ -17,7 +17,7 @@ namespace Tusk {
 		void addChild(const Ref<Joint>& child);
 		void setAnimationTransform(glm::mat4 transform);
 
-		void calculateInverseBindTransform(glm::mat4 parentBindTransform);
+		void calculateInverseBindTransform(const glm::mat4& parentBindTransform);
 
 	private:
 		uint32_t _index;

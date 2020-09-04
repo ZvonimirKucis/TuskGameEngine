@@ -84,7 +84,7 @@ namespace Tusk {
 		positionsId.erase(0, 1);
 		pugi::xml_node positionsData = _meshData.find_child_by_attribute("source", "id", positionsId.c_str()).child("float_array");
 		
-		uint32_t count = std::stoi(positionsData.attribute("count").value());
+		uint32_t count = positionsData.attribute("count").as_int();
 		std::vector<std::string> positionDataVector = Utils::split(positionsData.child_value(), ' ');
 
 		for (int i = 0; i < count / 3; i++) {
@@ -107,7 +107,7 @@ namespace Tusk {
 		normalsId.erase(0, 1);
 		pugi::xml_node normalsData = _meshData.find_child_by_attribute("source", "id", normalsId.c_str()).child("float_array");
 
-		uint32_t count = std::stoi(normalsData.attribute("count").value());
+		uint32_t count = normalsData.attribute("count").as_int();
 		std::vector<std::string> normalDataVector = Utils::split(normalsData.child_value(), ' ');
 
 		for (int i = 0; i < count / 3; i++) {
@@ -130,7 +130,7 @@ namespace Tusk {
 		texCoordsId.erase(0, 1);
 		pugi::xml_node texCoordsData = _meshData.find_child_by_attribute("source", "id", texCoordsId.c_str()).child("float_array");
 
-		uint32_t count = std::stoi(texCoordsData.attribute("count").value());
+		uint32_t count = texCoordsData.attribute("count").as_int();
 		std::vector<std::string> texCoordsVector = Utils::split(texCoordsData.child_value(), ' ');
 
 		for (int i = 0; i < count / 2; i++) {

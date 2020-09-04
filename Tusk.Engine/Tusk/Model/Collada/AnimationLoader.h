@@ -8,12 +8,12 @@
 namespace Tusk {
 	class AnimationLoader {
 	public:
-		AnimationLoader(pugi::xml_node animationData, pugi::xml_node jointHierarchy);
+		AnimationLoader(pugi::xml_node animationData);
 
 		Ref<Animation> extractAnimation();
 
 	private:
-		std::string findRootJointName();
+		//std::string findRootJointName();
 		std::vector<float> getKeyTimes();
 		std::vector<Ref<KeyFrame>> initKeyFrames(const std::vector<float>& times);
 		void loadKeyFrameTransforms(std::vector<Ref<KeyFrame>>& keyFrames, pugi::xml_node jointNode, std::string rootNode);
@@ -24,6 +24,5 @@ namespace Tusk {
 
 	private:
 		pugi::xml_node _animationData;
-		pugi::xml_node _jointHierarchy;
 	};
 }

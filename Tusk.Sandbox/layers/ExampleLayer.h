@@ -69,7 +69,7 @@ public:
 		_playerEntity.addComponent<Tusk::AnimatedMeshComponent>(_playerModel, _playerMaterial);
 		//_playerEntity.addComponent<Tusk::ScriptComponent>().bind<Tusk::ModelController>();
 		auto& playerTransform = _playerEntity.getComponent<Tusk::TransformComponent>().transform;
-		playerTransform.setPosition(glm::vec3(-5.0f, 0.0f, -10.0f));
+		playerTransform.setPosition(glm::vec3(-5.0f, 0.0f, 0.0f));
 		playerTransform.setScale(1.5f);
 
 		_backpackEntity = _activeScene->createEntity("backpack");

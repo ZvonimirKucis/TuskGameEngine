@@ -6,11 +6,11 @@
 #include <glm/gtc/type_ptr.hpp>
 
 namespace Tusk {
-	AnimationLoader::AnimationLoader(pugi::xml_node animationData, pugi::xml_node jointHierarchy) 
-		:_animationData(animationData), _jointHierarchy(jointHierarchy){}
+	AnimationLoader::AnimationLoader(pugi::xml_node animationData) 
+		:_animationData(animationData){}
 
 	Ref<Animation> AnimationLoader::extractAnimation() {
-		std::string rootNode = findRootJointName();
+		std::string rootNode = "Torso";
 		
 		std::vector<float> times = getKeyTimes();
 		float duration = times[times.size() - 1];
@@ -27,7 +27,11 @@ namespace Tusk {
 		std::vector<float> times;
 
 		pugi::xml_node timeData = _animationData.child("animation").child("source").child("float_array");
-		std::vector<std::string> rawTimes = Utils::split(timeData.child_value(), ' ');
+		std::string str = timeData.child_value();
+		
+		std::replace(str.begin(), str.end(), '\n', ' ');
+		str = Utils::trim(str);
+		std::vector<std::string> rawTimes = Utils::split(str, ' ');
 
 		for (uint32_t i = 0; i < rawTimes.size(); i++) {
 			times.push_back(std::stof(rawTimes[i]));
@@ -48,10 +52,15 @@ namespace Tusk {
 
 	void AnimationLoader::loadKeyFrameTransforms(std::vector<Ref<KeyFrame>>& keyFrames, pugi::xml_node jointNode, std::string rootNode) {
 		std::string jointNameID = getJointName(jointNode);
+		//std::cout << jointNameID << std::endl;
 		std::string dataID = getDataID(jointNode);
 
 		pugi::xml_node transformData = jointNode.find_child_by_attribute("source", "id", dataID.c_str()).child("float_array");
-		std::vector<std::string> rawData = Utils::split(transformData.child_value(), ' ');
+		std::string str = transformData.child_value();
+		
+		std::replace(str.begin(), str.end(), '\n', ' ');
+		str = Utils::trim(str);
+		std::vector<std::string> rawData = Utils::split(str, ' ');
 
 		bool isRoot = strcmp(jointNameID.c_str(), rootNode.c_str()) == 0;
 		processTransforms(jointNameID, rawData, keyFrames, isRoot);
@@ -90,8 +99,8 @@ namespace Tusk {
 		return dataID.erase(0, 1);
 	}
 
-	std::string AnimationLoader::findRootJointName() {
+	/*std::string AnimationLoader::findRootJointName() {
 		pugi::xml_node skeleton = _jointHierarchy.child("visual_scene").find_child_by_attribute("node", "id", "Armature");
 		return skeleton.child("node").attribute("id").as_string();
-	}
+	}*/
 }

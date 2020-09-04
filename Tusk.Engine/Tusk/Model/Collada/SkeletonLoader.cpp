@@ -32,7 +32,11 @@ namespace Tusk {
 		auto it = std::find(_boneOrder.begin(), _boneOrder.end(), nameID);
 		uint32_t index = std::distance(_boneOrder.begin(), it);
 
-		std::vector<std::string> matrixData = Utils::split(jointNode.child("matrix").child_value(), ' ');
+		std::string str = jointNode.child("matrix").child_value();
+		//str.erase(std::remove(str.begin(), str.end(), '\n'), str.end());
+		//std::replace(str.begin(), str.end(), '\n', ' ');
+		//str = Utils::trim(str);
+		std::vector<std::string> matrixData = Utils::split(str, ' ');
 		glm::mat4 matrix = glm::make_mat4(convertMatrixData(matrixData));
 
 		matrix = glm::transpose(matrix);
