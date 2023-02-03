@@ -34,9 +34,6 @@
     <Filter Include="Tusk\Model\Collada">
       <UniqueIdentifier>{6B3161B5-5715-220B-C075-1C5EAC780C8D}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tusk\Model\OBJ">
-      <UniqueIdentifier>{3617FBBB-22E5-EEC1-0B79-5FE8F7E5CA26}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Tusk\Model\Primitives">
       <UniqueIdentifier>{E7E0DE0E-534D-9A09-1C41-3267886CBC71}</UniqueIdentifier>
     </Filter>
@@ -94,10 +91,16 @@
     <ClInclude Include="Tusk\Audio\AudioEngineAPI.h">
       <Filter>Tusk\Audio</Filter>
     </ClInclude>
+    <ClInclude Include="Tusk\Audio\AudioSource.h">
+      <Filter>Tusk\Audio</Filter>
+    </ClInclude>
     <ClInclude Include="Tusk\Audio\OpenAL\OpenALAudioClip.h">
       <Filter>Tusk\Audio\OpenAL</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Audio\OpenAL\OpenALAudioEngineAPI.h">
+      <Filter>Tusk\Audio\OpenAL</Filter>
+    </ClInclude>
+    <ClInclude Include="Tusk\Audio\OpenAL\OpenALSource.h">
       <Filter>Tusk\Audio\OpenAL</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Audio\WAVLoader.h">
@@ -174,9 +177,6 @@
     </ClInclude>
     <ClInclude Include="Tusk\Model\Model.h">
       <Filter>Tusk\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Tusk\Model\OBJ\OBJLoader.h">
-      <Filter>Tusk\Model\OBJ</Filter>
     </ClInclude>
     <ClInclude Include="Tusk\Model\Primitives\Cube.h">
       <Filter>Tusk\Model\Primitives</Filter>
@@ -284,8 +284,7 @@
       <Filter>Tusk\Utils</Filter>
     </ClInclude>
     <ClInclude Include="tuskpch.h" />
-    <ClInclude Include="Tusk\Audio\AudioSource.h" />
-    <ClInclude Include="Tusk\Audio\OpenAL\OpenALSource.h" />
+    <ClInclude Include="Tusk\Model\OBJ\OBJLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tusk\Animation\Animation.cpp">
@@ -315,10 +314,16 @@
     <ClCompile Include="Tusk\Audio\AudioEngineAPI.cpp">
       <Filter>Tusk\Audio</Filter>
     </ClCompile>
+    <ClCompile Include="Tusk\Audio\AudioSource.cpp">
+      <Filter>Tusk\Audio</Filter>
+    </ClCompile>
     <ClCompile Include="Tusk\Audio\OpenAL\OpenALAudioClip.cpp">
       <Filter>Tusk\Audio\OpenAL</Filter>
     </ClCompile>
     <ClCompile Include="Tusk\Audio\OpenAL\OpenALAudioEngineAPI.cpp">
+      <Filter>Tusk\Audio\OpenAL</Filter>
+    </ClCompile>
+    <ClCompile Include="Tusk\Audio\OpenAL\OpenALSource.cpp">
       <Filter>Tusk\Audio\OpenAL</Filter>
     </ClCompile>
     <ClCompile Include="Tusk\Audio\WAVLoader.cpp">
@@ -377,9 +382,6 @@
     </ClCompile>
     <ClCompile Include="Tusk\Model\Model.cpp">
       <Filter>Tusk\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Tusk\Model\OBJ\OBJLoader.cpp">
-      <Filter>Tusk\Model\OBJ</Filter>
     </ClCompile>
     <ClCompile Include="Tusk\Model\Primitives\Cube.cpp">
       <Filter>Tusk\Model\Primitives</Filter>
@@ -466,7 +468,6 @@
       <Filter>Tusk\Utils</Filter>
     </ClCompile>
     <ClCompile Include="tuskpch.cpp" />
-    <ClCompile Include="Tusk\Audio\AudioSource.cpp" />
-    <ClCompile Include="Tusk\Audio\OpenAL\OpenALSource.cpp" />
+    <ClCompile Include="Tusk\Model\OBJ\OBJLoader.cpp" />
   </ItemGroup>
 </Project>

@@ -2,15 +2,11 @@
 out vec4 FragColor;
 
 in vec3 FragPos;
-//in vec3 LightPos;
 in vec2 TexCoords;
-
-//in vec3 TangentLightPos;
 in vec3 TangentFragPos;
 
 struct DirLight {
     vec3 direction;
-  
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
@@ -21,8 +17,6 @@ uniform sampler2D texture_diffuse;
 uniform sampler2D texture_normal;
 uniform sampler2D texture_specular;
 
-//uniform vec3 lightColor;
-
 void main() {
     vec3 normal = texture(texture_normal, TexCoords).rgb;
     normal = normalize(normal * 2.0 - 1.0); 
@@ -31,7 +25,6 @@ void main() {
     vec3 ambient = dirLight.ambient * texture(texture_diffuse, TexCoords).rgb;    
     
      // diffuse 
-    //vec3 lightDir = normalize(TangentLightPos - TangentFragPos);
     vec3 lightDir = normalize(-dirLight.direction);
     float diff = max(dot(normal, lightDir), 0.0);
     vec3 diffuse = dirLight.diffuse * diff * texture(texture_diffuse, TexCoords).rgb;

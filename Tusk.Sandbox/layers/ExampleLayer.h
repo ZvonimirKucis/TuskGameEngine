@@ -12,17 +12,16 @@ public:
 	ExampleLayer() : Layer("example") {}
 
 	void onAttach() override {
-		//_animatedPlayerModel = Tusk::CreateRef<Tusk::AnimationModel>("assets/objects/model.dae");
 		_runAnimation = Tusk::Loader::loadAnimation("assets/objects/model.dae");
 
 		_playerModel = Tusk::CreateRef<Tusk::AnimationModel>("assets/objects/model.dae");
 		_playerModel->playAnimation(_runAnimation);
-		_playerShader = Tusk::Shader::load("assets/shaders/player.vs", "assets/shaders/player.fs");
+		_playerShader = Tusk::Shader::load("assets/shaders/animation.vs", "assets/shaders/animation.fs");
 		_playerMaterial = Tusk::CreateRef<Tusk::Material>(_playerShader);
 		_playerMaterial->set2DTexture(Tusk::Texture2D::create("assets/objects/diffuse.png", Tusk::TextureType::Diffuse, true));
 		
 		_groundModel = Tusk::CreateRef<Tusk::Model>(Tusk::Primitive::instantiate(Tusk::PrimitiveType::Cube));
-		_groundShader = Tusk::Shader::load("assets/shaders/default_env_mapping.vs", "assets/shaders/default_env_mapping.fs");
+		_groundShader = Tusk::Shader::load("assets/shaders/blank.vs", "assets/shaders/blank.fs");
 		_groundMaterial = Tusk::CreateRef<Tusk::Material>(_groundShader);
 
 		_backpackModel = Tusk::CreateRef<Tusk::Model>("assets/objects/backpack/backpack.obj");
@@ -41,9 +40,7 @@ public:
 			"assets/skybox/front.jpg",
 			"assets/skybox/back.jpg"
 		};
-		
 		_skybox = Tusk::CreateRef<Tusk::Skybox>(faces);
-		//_envMappingShader = Tusk::Shader::load("assets/shaders/default_env_mapping.vs", "assets/shaders/default_env_mapping.fs");
 
 		_activeScene = Tusk::CreateScope<Tusk::Scene>();
 		_activeScene->renderLightObjects(false);
@@ -67,7 +64,6 @@ public:
 
 		_playerEntity = _activeScene->createEntity("player");
 		_playerEntity.addComponent<Tusk::AnimatedMeshComponent>(_playerModel, _playerMaterial);
-		//_playerEntity.addComponent<Tusk::ScriptComponent>().bind<Tusk::ModelController>();
 		auto& playerTransform = _playerEntity.getComponent<Tusk::TransformComponent>().transform;
 		playerTransform.setPosition(glm::vec3(-5.0f, 0.0f, 0.0f));
 		playerTransform.setScale(1.5f);
@@ -80,12 +76,12 @@ public:
 		transformTest.setPosition(glm::vec3(5.0f, 10.0f, -10.0f));
 		transformTest.setScale(1.5f);
 
-		/*_groundEntity = _activeScene->createEntity("ground");
+		_groundEntity = _activeScene->createEntity("ground");
 		_groundEntity.addComponent<Tusk::MeshComponent>(_groundModel, _groundMaterial);
 		auto& groundTransform = _groundEntity.getComponent<Tusk::TransformComponent>().transform;
 		groundTransform.setPosition(glm::vec3(5.0f, 0.0f, -10.0f));
-		groundTransform.setScale(glm::vec3(10.0f, 0.2f, 10.0f));*/
-
+		groundTransform.setScale(glm::vec3(10.0f, 0.2f, 10.0f));
+		
 		_activeScene->startScene();
 	}
 

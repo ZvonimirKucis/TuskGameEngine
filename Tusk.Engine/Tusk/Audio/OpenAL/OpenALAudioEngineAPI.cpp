@@ -1,7 +1,7 @@
 #include "tuskpch.h"
 
 #include "OpenALAudioEngineAPI.h"
-#include <AL/al.h>
+#include <al.h>
 
 namespace Tusk{
 

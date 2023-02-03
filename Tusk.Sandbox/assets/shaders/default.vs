@@ -27,7 +27,6 @@ void main() {
     vec3 B = cross(N, T);
     
     mat3 TBN = transpose(mat3(T, B, N));
-    //TangentLightPos = TBN * vec3(view * vec4(lightPos, 1.0));;
     TangentFragPos  = TBN * FragPos;
 
     gl_Position = projection * view * model * vec4(aPos, 1.0);

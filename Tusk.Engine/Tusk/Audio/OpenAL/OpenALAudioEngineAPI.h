@@ -2,7 +2,7 @@
 
 #include "Tusk/Audio/AudioEngineAPI.h"
 
-#include <AL/alc.h>
+#include <alc.h>
 
 namespace Tusk {
 
