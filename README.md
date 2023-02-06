@@ -12,4 +12,4 @@ Start by cloning the repository with `git clone https://github.com/ZvonimirKucis
 
 <ins>**2. Generate solution:**</ins>
 
-1. Run the `GenerateSolution.bat` file found in `premake` folder. This will generate a Visual Studio solution file for user's usage.
+Run the `GenerateSolution.bat` file found in `premake` folder. This will generate a Visual Studio solution file for user's usage.
