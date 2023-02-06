@@ -139,7 +139,7 @@
     <ClInclude Include="Tusk\Model\Material.h" />
     <ClInclude Include="Tusk\Model\Mesh.h" />
     <ClInclude Include="Tusk\Model\Model.h" />
-    <ClInclude Include="Tusk\Model\OBJ\OBJLoader.h" />
+    <ClInclude Include="Tusk\Model\OBJLoader\OBJLoader.h" />
     <ClInclude Include="Tusk\Model\Primitives\Cube.h" />
     <ClInclude Include="Tusk\Model\Primitives\Primitive.h" />
     <ClInclude Include="Tusk\Model\Utils\Utils.h" />
@@ -210,7 +210,7 @@
     <ClCompile Include="Tusk\Model\Material.cpp" />
     <ClCompile Include="Tusk\Model\Mesh.cpp" />
     <ClCompile Include="Tusk\Model\Model.cpp" />
-    <ClCompile Include="Tusk\Model\OBJ\OBJLoader.cpp" />
+    <ClCompile Include="Tusk\Model\OBJLoader\OBJLoader.cpp" />
     <ClCompile Include="Tusk\Model\Primitives\Cube.cpp" />
     <ClCompile Include="Tusk\Model\Primitives\Primitive.cpp" />
     <ClCompile Include="Tusk\Model\Utils\Utils.cpp" />

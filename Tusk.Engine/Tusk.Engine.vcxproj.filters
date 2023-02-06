@@ -284,7 +284,7 @@
       <Filter>Tusk\Utils</Filter>
     </ClInclude>
     <ClInclude Include="tuskpch.h" />
-    <ClInclude Include="Tusk\Model\OBJ\OBJLoader.h" />
+    <ClInclude Include="Tusk\Model\OBJLoader\OBJLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Tusk\Animation\Animation.cpp">
@@ -468,6 +468,6 @@
       <Filter>Tusk\Utils</Filter>
     </ClCompile>
     <ClCompile Include="tuskpch.cpp" />
-    <ClCompile Include="Tusk\Model\OBJ\OBJLoader.cpp" />
+    <ClCompile Include="Tusk\Model\OBJLoader\OBJLoader.cpp" />
   </ItemGroup>
 </Project>

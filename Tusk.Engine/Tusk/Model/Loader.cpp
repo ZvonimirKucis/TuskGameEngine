@@ -2,7 +2,7 @@
 
 #include "Loader.h"
 #include "Collada/ColladaLoader.h"
-#include "OBJ/OBJLoader.h"
+#include "OBJLoader/OBJLoader.h"
 
 namespace Tusk {
 
