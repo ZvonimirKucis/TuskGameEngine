@@ -24,12 +24,14 @@ IncludeDir["stb_image"] = "External/stb"
 IncludeDir["entt"] = "External/entt/include"
 IncludeDir["xml"] = "External/pugixml"
 IncludeDir["obj"] = "External/tiny"
+IncludeDir["sound"] = "External/soloud/include"
 
 group "Dependencies"
 	include "External/GLFW"
 	include "External/Glad"
 	include "External/imgui"
 	include "External/pugixml"
+	include "External/soloud"
 group ""
 
 project "Tusk.Engine"
@@ -68,6 +70,7 @@ project "Tusk.Engine"
 		"%{IncludeDir.entt}",
 		"%{IncludeDir.xml}",
 		"%{IncludeDir.obj}",
+		"%{IncludeDir.sound}",
 	}
 
 	links 
@@ -77,6 +80,7 @@ project "Tusk.Engine"
 		"ImGui",
 		"opengl32.lib",
 		"pugiXML",
+		"SoLoud"
 	}
 
 	filter "system:windows"

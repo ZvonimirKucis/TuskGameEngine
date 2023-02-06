@@ -4,7 +4,7 @@ namespace Tusk {
 
 	class AudioEngineAPI {
 	public:
-		virtual ~AudioEngineAPI() = default;
+		virtual ~AudioEngineAPI() = 0;
 
 		virtual void init() = 0;
 

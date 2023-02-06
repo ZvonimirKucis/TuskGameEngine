@@ -7,12 +7,12 @@ namespace Tusk {
 	Ref<AudioClip> audioClip;
 
 	void ModelController::onCreate() {
-		audioClip = AudioClip::load("assets/sound/africa-toto.wav");
+		/*audioClip = AudioClip::load("assets/sound/africa-toto.wav");
 		auto& source = getComponent<AudioSourceComponent>().source;
 		source->setMaxDistance(50.0f);
 		source->setVolume(0.3f);
 		source->setLooping(true);
-		source->play(audioClip);
+		source->play(audioClip);*/
 	}
 
 	void ModelController::onDestroy() {

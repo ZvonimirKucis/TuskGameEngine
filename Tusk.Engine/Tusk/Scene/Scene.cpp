@@ -79,7 +79,7 @@ namespace Tusk {
 				auto [transform, audioSource] = view.get<TransformComponent, AudioSourceComponent>(entity);
 				glm::mat4 applyTransform = viewMatrix * transform.transform.getModelMatrix();
 				glm::vec4 pos = applyTransform[3];
-				audioSource.source->setPosition(pos.x, pos.y, pos.z);
+				//audioSource.source->setPosition(pos.x, pos.y, pos.z);
 			}
 		}
 
