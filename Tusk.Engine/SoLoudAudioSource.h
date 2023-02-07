@@ -19,6 +19,5 @@ namespace Tusk {
 
 	private:
 		Ref<AudioClip> _clip;
-		SoLoud::Soloud* _soloudEngine;
 	};
 }
