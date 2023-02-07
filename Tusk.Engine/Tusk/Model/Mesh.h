@@ -1,28 +1,25 @@
 #pragma once
 
-#include "../Renderer/Vulkan/VulkanVertex.h"
-#include "../Renderer/Buffer.h"
+#include "Tusk/Renderer/Buffer.h"
+#include "Tusk/Renderer/VertexArray.h"
 
 namespace Tusk {
 
 	class Mesh {
 	public:
-		Mesh(std::string modelPath);
+		Mesh() = default;
+		Mesh(std::vector<Vertex>& vertices, std::vector<uint32_t>& indices);
 		~Mesh();
 
-		VertexBuffer* getVertexBuffer() { return _vertexBuffer; }
-		IndexBuffer* getIndexBuffer() { return _indexBuffer; }
+		void draw();
 
 	private:
-		void loadModel(std::string modelPath);
-		void createBuffers();
+		void setupMesh(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices);
 
 	private:
-		std::vector<Vertex> _vertices;
-		std::vector<uint32_t> _indices;
+		Ref<VertexArray> _vertexArray;
 
-		VertexBuffer* _vertexBuffer;
-		IndexBuffer* _indexBuffer;
+		friend class Model;
 	};
 
 }

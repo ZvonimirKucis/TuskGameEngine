@@ -1,6 +1,6 @@
-#include "tuskpch.h"
+#include "tuskpch.h"	
 
-#include "../Renderer/Renderer.h"
+#include "Tusk/Renderer/Renderer.h"
 
 #include "Scene.h"
 #include "Entity.h"
@@ -8,10 +8,7 @@
 
 namespace Tusk {
 
-	Scene::Scene() {
-		_shader = Tusk::Shader::create("assets/shaders/main.vert.spv", "assets/shaders/main.frag.spv");
-		_texture = Tusk::Texture::create("assets/textures/viking_room.png");
-	}
+	Scene::Scene() {}
 
 	Entity Scene::createEntity(const std::string& name) {
 		Entity entity =  {_registry.create(), this};
@@ -23,48 +20,130 @@ namespace Tusk {
 		return entity;
 	}
 
-	void Scene::onUpdate(float deltaTime) {
-
-		// Scripts
+	void Scene::startScene() {
+		// Create scripts
 		{
-			_registry.view<ScriptComponent>().each([=](auto entity, auto& nsc)
-				{
-					if (!nsc.instance)
-					{
-						nsc.instantiateFunction();
-						nsc.instance->_entity = Entity{ entity, this };
-
-						if (nsc.onCreateFunction)
-							nsc.onCreateFunction(nsc.instance);
-					}
-
-					if (nsc.onUpdateFunction)
-						nsc.onUpdateFunction(nsc.instance, deltaTime);
-				});
+			auto view = _registry.view<ScriptComponent>();
+			for (auto entity : view) {
+				auto& script = view.get<ScriptComponent>(entity);
+				script.instance = script.instantiateScript();
+				script.instance->_entity = Entity(entity, this);
+				script.instance->onCreate();
+			}
 		}
+
+		// Get directional light data
+		{
+			auto view = _registry.view<DirectionalLightComponent>();
+			for (auto entity : view) {
+				auto& light = view.get<DirectionalLightComponent>(entity);
+				_lightData = light.lightData;
+				break;
+			}
+		}
+	}
+
+	void Scene::onUpdate(float deltaTime) {
+		// Update scripts
+		{
+			auto view = _registry.view<ScriptComponent>();
+			for (auto entity : view) {
+				auto& script = view.get<ScriptComponent>(entity);
+				script.instance->onUpdate(deltaTime);
+				
+			}
+		}
+
+		// Find primary camera
+		Camera* mainCamera = nullptr;
+		glm::mat4 viewMatrix = glm::mat4(1.0f);
+		{
+			auto view = _registry.view<TransformComponent, CameraComponent>();
+			for (auto entity : view)
+			{
+				auto [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
+
+				if (camera.primary)
+				{
+					mainCamera = &camera.camera;
+					viewMatrix = glm::inverse(transform.transform.getModelMatrix());
+					break;
+				}
+			}
+		}
+
+		// Adjust sound position
+		if (mainCamera) {
+			auto view = _registry.view<TransformComponent, AudioSourceComponent>();
+			for (auto entity : view) {
+				auto [transform, audioSource] = view.get<TransformComponent, AudioSourceComponent>(entity);
+				glm::mat4 applyTransform = viewMatrix * transform.transform.getModelMatrix();
+				glm::vec4 pos = applyTransform[3];
+				//audioSource.source->setPosition(pos.x, pos.y, pos.z);
+			}
+		}
+
 
 		// Render
-		{
-			//auto view = _registry.view<TransformComponent, CameraComponent>();
-
-			/*for (auto entity : view) {
-				auto& [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
-
-				if (camera.primary) {
-
+		if(mainCamera) {
+			Renderer::beginScene(*mainCamera, viewMatrix, _lightData);
+			// Lights
+			if(_renderLights) {
+				auto view = _registry.view<TransformComponent, PointLightComponent>();
+				for (auto entity : view) {
+					auto [transform, light] = view.get<TransformComponent, PointLightComponent>(entity);
+					Renderer::submit(light.getRef(), transform.transform.getModelMatrix());
 				}
-			}*/
-
-			Renderer::beginScene();
-			Renderer::clear();
-			auto view = _registry.view<TransformComponent, MeshComponent>();
-			for (auto entity : view) {
-				auto [transform, mesh] = view.get<TransformComponent, MeshComponent>(entity);
-				
-				Renderer::submit(_shader, mesh.mesh->getVertexBuffer(), mesh.mesh->getIndexBuffer(), _texture);
 			}
+
+			// Animated objects
+			{
+				auto view = _registry.view<TransformComponent, AnimatedMeshComponent>();
+				for (auto entity : view) {
+					auto [transform, animatedMesh] = view.get<TransformComponent, AnimatedMeshComponent>(entity);
+					animatedMesh.model->update(deltaTime);
+					Renderer::submit(animatedMesh.material, animatedMesh.model, transform.transform.getModelMatrix());
+				}
+			}
+
+			// Objects
+			{
+				auto view = _registry.view<TransformComponent, MeshComponent>();
+				for (auto entity : view) {
+					auto [transform, mesh] = view.get<TransformComponent, MeshComponent>(entity);
+					Renderer::submit(mesh.material, mesh.model, transform.transform.getModelMatrix());
+				}
+			}
+
+			// Skybox
+			if (_skybox) {
+				Renderer::submit(_skybox);
+			}
+
 			Renderer::endScene();
 		}
+	}
+
+	void Scene::endScene() {
+		// Destroy scripts
+		{
+			auto view = _registry.view<ScriptComponent>();
+			for (auto entity : view) {
+				auto& script = view.get<ScriptComponent>(entity);
+				script.instance->onDestroy();
+				script.destroyScript(&script);
+			}
+		}
+	}
+
+
+	void Scene::onViewportResize(uint32_t width, uint32_t height) {
+		auto view = _registry.view<CameraComponent>();
+		for (auto entity : view) {
+			auto& cameraComponent = view.get<CameraComponent>(entity);
+			cameraComponent.camera.setViewportSize(width, height);
+		}
+
 	}
 
 	Scene::~Scene() {

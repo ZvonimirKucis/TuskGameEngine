@@ -3,16 +3,22 @@
 #include "Application.h"
 #include "Renderer/Renderer.h"
 
+
 namespace Tusk {
 	Application* Application::_instance = nullptr;
 
-	Application::Application() {
+	Application::Application(const std::string& name, uint32_t width, uint32_t height) {
 		_instance = this;
 
-		_window = Window::create();
+		_window = Window::create(WindowCreateInfo(name, width, height));
 		_window->setEventCallback(std::bind(&Application::onEvent, this, std::placeholders::_1));
+		_window->setVSync(true);
 
-		Renderer::init(_window);
+		_imGuiLayer = new ImGuiLayer();
+		pushOverlay(_imGuiLayer);
+
+		Renderer::init();
+		AudioEngine::init();
 	}
 
 	void Application::pushLayer(Layer* layer) {
@@ -46,9 +52,14 @@ namespace Tusk {
 			if (!_minimized) {
 				for (Layer* layer : _layerStack) {
 					layer->onUpdate(deltaTime);
-				}
-				Renderer::update();
+				} 
 			}
+
+			_imGuiLayer->begin();
+			for (Layer* layer : _layerStack) {
+				layer->onImGuiRender(deltaTime);
+			}
+			_imGuiLayer->end();
 
 			_window->onUpdate();
 		}
@@ -65,11 +76,10 @@ namespace Tusk {
 			return false;
 		}
 		_minimized = false;
-		Renderer::onWindowResize();
+		Renderer::onWindowResize(e.getWidth(), e.getHeight());
 		return false;
 	}
 
 	Application::~Application() {
-
 	}
 }

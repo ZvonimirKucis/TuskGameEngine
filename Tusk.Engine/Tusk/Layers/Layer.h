@@ -1,11 +1,9 @@
 #pragma once
-#include "../Utils/Defines.h"
-#include "../Events/Event.h"
+#include "Tusk/Events/Event.h"
 
 namespace Tusk {
 
-	class Layer
-	{
+	class Layer {
 	public:
 		Layer(const std::string& name = "Layer");
 		virtual ~Layer() = default;
@@ -13,7 +11,7 @@ namespace Tusk {
 		virtual void onAttach() {}
 		virtual void onDetach() {}
 		virtual void onUpdate(float deltaTime) {}
-		//virtual void OnImGuiRender() {}
+		virtual void onImGuiRender(float deltaTime) {}
 		virtual void onEvent(Event& event) {}
 
 		const std::string& getName() const { return _debugName; }

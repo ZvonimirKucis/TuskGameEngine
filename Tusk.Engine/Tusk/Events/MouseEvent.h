@@ -7,32 +7,32 @@ namespace Tusk {
 	{
 	public:
 		MouseMovedEvent(float x, float y)
-			: m_MouseX(x), m_MouseY(y) {}
+			: _mouseX(x), _mouseY(y) {}
 
-		float getX() const { return m_MouseX; }
-		float getY() const { return m_MouseY; }
+		float getX() const { return _mouseX; }
+		float getY() const { return _mouseY; }
 
 		std::string toString() const override
 		{
 			std::stringstream ss;
-			ss << "MouseMovedEvent: " << m_MouseX << ", " << m_MouseY;
+			ss << "MouseMovedEvent: " << _mouseX << ", " << _mouseY;
 			return ss.str();
 		}
 
 		EVENT_CLASS_TYPE(MouseMoved)
 			EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 	private:
-		float m_MouseX, m_MouseY;
+		float _mouseX, _mouseY;
 	};
 
 	class MouseScrolledEvent : public Event
 	{
 	public:
 		MouseScrolledEvent(float xOffset, float yOffset)
-			: m_XOffset(xOffset), m_YOffset(yOffset) {}
+			: _xOffset(xOffset), _yOffset(yOffset) {}
 
-		float getXOffset() const { return m_XOffset; }
-		float getYOffset() const { return m_YOffset; }
+		float getXOffset() const { return _xOffset; }
+		float getYOffset() const { return _yOffset; }
 
 		std::string toString() const override
 		{
@@ -44,7 +44,7 @@ namespace Tusk {
 		EVENT_CLASS_TYPE(MouseScrolled)
 			EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 	private:
-		float m_XOffset, m_YOffset;
+		float _xOffset, _yOffset;
 	};
 
 	class MouseButtonEvent : public Event

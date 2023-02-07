@@ -1,23 +1,21 @@
 #pragma once
 
-#include "../Renderer/Shader.h"
+#include "Tusk/Renderer/Shader.h"
+#include "Tusk/Renderer/Texture.h"
 
 namespace Tusk {
-
 	class Material {
 	public:
-		Material() = default;
+		Material(const Ref<Shader>& shader);
 
-		bool isLoaded() { return _loaded; }
-		Shader* getShader() { return _shader; }
+		Ref<Shader> getShader() { return _materialShader; }
+		
+		void set2DTexture(const Ref<Texture2D>& texture);
 
+		void bindTextures();
 	private:
-		void createShader();
-		void loadTextures();
-
-	private:
-		bool _loaded = false;
-		Shader* _shader;
+		Ref<Shader> _materialShader;
+		std::vector<Ref<Texture2D>> _textures;
 	};
 
 }

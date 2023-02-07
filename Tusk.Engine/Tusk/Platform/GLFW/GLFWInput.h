@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Input.h"
+#include "Tusk/Platform/Input.h"
 
 namespace Tusk {
 

@@ -1,7 +1,15 @@
 #pragma once
 
-#include "../Model/Mesh.h"
-#include "../Model/Material.h"
+#include "Tusk/Model/Model.h"
+#include "Tusk/Model/AnimationModel.h"
+#include "Tusk/Model/Material.h"
+
+#include "Tusk/Light/DirectionalLight.h"
+#include "Tusk/Light/LightObject.h"
+
+#include "Tusk/Camera/SceneCamera.h"
+
+#include "Tusk/Audio/AudioSource.h"
 
 #include "ScriptableEntity.h"
 #include "Transform.h"
@@ -30,41 +38,74 @@ namespace Tusk {
 	};
 
 	struct MeshComponent {
-		Mesh* mesh;
-		Material* material;
+		Ref<Model> model;
+		Ref<Material> material;
 
 		MeshComponent() = default;
 		MeshComponent(const MeshComponent&) = default;
-		MeshComponent(Mesh* mesh)
-			: mesh(mesh) {}
-		MeshComponent(Mesh* mesh, Material* material)
-			: mesh(mesh), material(material) {}
+		MeshComponent(const Ref<Model> model, const Ref<Material> material)
+			: model(model), material(material) {}
 	};
 
-	struct ScriptComponent
-	{
+	struct AnimatedMeshComponent {
+		Ref<AnimationModel> model;
+		Ref<Material> material;
+
+		AnimatedMeshComponent() = default;
+		AnimatedMeshComponent(const AnimatedMeshComponent&) = default;
+		AnimatedMeshComponent(const Ref<AnimationModel> model, const Ref<Material> material)
+			: model(model), material(material) {}
+	};
+
+	struct ScriptComponent {
 		ScriptableEntity* instance = nullptr;
 
-		std::function<void()> instantiateFunction;
-		std::function<void()> destroyInstanceFunction;
-
-		std::function<void(ScriptableEntity*)> onCreateFunction;
-		std::function<void(ScriptableEntity*)> onDestroyFunction;
-		std::function<void(ScriptableEntity*, float)> onUpdateFunction;
+		ScriptableEntity* (*instantiateScript)();
+		void (*destroyScript)(ScriptComponent*);
 
 		template<typename T>
-		void Bind()
-		{
-			instantiateFunction = [&]() { instance = new T(); };
-			destroyInstanceFunction = [&]() { delete (T*)instance; instance = nullptr; };
-
-			onCreateFunction = [](ScriptableEntity* instance) { ((T*)instance)->onCreate(); };
-			onDestroyFunction = [](ScriptableEntity* instance) { ((T*)instance)->onDestroy(); };
-			onUpdateFunction = [](ScriptableEntity* instance, float deltaTime) { ((T*)instance)->onUpdate(deltaTime); };
-		}	
+		void bind() {
+			instantiateScript = []() {return static_cast<ScriptableEntity*> (new T()); };
+			destroyScript = [](ScriptComponent* sc) {delete sc->instance; };
+		}
 	};
 
-	/*struct CameraComponent {
+	struct CameraComponent {
+		SceneCamera camera;
 		bool primary = true;
-	};*/
+
+		CameraComponent() = default;
+		CameraComponent(const CameraComponent&) = default;
+	};
+
+	struct PointLightComponent {
+		LightObject lightObject;
+
+		PointLightComponent() = default;
+		PointLightComponent(const PointLightComponent&) = default;
+
+		LightObject* getRef() {
+			return &lightObject;
+		}
+	};
+
+	struct DirectionalLightComponent {
+		DirectionalLight lightData;
+
+		DirectionalLightComponent() = default;
+		DirectionalLightComponent(const DirectionalLightComponent&) = default;
+		DirectionalLightComponent(const DirectionalLight& lightData)
+			:lightData(lightData) {}
+		
+	};
+
+	struct AudioSourceComponent {
+		Ref<AudioSource> source;
+
+		AudioSourceComponent() = default;
+		AudioSourceComponent(const AudioSourceComponent&) = default;
+		AudioSourceComponent(const Ref<AudioSource>& source)
+			:source(source) {}
+
+	};
 }

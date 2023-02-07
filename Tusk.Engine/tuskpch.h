@@ -13,6 +13,7 @@
 #include <cstdint>
 #include <algorithm>
 #include <chrono>
+#include <math.h> 
 
 #include "Tusk/Utils/Defines.h"
 #include "Tusk/Utils/Logger.h"

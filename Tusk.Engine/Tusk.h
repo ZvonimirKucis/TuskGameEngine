@@ -17,12 +17,23 @@
 #include "Tusk/Scene/Scene.h"
 #include "Tusk/Scene/Entity.h"
 #include "Tusk/Scene/Components.h"
+#include "Tusk/Scene/ScriptableEntity.h"
 
 #include "Tusk/Renderer/Renderer.h"
 #include "Tusk/Renderer/Shader.h"
 #include "Tusk/Renderer/Buffer.h"
 #include "Tusk/Renderer/Texture.h"
 
-#include "Tusk/Model/Mesh.h"
+#include "Tusk/Light/DirectionalLight.h"
+#include "Tusk/Skybox/Skybox.h"
 
-#include "Tusk/EntryPoint.h"
+#include "Tusk/Model/Model.h"
+#include "Tusk/Model/AnimationModel.h"
+#include "Tusk/Model/Material.h"
+#include "Tusk/Model/Primitives/Primitive.h"
+
+#include "Tusk/Model/Loader.h"
+#include  "Tusk/Animation/Animation.h"
+
+#include "Tusk/Audio/AudioClip.h"
+#include "Tusk/Audio/AudioSource.h"

@@ -1,46 +1,11 @@
 #include <Tusk.h>
+#include <Tusk/EntryPoint.h>
 
-class ExampleLayer : public Tusk::Layer {
-
-public:
-	ExampleLayer() : Layer("example") {}
-
-	void onAttach() override {
-		_activeScene = new Tusk::Scene();
-		_mesh = new Tusk::Mesh("assets/objects/viking_room.obj");
-
-		_roomEntity = _activeScene->createEntity("room");
-		_roomEntity.addComponent<Tusk::MeshComponent>(_mesh);
-	}
-
-	void onUpdate(float deltaTime) override {
-		_activeScene->onUpdate(deltaTime);
-	}
-
-	void onEvent(Tusk::Event& event) override {
-		if (event.getEventType() == Tusk::EventType::KeyPressed)
-		{
-			Tusk::KeyPressedEvent& e = (Tusk::KeyPressedEvent&)event;
-			if (e.getKeyCode() == TUSK_KEY_TAB)
-				Tusk::Logger::Log("Tab key is pressed!");
-		}
-	}
-
-	void onDetach() override {
-		delete _mesh;
-		delete _activeScene;
-	}
-
-private:
-	Tusk::Mesh* _mesh;
-
-	Tusk::Scene* _activeScene;
-	Tusk::Entity _roomEntity;
-};
+#include "layers/ExampleLayer.h"
 
 class Sandbox : public Tusk::Application {
 public:
-	Sandbox() {
+	Sandbox() : Application("Tusk Sandbox - Zvonimir Kucis") {
 		pushLayer(new ExampleLayer());
 	}
 

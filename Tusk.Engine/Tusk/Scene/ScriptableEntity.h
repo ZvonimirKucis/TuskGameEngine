@@ -6,9 +6,14 @@ namespace Tusk {
 	class ScriptableEntity {
 	public:
 		template<typename T>
-		T& GetComponent() {
+		T& getComponent() {
 			return _entity.getComponent<T>();
 		}
+
+	protected:
+		virtual void onCreate() {}
+		virtual void onDestroy() {}
+		virtual void onUpdate(float deltaTime) {}
 
 	private:
 		Entity _entity;

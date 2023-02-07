@@ -1,6 +1,8 @@
 #pragma once
 
-#include "../Window.h"
+#include "Tusk/Platform/Window.h"
+#include "Tusk/Renderer/GraphicsContext.h"
+
 #include <GLFW/glfw3.h>
 
 namespace Tusk {
@@ -15,6 +17,8 @@ namespace Tusk {
 		unsigned int getHeight() const override { return _data.height; }
 
 		void setEventCallback(const EventCallbackFn& callback) override { _data.EventCallback = callback; }
+		void setVSync(bool enabled) override;
+		bool isVSync() const override;
 
 		inline virtual void* getNativeWindow() const override { return _window; };
 	private:
@@ -22,11 +26,13 @@ namespace Tusk {
 
 	private:
 		GLFWwindow* _window;
+		Scope<GraphicsContext> _context;
 
 		struct WindowData
 		{
 			std::string title;
 			uint32_t width = 0, height = 0;
+			bool VSync = true;
 
 			EventCallbackFn EventCallback;
 		};

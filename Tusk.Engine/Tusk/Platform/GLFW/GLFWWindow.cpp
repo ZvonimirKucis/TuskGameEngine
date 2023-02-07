@@ -1,13 +1,12 @@
 #include "tuskpch.h"
 
-#define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
 #include "GLFWWindow.h"
 
-#include "../../Events/ApplicationEvent.h"
-#include "../../Events/KeyEvent.h"
-#include "../../Events/MouseEvent.h"
+#include "Tusk/Events/ApplicationEvent.h"
+#include "Tusk/Events/KeyEvent.h"
+#include "Tusk/Events/MouseEvent.h"
 
 namespace Tusk {
 	
@@ -17,7 +16,6 @@ namespace Tusk {
 	}
 
 	GLFWWindow::GLFWWindow(const WindowCreateInfo& props) {
-		Logger::Trace("Creating GLFW window.");
 		init(props);
 	}
 
@@ -27,12 +25,20 @@ namespace Tusk {
 		_data.height = props.height;		
 
 		glfwInit();
-		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-
 		glfwSetErrorCallback(GLFWErrorCallback);
 
+#if _DEBUG
+		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+#endif
+		glfwWindowHint(GLFW_SAMPLES, 4);
+
 		_window = glfwCreateWindow(props.width, props.height, props.title.c_str(), nullptr, nullptr);
+
+		_context = GraphicsContext::create(_window);
+		_context->init();
+
 		glfwSetWindowUserPointer(_window, &_data);
+		setVSync(true);
 
 		glfwSetWindowSizeCallback(_window, [](GLFWwindow* window, int width, int height){
 			WindowData& data = *(WindowData*) glfwGetWindowUserPointer(window);
@@ -76,6 +82,14 @@ namespace Tusk {
 			}
 		});
 
+		glfwSetCharCallback(_window, [](GLFWwindow* window, unsigned int keycode)
+		{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+				KeyTypedEvent event(keycode);
+				data.EventCallback(event);
+		});
+
 		glfwSetMouseButtonCallback(_window, [](GLFWwindow* window, int button, int action, int mods) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
@@ -111,8 +125,22 @@ namespace Tusk {
 		});
 	}
 
+	void GLFWWindow::setVSync(bool enabled) {
+		if (enabled)
+			glfwSwapInterval(1);
+		else
+			glfwSwapInterval(0);
+
+		_data.VSync = enabled;
+	}
+
+	bool GLFWWindow::isVSync() const {
+		return _data.VSync;
+	}
+
 	void GLFWWindow::onUpdate() {
 		glfwPollEvents();
+		_context->swapBuffers();
 	}
 
 	GLFWWindow::~GLFWWindow() {
