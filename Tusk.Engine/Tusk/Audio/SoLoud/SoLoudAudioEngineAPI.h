@@ -12,6 +12,8 @@ namespace Tusk {
 
 		virtual void init() override;
 
+		SoLoud::Soloud* getEngine() { return _soloudEngine; }
+
 	private:
 		SoLoud::Soloud* _soloudEngine;
 	};

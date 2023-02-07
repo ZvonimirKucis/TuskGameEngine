@@ -7,11 +7,8 @@ namespace Tusk {
 	public:
 		virtual ~AudioSource() = default;
 
-		virtual void play(const Ref<AudioClip>& clip) = 0;
-		virtual void pause() = 0;
-		virtual void continuePlaying() = 0;
-		virtual void stop() = 0;
-		virtual bool isPlaying() = 0;
+		virtual void clip(const Ref<AudioClip>& clip) = 0;
+		virtual void play() = 0;
 
 		virtual void setVolume(float volume) = 0;
 		virtual void setPitch(float pitch) = 0;

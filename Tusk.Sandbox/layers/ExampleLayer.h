@@ -125,7 +125,6 @@ private:
 	Tusk::Ref<Tusk::Shader> _groundShader;
 	Tusk::Ref<Tusk::Material> _groundMaterial;
 
-	//Tusk::Ref<Tusk::Shader> _envMappingShader;
 	Tusk::Ref<Tusk::Skybox> _skybox;
 
 	Tusk::Entity _cameraEntity;

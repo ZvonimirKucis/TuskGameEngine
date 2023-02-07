@@ -12,7 +12,8 @@ project "SoLoud"
     {
         "src/audiosource/**.c*",
 		"src/filter/**.c*",
-		"src/core/**.c*"
+		"src/core/**.c*",
+        "src/backend/winmm/**.c*"
     }
 
     includedirs
