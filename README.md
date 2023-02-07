@@ -1,6 +1,6 @@
 ## Tusk Game Engine
 
-Tusk is a game engine written in C++ based on entity component system and utilizing OpenGL for rendering. Currently only works on windows.
+Tusk is a game engine written in C++ based on entity component system and utilizing OpenGL for rendering. Currently only works on Windows.
 
 ### Getting Started
 
